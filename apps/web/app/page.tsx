@@ -1,4 +1,9 @@
-//import '../styles/globals.css'
+import { GlassCard } from 'components/elements/cards'
 export default function Page() {
-    return <h1>Hello, Next.js!</h1>;
+    return (
+        <>
+            <GlassCard />
+            <h1>Hello, Next!</h1>
+        </>
+    );
 }
