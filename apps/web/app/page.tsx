@@ -1,9 +1,8 @@
-import { GlassCard } from 'components/elements/cards'
+import HomePage from 'components/features/homepage'
 export default function Page() {
     return (
         <>
-            <GlassCard />
-            <h1>Hello, Next!</h1>
+            <HomePage />
         </>
     );
 }

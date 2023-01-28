@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import NavBar from "components/modules/navbar";
+import NavBar from "components/modules/navbar/navbar";
 import g from 'public/icons/logo.svg';
 
 

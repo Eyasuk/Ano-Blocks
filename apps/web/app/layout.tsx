@@ -1,4 +1,4 @@
-import Default from 'components/layouts/default';
+import Default from 'components/layouts/default/default';
 
 import '../styles/globals.scss';
 
