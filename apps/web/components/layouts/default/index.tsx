@@ -1,4 +1,4 @@
-import Header from "components/modules/header/header";
+import Header from "components/modules/header";
 import styles from "./layout.module.scss";
 
 type Props = {

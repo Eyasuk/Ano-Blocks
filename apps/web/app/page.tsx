@@ -1,8 +1,10 @@
-import HomePage from 'components/features/homepage/homepage'
+import HomePage from 'components/features/homepage'
+import { GlassCard } from 'components/elements/cards'
 export default function Page() {
     return (
         <>
-            <HomePage />
+            <GlassCard />
+            <h1>Hello, Next!</h1>
         </>
     );
 }
