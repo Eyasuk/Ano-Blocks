@@ -1,0 +1,11 @@
+.default {
+    color: var(--white_500);
+    a {
+        color: var(--gray_500);
+    }
+    a:hover,a:active {
+        color: var(--white_500);
+        text-decoration: underline var(--gray_500);
+        text-underline-offset: 0.5rem;
+    }
+}

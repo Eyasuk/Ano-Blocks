@@ -1,5 +1,5 @@
 module.exports = {
     reactStrictMode: true,
-    transpilePackages: ["ui"],
+    transpilePackages: ["packages"],
     experimental: { appDir: true },
 };
