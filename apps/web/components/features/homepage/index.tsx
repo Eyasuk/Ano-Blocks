@@ -1,9 +1,10 @@
-import styles from "./homepage.module.scss";
+import Wallet from 'components/modules/walletcard';
+//import styles from "./homepage.module.scss";
 
-export default function GlassCard(): JSX.Element {
+export default function HomePage(): JSX.Element {
   return (
-    <div className={styles.container}>
-
+    <div>
+      <Wallet />
     </div>
   );
 }

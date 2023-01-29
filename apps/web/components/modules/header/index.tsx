@@ -1,7 +1,5 @@
 import Image from 'next/image';
 import NavBar from "components/modules/navbar";
-import g from 'public/icons/logo.svg';
-
 
 import styles from "./header.module.scss";
 
