@@ -33,9 +33,6 @@ export default function Introduction(): JSX.Element {
                                 );
                             })
                         }
-                        <div className={step == 0 ? styles.step : styles.circle}></div>
-                        <div className={step == 1 ? styles.step : styles.circle}></div>
-                        <div className={step == 2 ? styles.step : styles.circle}></div>
                     </div>
                     <div className={styles.button}>
                         <OutlinedButton text='Create Wallet' onClick={() => false} />
