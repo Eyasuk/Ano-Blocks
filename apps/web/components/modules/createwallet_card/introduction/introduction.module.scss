@@ -9,11 +9,22 @@
         .title {
             margin-top: 2em;
             font-size: var(--text_xl);
+            animation: fadeInOutAnimation 4530ms infinite;
+            animation-direction: reverse;
+            animation-timing-function: ease-in-out;
+        }
+        .image {
+            animation: fadeInOutAnimation 4530ms infinite;
+            animation-direction: reverse;
+            animation-timing-function: ease-in-out;
         }
         .description {
             font-size: var(--text_base);
             max-width: 25ch;
             text-align: center;
+            animation: fadeInOutAnimation 4530ms infinite;
+            animation-direction: reverse;
+            animation-timing-function: ease-in-out;
         }
         .progress {
             display: flex;
@@ -43,5 +54,14 @@
             flex-direction: column;
             justify-content: space-between;
         }
+    }
+}
+
+@keyframes fadeInOutAnimation {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
     }
 }

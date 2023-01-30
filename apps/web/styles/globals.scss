@@ -28,7 +28,7 @@ body {
     background: -moz-radial-gradient(center, var(--blue_900), var(--blue_500)) no-repeat;
     background: radial-gradient(ellipse at center, var(--blue_900), var(--blue_500)) no-repeat;
     background-size: cover;
-    height: 100%;
+    min-height: 100%;
     font-family: Montserrat, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     color: var(--white_900)
 }

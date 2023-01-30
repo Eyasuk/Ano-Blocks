@@ -24,16 +24,22 @@ export default function Introduction(): JSX.Element {
             <GlassCard>
                 <div className={styles.layouts}>
                     <p className={styles.title}>{IntroductionData[step].title}</p>
-                    <NextImage src={IntroductionData[step].image} alt={IntroductionData[step].title} width={100} height={200} />
+                    <NextImage className={styles.image} src={IntroductionData[step].image} alt={IntroductionData[step].title} width={150} height={200} />
                     <p className={styles.description}>{IntroductionData[step].description}</p>
                     <div className={styles.progress}>
+                        {
+                            IntroductionData.map((_, index) => {
+                                return (<div className={step == index ? styles.step : styles.circle}></div>
+                                );
+                            })
+                        }
                         <div className={step == 0 ? styles.step : styles.circle}></div>
                         <div className={step == 1 ? styles.step : styles.circle}></div>
                         <div className={step == 2 ? styles.step : styles.circle}></div>
                     </div>
                     <div className={styles.button}>
-                        <FilledButton text='Create Wallet' onClick={() => false} />
-                        <OutlinedButton text='I have Wallet' onClick={() => false} />
+                        <OutlinedButton text='Create Wallet' onClick={() => false} />
+                        <FilledButton text='I have Wallet' onClick={() => false} />
                     </div>
                 </div>
             </GlassCard>
