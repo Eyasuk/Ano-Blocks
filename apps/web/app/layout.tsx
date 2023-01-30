@@ -1,5 +1,3 @@
-import Default from 'components/layouts/default';
-
 import '../styles/globals.scss';
 
 export default function Layout({ children }: any): JSX.Element {
@@ -9,7 +7,7 @@ export default function Layout({ children }: any): JSX.Element {
                 <title>AnoBlocks</title>
             </head>
             <body>
-                <Default>{children}</Default>
+                {children}
             </body>
         </html>
     );
