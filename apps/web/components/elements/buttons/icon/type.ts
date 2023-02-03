@@ -1,5 +1,4 @@
 export type IconButtonProps = {
-    icon: JSX.Element,
-    onClick: Function,
-}
-
+  icon: JSX.Element;
+  onClick: Function;
+};

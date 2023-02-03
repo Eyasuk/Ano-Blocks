@@ -1,9 +1,9 @@
-import CreateWallet from 'components/features/createwallet/intro';
+import CreateWallet from "components/features/createwallet/intro";
 
 export default function Page() {
-    return (
-        <>
-            <CreateWallet />
-        </>
-    );
+  return (
+    <>
+      <CreateWallet />
+    </>
+  );
 }

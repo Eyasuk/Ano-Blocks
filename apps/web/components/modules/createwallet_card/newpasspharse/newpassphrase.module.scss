@@ -1,58 +1,48 @@
-.container {
-    width: 32em;
-    margin-top: 2em;
-    .layouts {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        .title {
-            margin-top: 0.8em;
-            margin-bottom: 0.3em;
-            font-size: var(--text_xl);
-        }
-        .description {
-            font-size: var(--text_tiny);
-            max-width: 42ch;
-            text-align: center;
-            color: var(--gray_500);
-        }
-        .passphrase {
-            display: grid;
-            grid-template-rows: 1fr 1fr 1fr;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-gap: 1em;
-            min-width: 75%;
-            margin: 2em;
-            .wordinputfield {
-                min-height: 2em;
-                border: 2px solid var(--green);
-                border-radius: 8px;
-                display: flex;
-                justify-content: flex-start;
-                align-items: center;
-                min-width: 10ch;
-                .index {
-                    margin-left: 10%;
-                    color: var(--gray_500);
-                }
-                .content {
-                    margin-left: 3%;
-                }
-            }
-        }
-        .button {
-            display: flex;
-            // align-self: flex-end;
-            margin-right: 2%;
-            margin-left: 30%;
-            margin-bottom: 7%;
-            margin-top: 5%;
-            .icons {
-                display: flex;
-                flex-direction: row;
-                margin-right: 18%;
-            }
-        }
+.layouts {
+  width: 32em;
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .title {
+    margin-top: 0.8em;
+    margin-bottom: 0.3em;
+    font-size: var(--text_xl);
+  }
+  .description {
+    font-size: var(--text_tiny);
+    max-width: 42ch;
+    text-align: center;
+    color: var(--gray_500);
+  }
+  .passphrase {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1em;
+    min-width: 75%;
+    margin: 2em;
+    .wordinputfield {
+      min-height: 2em;
+      border: 2px solid var(--green);
+      border-radius: 8px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      min-width: 10ch;
+      .index {
+        margin-left: 10%;
+        color: var(--gray_500);
+      }
+      .content {
+        margin-left: 3%;
+      }
     }
+  }
+
+  .icons {
+    margin-top: 1.2em;
+    margin-left: 3em;
+  }
 }
