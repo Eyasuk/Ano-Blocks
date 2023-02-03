@@ -32,7 +32,7 @@ export default function Introduction(): JSX.Element {
                     <div className={styles.passphrase}>
                         {passphrase.map((content, index) => {
                             return (
-                                <div className={styles.wordinputfield}>
+                                <div className={styles.wordinputfield} key={index}>
                                     <p className={styles.index}>{index + 1 + '.'}</p>
                                     <p className={styles.content}>{content}</p>
                                 </div>)
