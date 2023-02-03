@@ -24,13 +24,14 @@
             grid-gap: 1em;
             min-width: 75%;
             margin: 2em;
-            .box {
+            .wordinputfield {
                 min-height: 2em;
                 border: 2px solid var(--green);
                 border-radius: 8px;
                 display: flex;
                 justify-content: flex-start;
                 align-items: center;
+                min-width: 10ch;
                 .index {
                     margin-left: 10%;
                     color: var(--gray_500);

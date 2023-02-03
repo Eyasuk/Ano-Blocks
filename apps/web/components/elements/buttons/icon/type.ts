@@ -1,10 +1,5 @@
-// import {AccountBookTwoTone} from '@ant-design/icons';
 export type IconButtonProps = {
     icon: JSX.Element,
-    onClick: () => boolean,
+    onClick: Function,
 }
 
-// export const c:IconButtonProps = {
-// onClick:()=>false,
-// icon:<AccountBookTwoTone/>
-// }
