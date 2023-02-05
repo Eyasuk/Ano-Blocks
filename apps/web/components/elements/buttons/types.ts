@@ -1,4 +1,4 @@
 export type ButtonProps = {
   text: string;
-  onClick: () => boolean;
+  onClick: Function;
 };

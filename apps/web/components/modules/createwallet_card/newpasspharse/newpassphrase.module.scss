@@ -42,7 +42,13 @@
   }
 
   .icons {
-    margin-top: 1.2em;
-    margin-left: 3em;
+    display: flex;
+    flex-direction: row;
+    margin-top: 0.2em;
+    margin-bottom: 2.5em;
+    margin-left: 13em;
+    .button {
+      margin-left: 1em;
+    }
   }
 }
