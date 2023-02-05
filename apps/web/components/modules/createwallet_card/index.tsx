@@ -1,4 +1,5 @@
-import IntroductionWallet from './introduction';
-import GeneratePassPhrase from './newpasspharse';
+import IntroductionWallet from "./introduction";
+import GeneratePassPhrase from "./newpasspharse";
+import CreatePassword from "./password";
 
-export { IntroductionWallet, GeneratePassPhrase };
+export { IntroductionWallet, GeneratePassPhrase, CreatePassword };

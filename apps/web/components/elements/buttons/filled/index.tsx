@@ -1,9 +1,7 @@
-import { ButtonProps } from '../types';
+import { ButtonProps } from "../types";
 
-import styles from './filledbutton.module.scss';
+import styles from "./filledbutton.module.scss";
 
 export default function FilledButton({ text }: ButtonProps): JSX.Element {
-    return (
-        <button className={styles.container}>{text}</button>
-    );
+  return <button className={styles.container}>{text}</button>;
 }
