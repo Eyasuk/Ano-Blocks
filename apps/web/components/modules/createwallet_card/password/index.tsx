@@ -1,3 +1,4 @@
+'use client';
 import { useState } from 'react';
 import Input from 'components/elements/input';
 import { OutlinedButton } from 'components/elements/buttons';
