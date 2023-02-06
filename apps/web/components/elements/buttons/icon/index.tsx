@@ -1,6 +1,7 @@
-import { IconButtonProps } from "./type";
+'use client';
+import { IconButtonProps } from './type';
 
-import styles from "./icon.module.scss";
+import styles from './icon.module.scss';
 
 export default function IconButton({
   icon,

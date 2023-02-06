@@ -1,3 +1,4 @@
+'use client';
 import { ButtonProps } from '../types';
 
 import styles from './outlined.module.scss';
