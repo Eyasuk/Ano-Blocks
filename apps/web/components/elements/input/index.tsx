@@ -1,3 +1,4 @@
+'use client';
 import { useState } from 'react';
 import { EyeIcon, EyeInvisibleIcon } from 'components/elements/icons';
 import InputProps from './types';

@@ -1,4 +1,3 @@
-'use client';
 import { IconButtonProps } from './type';
 
 import styles from './icon.module.scss';

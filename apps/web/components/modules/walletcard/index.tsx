@@ -1,8 +1,9 @@
-import { CopyIcon, QrIcon } from "components/elements/icons";
-import { GlassCard } from "components/elements/cards";
-import { FilledButton, OutlinedButton } from "components/elements/buttons";
+'use client';
+import { CopyIcon, QrIcon } from 'components/elements/icons';
+import { GlassCard } from 'components/elements/cards';
+import { FilledButton, OutlinedButton } from 'components/elements/buttons';
 
-import styles from "./walletcard.module.scss";
+import styles from './walletcard.module.scss';
 export default function Wallet(): JSX.Element {
   return (
     <div className={styles.container}>
@@ -26,8 +27,8 @@ export default function Wallet(): JSX.Element {
           </div>
 
           <div className={styles.leftButton}>
-            <FilledButton text="Receive" onClick={() => true} />
-            <OutlinedButton text="Send" onClick={() => true} />
+            <FilledButton text='Receive' onClick={() => true} />
+            <OutlinedButton text='Send' onClick={() => true} />
           </div>
         </div>
       </GlassCard>
