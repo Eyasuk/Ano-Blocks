@@ -37,7 +37,7 @@ export default function NewWallet() {
                   />
                 );
               case 3:
-                return <ConfirmPassphrase />;
+                return <ConfirmPassphrase passphrase={passphrase} />;
               default:
                 null;
             }

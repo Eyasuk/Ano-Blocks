@@ -4,11 +4,13 @@ import NextImage from 'next/image';
 import { GlassCard } from 'components/elements/cards';
 import { OutlinedButton, FilledButton } from 'components/elements/buttons';
 import { chooseRandomPasspharse } from 'utils/helpers/chooseRandomPassPharse';
-import { RandomPassphraseType } from './types';
+import { RandomPassphraseType, ConfirmPasspraseProps } from './types';
 
 import styles from './confirmPassphrase.module.scss';
 
-export default function ConfirmPassphrase(): JSX.Element {
+export default function ConfirmPassphrase({
+  passphrase,
+}: ConfirmPasspraseProps): JSX.Element {
   const [randomPassphrase, setRandomPassphrase] =
     useState<RandomPassphraseType>();
 
@@ -27,26 +29,39 @@ export default function ConfirmPassphrase(): JSX.Element {
 
       {randomPassphrase?.choosenWords.map((items, index) => {
         return (
-          <div key={index}>
-            {items.map((subitems, subindex) => {
-              if (randomPassphrase.postion[index] == subindex) {
-                <h1 key={subindex}>{subitems}</h1>;
-              } else {
-                return <h6 key={subindex}>{subitems}</h6>;
-              }
-            })}
+          <div className={styles.passphraseChoice}>
+            <div className={styles.passphraseNumber}>
+              <h2 className={styles.passphraseNo}>
+                {randomPassphrase.postion[index] + 1}
+              </h2>
+              <p>word</p>
+            </div>
+
+            <div key={index} className={styles.row}>
+              {items.map((subitems, subindex) => {
+                return (
+                  <div className={styles.oneitem}>
+                    <input
+                      className={styles.input}
+                      key={index + subindex}
+                      type='radio'
+                      name={index.toString()}
+                      value={subindex}
+                    />
+                    <label
+                      className={styles.labels}
+                      key={index + subindex}
+                      htmlFor={(index + subindex).toString()}
+                    >
+                      {passphrase[subitems]}
+                    </label>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         );
       })}
-      {/* {randomPassphrase?.choosenWords.map((item, index) => {
-        return item.map((value, i) => {
-          randomPassphrase.postion[index] == i ? (
-            <h1>{value}</h1>
-          ) : (
-            <p>{value}</p>
-          );
-        });
-      })} */}
     </div>
   );
 }
