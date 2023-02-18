@@ -27,6 +27,7 @@ export default function CreatePassword({
     setPassword(event.target.password);
     stateChanger(3);
   };
+
   return (
     <div className={styles.layouts}>
       <p className={styles.title}>New Password</p>

@@ -1,5 +1,5 @@
 .layouts {
-  width: 32em;
+  width: 35em;
   margin-top: 2em;
   display: flex;
   flex-direction: column;
@@ -45,7 +45,8 @@
         height: 40px;
         position: relative;
         .input,
-        .labels {
+        .labels,
+        .error {
           display: block;
           position: absolute;
           top: 0;
@@ -63,16 +64,25 @@
           color: var(--green);
           border: 1px solid var(--green);
         }
-        .labels {
+        .input:checked + .error {
+          color: var(--red);
+          border: 1px solid var(--red);
+        }
+        .labels,
+        .error {
           text-align: center;
           padding-top: 10%;
           padding-bottom: 10%;
           border-radius: 7px;
-          border: 1px solid #ccc;
           cursor: pointer;
           z-index: 90;
         }
       }
     }
+  }
+  .button {
+    margin-top: 1.5em;
+    margin-bottom: 2em;
+    margin-left: 69%;
   }
 }
