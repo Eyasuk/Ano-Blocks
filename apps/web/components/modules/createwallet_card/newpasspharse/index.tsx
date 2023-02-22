@@ -7,7 +7,7 @@ import {
   FilledButton,
   IconButton,
 } from 'components/elements/buttons';
-import { generatePassPhrase } from 'utils/services/wallet/generateMnemonic';
+import { generatePassPhrase } from 'utils/helpers/createWallet';
 import { downloadFile } from 'utils/helpers/downloadfile';
 import { PassphraseTypes } from './types';
 import styles from './newpassphrase.module.scss';
