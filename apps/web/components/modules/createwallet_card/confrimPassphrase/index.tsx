@@ -4,9 +4,11 @@ import NextImage from 'next/image';
 import { GlassCard } from 'components/elements/cards';
 import { OutlinedButton, FilledButton } from 'components/elements/buttons';
 import { chooseRandomPasspharse } from 'utils/helpers/chooseRandomPassPharse';
+import { createWallet } from 'utils/helpers/createWallet';
 import { RandomPassphraseType, ConfirmPasspraseProps } from './types';
 
 import styles from './confirmPassphrase.module.scss';
+import { create } from 'domain';
 
 export default function ConfirmPassphrase({
   passphrase,
@@ -25,6 +27,7 @@ export default function ConfirmPassphrase({
 
   const handleSumbit = (event: any) => {
     event.preventDefault();
+    createWallet(passphrase);
     if (!event.target) {
       return;
     }
