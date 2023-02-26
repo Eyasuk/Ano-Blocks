@@ -25,9 +25,9 @@ export default function ConfirmPassphrase({
     if (chooseRandomPass) setRandomPassphrase(chooseRandomPass);
   }, []);
 
-  const handleSumbit = (event: any) => {
+  const handleSumbit = async (event: any) => {
     event.preventDefault();
-    createWallet(passphrase);
+
     if (!event.target) {
       return;
     }
@@ -48,10 +48,14 @@ export default function ConfirmPassphrase({
         correctChoosen[i] = true;
       }
     }
-    if (!allWordSelected) console.log('notification');
+    if (!allWordSelected) console.log('choose all words');
     else if (correctChoosen.includes(false))
       setPassphraseCoosen(correctChoosen);
-    else console.log('next page');
+    else {
+      const account = await createWallet(passphrase);
+
+      console.log(account);
+    }
   };
 
   return (

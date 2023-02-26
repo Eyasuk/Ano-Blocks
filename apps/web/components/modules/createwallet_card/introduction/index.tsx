@@ -1,15 +1,17 @@
-"use client";
-import { useState, useEffect } from "react";
-import NextImage from "next/image";
-import { GlassCard } from "components/elements/cards";
-import { OutlinedButton, FilledButton } from "components/elements/buttons";
-import { IntroductionData } from "utils/constants/introdcationData";
+'use client';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import NextImage from 'next/image';
+import { GlassCard } from 'components/elements/cards';
+import { OutlinedButton, FilledButton } from 'components/elements/buttons';
+import { IntroductionData } from 'utils/constants/introdcationData';
 
-import styles from "./introduction.module.scss";
+import styles from './introduction.module.scss';
 
 export default function Introduction(): JSX.Element {
   const [step, setStep] = useState<number>(0);
   const lengthOfIntroData = IntroductionData.length;
+  const router = useRouter();
 
   useEffect(() => {
     const steps = setInterval(() => {
@@ -43,8 +45,11 @@ export default function Introduction(): JSX.Element {
             })}
           </div>
           <div className={styles.button}>
-            <OutlinedButton text="Create Wallet" onClick={() => false} />
-            <FilledButton text="I have Wallet" onClick={() => false} />
+            <OutlinedButton
+              text='Create Wallet'
+              onClick={() => router.push('/new')}
+            />
+            <FilledButton text='I have Wallet' onClick={() => false} />
           </div>
         </div>
       </GlassCard>
