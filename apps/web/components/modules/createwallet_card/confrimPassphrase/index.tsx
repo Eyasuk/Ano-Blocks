@@ -1,21 +1,22 @@
 'use client';
 import { useState, useEffect } from 'react';
-import NextImage from 'next/image';
-import { GlassCard } from 'components/elements/cards';
+import { useRouter } from 'next/navigation';
 import { OutlinedButton, FilledButton } from 'components/elements/buttons';
 import { chooseRandomPasspharse } from 'utils/helpers/chooseRandomPassPharse';
-import { createWallet } from 'utils/helpers/createWallet';
+import { useUser } from 'utils/hooks/user';
 import { RandomPassphraseType, ConfirmPasspraseProps } from './types';
 
 import styles from './confirmPassphrase.module.scss';
-import { create } from 'domain';
 
 export default function ConfirmPassphrase({
   passphrase,
+  password,
+  stateChanger,
 }: ConfirmPasspraseProps): JSX.Element {
+  const router = useRouter();
   const [randomPassphrase, setRandomPassphrase] =
     useState<RandomPassphraseType>();
-
+  const { setUserLoggedin, userLoggedin, setUserInfo } = useUser();
   const [passphraseCoosen, setPassphraseCoosen] = useState<boolean[]>(
     Array(4).fill(true)
   );
@@ -52,9 +53,7 @@ export default function ConfirmPassphrase({
     else if (correctChoosen.includes(false))
       setPassphraseCoosen(correctChoosen);
     else {
-      const account = await createWallet(passphrase);
-
-      console.log(account);
+      stateChanger(3);
     }
   };
 
@@ -104,7 +103,7 @@ export default function ConfirmPassphrase({
           );
         })}
         <div className={styles.button}>
-          <OutlinedButton text='Finsh' />
+          <OutlinedButton text='Next' />
         </div>
       </form>
     </div>

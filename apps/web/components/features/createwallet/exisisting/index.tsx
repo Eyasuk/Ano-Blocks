@@ -1,14 +1,13 @@
 'use client';
-import { useState } from 'react';
+import { SetStateAction, useState } from 'react';
 import { GlassCard } from 'components/elements/cards';
 import Welcome from 'components/layouts/welcome';
 import {
-  GeneratePassPhrase,
   CreatePassword,
+  ImportPassphrase,
 } from 'components/modules/createwallet_card';
 
-import styles from './new.module.scss';
-import ConfirmPassphrase from 'components/modules/createwallet_card/confrimPassphrase';
+import styles from './exisisting.module.scss';
 
 export default function NewWallet() {
   const [steps, setSteps] = useState<1 | 2 | 3>(1);
@@ -23,21 +22,13 @@ export default function NewWallet() {
             switch (steps) {
               case 1:
                 return (
-                  <GeneratePassPhrase
-                    stateChanger={setSteps}
+                  <ImportPassphrase
                     passPhrase={passphrase}
                     setpassPhrase={setPassphrase}
+                    stateChanger={setSteps}
                   />
                 );
               case 2:
-                return (
-                  <ConfirmPassphrase
-                    passphrase={passphrase}
-                    password={password}
-                    stateChanger={setSteps}
-                  />
-                );
-              case 3:
                 return (
                   <CreatePassword
                     stateChanger={setSteps}

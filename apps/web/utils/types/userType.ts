@@ -8,4 +8,4 @@ export type UserLoginInfo = {
   priv: string;
   pubad: string;
   pubkey: string;
-};
+} | null;

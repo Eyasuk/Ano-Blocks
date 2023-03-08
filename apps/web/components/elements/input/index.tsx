@@ -35,7 +35,11 @@ export default function Input({
           <input className={styles.inputField} {...rest} />
         )}
         {inputType === 'password' && (
-          <button className={styles.showPassword} onClick={makePasswordVisible}>
+          <button
+            className={styles.showPassword}
+            onClick={makePasswordVisible}
+            type={'button'}
+          >
             {passwordVisible ? <EyeIcon /> : <EyeInvisibleIcon />}
           </button>
         )}

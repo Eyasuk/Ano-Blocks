@@ -40,6 +40,7 @@ export default function Introduction(): JSX.Element {
               return (
                 <div
                   className={step == index ? styles.step : styles.circle}
+                  key={index}
                 ></div>
               );
             })}
@@ -49,7 +50,10 @@ export default function Introduction(): JSX.Element {
               text='Create Wallet'
               onClick={() => router.push('/new')}
             />
-            <FilledButton text='I have Wallet' onClick={() => false} />
+            <FilledButton
+              text='I have Wallet'
+              onClick={() => router.push('/import')}
+            />
           </div>
         </div>
       </GlassCard>

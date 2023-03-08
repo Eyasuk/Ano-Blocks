@@ -1,31 +1,46 @@
 'use client';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Input from 'components/elements/input';
 import { OutlinedButton } from 'components/elements/buttons';
+import { notification } from 'components/elements/notification';
+import { createWallet } from 'utils/helpers/createWallet';
+import { signUp } from 'utils/helpers/userSession';
+import { useUser } from 'utils/hooks/user';
 import { PasswordTypes } from './types';
 
 import styles from './password.module.scss';
 
 export default function CreatePassword({
   setPassword,
+  passphrase,
   stateChanger,
 }: PasswordTypes): JSX.Element {
-  const [retypeInputError, setRetypeError] = useState<boolean>(false);
+  const router = useRouter();
   const [passInputError, setPassError] = useState<boolean>(false);
+  const { setUserLoggedin, userLoggedin, setUserInfo } = useUser();
 
-  const handleSumbit = (event: any) => {
+  const handleSumbit = async (event: any) => {
     event.preventDefault();
     if (!event.target) {
       setPassError(false);
-      setRetypeError(false);
       return;
     }
     if (event.target.password.value != event.target.repassword.value) {
-      setRetypeError(true);
+      setPassError(true);
+      notification({
+        message: "password doesn't match",
+        messageType: 'error',
+        description: 'make sure your password are the same',
+      });
       return;
     }
-    setPassword(event.target.password);
-    stateChanger(3);
+    setPassword(event.target.password.value);
+    const account = await createWallet(passphrase);
+    const userLogin = signUp(account, event.target.password.value);
+    setUserInfo(account);
+    setUserLoggedin(true);
+    router.push('/');
   };
 
   return (
@@ -52,14 +67,14 @@ export default function CreatePassword({
             label='Retype Password'
             inputType='password'
             autoComplete='off'
-            error={retypeInputError}
+            error={passInputError}
             id='repassword'
             name='repassword'
             required
             minLength={5}
           />
           <div className={styles.button}>
-            <OutlinedButton text='Next' />
+            <OutlinedButton text='Finsh' />
           </div>
         </div>
       </form>

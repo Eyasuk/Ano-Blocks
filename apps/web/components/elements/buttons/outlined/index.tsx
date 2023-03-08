@@ -8,6 +8,8 @@ export default function Outlined({ text, onClick }: ButtonProps): JSX.Element {
       {text}
     </button>
   ) : (
-    <button className={styles.container}>{text}</button>
+    <button className={styles.container} type='submit'>
+      {text}
+    </button>
   );
 }

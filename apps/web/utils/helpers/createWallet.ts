@@ -36,6 +36,7 @@ export async function createWallet(memonic: string[]): Promise<UserLoginInfo> {
   let priv = '',
     pubkey = '',
     pubad;
+
   if (account1.privateKey) priv = '0x' + toHex(account1.privateKey);
   if (account1.publicKey) pubkey = '0x' + toHex(account1.publicKey);
   if (account1.publicKey) pubad = publicKeyToAddress(toHex(account1.publicKey));

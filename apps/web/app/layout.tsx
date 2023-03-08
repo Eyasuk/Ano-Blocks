@@ -1,3 +1,4 @@
+import { UserProvider } from 'utils/hooks/user';
 import '../styles/globals.scss';
 
 export default function Layout({ children }: any): JSX.Element {
@@ -6,7 +7,9 @@ export default function Layout({ children }: any): JSX.Element {
       <head>
         <title>AnoBlocks</title>
       </head>
-      <body>{children}</body>
+      <body>
+        <UserProvider>{children}</UserProvider>
+      </body>
     </html>
   );
 }
