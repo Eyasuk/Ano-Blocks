@@ -65,7 +65,6 @@ export default function ImportPassphrase({
   };
 
   const onChange = (value: string, index: number) => {
-    console.log(value);
     let temp = [];
     for (let i = 0; i < 12; i++) {
       if (i === index) {
