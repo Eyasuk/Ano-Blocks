@@ -11,7 +11,7 @@ import styles from './exisisting.module.scss';
 
 export default function NewWallet() {
   const [steps, setSteps] = useState<1 | 2 | 3>(1);
-  const [passphrase, setPassphrase] = useState<string[]>([]);
+  const [passphrase, setPassphrase] = useState<string[]>(Array(12).fill(''));
   const [password, setPassword] = useState<string>('');
 
   return (

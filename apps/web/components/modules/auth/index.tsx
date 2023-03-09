@@ -5,7 +5,7 @@ import Input from 'components/elements/input';
 import { OutlinedButton } from 'components/elements/buttons';
 import { GlassCard } from 'components/elements/cards';
 import { checkUserWithPassword } from 'utils/helpers/userSession';
-import { useUser } from 'utils/hooks/user';
+import { useUser } from 'utils/context/user';
 import { UserLoginInfo } from 'utils/types/userType';
 
 import styles from './auth.module.scss';

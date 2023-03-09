@@ -4,7 +4,7 @@ import Default from 'components/layouts/default';
 
 import Send from 'components/modules/send';
 import { useEffect } from 'react';
-import { useUser } from 'utils/hooks/user';
+import { useUser } from 'utils/context/user';
 import { checkIfUserLogin } from 'utils/helpers/userSession';
 //import styles from "./homepage.module.scss";
 

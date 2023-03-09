@@ -1,4 +1,4 @@
-import { UserProvider } from 'utils/hooks/user';
+import { UserProvider } from 'utils/context/user';
 import HomePage from 'components/features/homepage';
 
 export default function Page() {

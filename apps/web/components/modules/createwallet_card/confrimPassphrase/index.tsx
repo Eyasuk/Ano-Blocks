@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { OutlinedButton, FilledButton } from 'components/elements/buttons';
 import { chooseRandomPasspharse } from 'utils/helpers/chooseRandomPassPharse';
-import { useUser } from 'utils/hooks/user';
+import { useUser } from 'utils/context/user';
 import { RandomPassphraseType, ConfirmPasspraseProps } from './types';
 
 import styles from './confirmPassphrase.module.scss';

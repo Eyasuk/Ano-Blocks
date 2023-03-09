@@ -15,10 +15,9 @@ export default function ImportPassphrase({
 }: PassphraseTypes): JSX.Element {
   //const [passphrase, setPassphrase] = useState<string[]>([]);
   const passphraseFetchedRef = useRef<boolean | null>(false);
-  const [userPassphrase, setPassphrase] = useState<Array<string>>(
-    Array(12).fill('')
-  );
-  useEffect(() => {}, []);
+  //const [userPassphrase, setPassphrase] = useState<Array<string>>(
+  //);
+  //useEffect(() => {}, []);
 
   const handleSumbit = async (event: any) => {
     event.preventDefault();
@@ -55,11 +54,22 @@ export default function ImportPassphrase({
           });
           return;
         }
-        setPassphrase(passphraseArray);
         setpassPhrase(passphraseArray);
         return;
       }
     }
+  };
+
+  const onChange = (value: string, index: number) => {
+    let temp = [];
+    for (let i = 0; i < 12; i++) {
+      if (i === index) {
+        temp[i] = value;
+      } else {
+        temp[i] = passPhrase[i];
+      }
+    }
+    setpassPhrase(temp);
   };
 
   return (
@@ -73,10 +83,12 @@ export default function ImportPassphrase({
         </p>
 
         <div className={styles.passphrase}>
-          {userPassphrase.map((content, index) => {
+          {passPhrase.map((content, index) => {
             return (
               <div className={styles.input} key={index}>
-                <p className={styles.index}>{index + 1 + '.'}</p>
+                <p className={styles.index}>
+                  {index + 1 + '.' + passPhrase[0]}
+                </p>
                 <div className={styles.wordinputfield} key={index}>
                   <Input
                     value={passPhrase[index]}
@@ -86,7 +98,9 @@ export default function ImportPassphrase({
                     name={'input' + index}
                     id={'input' + index}
                     onPasteCapture={handelCopy}
-                    // onChange={(e) => setValue(e.target.value)}
+                    onChange={(event) =>
+                      onChange(event.target.innerText, index)
+                    }
                   />
                 </div>
               </div>

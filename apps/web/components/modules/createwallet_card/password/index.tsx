@@ -6,7 +6,7 @@ import { OutlinedButton } from 'components/elements/buttons';
 import { notification } from 'components/elements/notification';
 import { createWallet } from 'utils/helpers/createWallet';
 import { signUp } from 'utils/helpers/userSession';
-import { useUser } from 'utils/hooks/user';
+import { useUser } from 'utils/context/user';
 import { PasswordTypes } from './types';
 
 import styles from './password.module.scss';

@@ -1,7 +1,7 @@
 import { FilledButton, OutlinedButton } from 'components/elements/buttons';
 import { GlassCard } from 'components/elements/cards';
 import Input from 'components/elements/input';
-import { useUser } from 'utils/hooks/user';
+import { useUser } from 'utils/context/user';
 
 import styles from './send.module.scss';
 

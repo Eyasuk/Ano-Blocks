@@ -1,6 +1,9 @@
 'use client';
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { redirect, useRouter, usePathname } from 'next/navigation';
 import { UserLoginInfo } from 'utils/types/userType';
+import { checkIfUserLogin } from 'utils/helpers/userSession';
+import { Router } from 'next/router';
 
 interface UserState {
   userLoggedin: boolean;
@@ -27,6 +30,8 @@ interface UserProviderProps {
 }
 
 export const UserProvider = ({ children }: UserProviderProps): JSX.Element => {
+  const router = useRouter();
+  const currentPath = usePathname();
   const [userLoggedin, setUserLoggedin] = useState<boolean>(false);
   const [userInfo, setUserInfo] = useState<UserLoginInfo>(null);
   const [showPasswordModal, setPasswordModal] = useState<boolean>(false);
@@ -35,6 +40,26 @@ export const UserProvider = ({ children }: UserProviderProps): JSX.Element => {
   //if then set password modal
   //if password correct set user info
   //set login true
+  const redirectTo = (path: string): void => {
+    const user = checkIfUserLogin();
+    if (!user) {
+      if (path === '/intro' || path === '/new' || path === '/import') {
+        router.push(path);
+      } else {
+        router.push('/intro');
+      }
+    } else {
+      if (path === '/intro' || path === '/new' || path === '/import') {
+        router.push('/');
+      } else if (!userLoggedin) {
+        router.push('/auth');
+      }
+    }
+  };
+  useEffect(() => {
+    redirectTo(currentPath ?? '/intro');
+  }, [currentPath]);
+
   return (
     <UserContext.Provider
       value={{

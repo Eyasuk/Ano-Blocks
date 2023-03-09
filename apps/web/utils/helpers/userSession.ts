@@ -18,7 +18,7 @@ export async function signUp(
     .setExpirationTime('2h')
     .sign(passwordUint);
 
-  setCookie('userData', jwt);
+  setCookie('userData', jwt, { maxAge: 90000 * 365 });
   return jwt;
 }
 

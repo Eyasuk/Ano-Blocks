@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import NavBar from 'components/modules/navbar';
 import { LogoutIcon, SettingIcon } from 'components/elements/icons';
 import { logout } from 'utils/helpers/userSession';
-import { useUser } from 'utils/hooks/user';
+import { useUser } from 'utils/context/user';
 
 import styles from './header.module.scss';
 

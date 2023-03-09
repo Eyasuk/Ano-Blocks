@@ -5,7 +5,7 @@ import { FilledButton, OutlinedButton } from 'components/elements/buttons';
 import { GlassCard } from 'components/elements/cards';
 import QrAddress from 'components/modules/qrAddress';
 import { notification } from 'components/elements/notification';
-import { useUser } from 'utils/hooks/user';
+import { useUser } from 'utils/context/user';
 import { shortenText } from 'utils/helpers/shortText';
 import { copyToClipBoard } from 'utils/helpers/copytext';
 
