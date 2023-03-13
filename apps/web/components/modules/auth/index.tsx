@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import Input from 'components/elements/input';
 import { OutlinedButton } from 'components/elements/buttons';
 import { GlassCard } from 'components/elements/cards';
+import { notification } from 'components/elements/notification';
 import { checkUserWithPassword } from 'utils/helpers/userSession';
 import { useUser } from 'utils/context/user';
 import { UserLoginInfo } from 'utils/types/userType';
@@ -25,6 +26,11 @@ export default function Auth(): JSX.Element {
     const auth = await checkUserWithPassword(event.target.password.value);
 
     if (!auth) {
+      notification({
+        message: 'Password Error',
+        description: 'Enter a Correct Password',
+        messageType: 'error',
+      });
       setPassError(true);
       return;
     }
@@ -65,7 +71,7 @@ export default function Auth(): JSX.Element {
               minLength={5}
             />
             <div className={styles.button}>
-              <OutlinedButton text='Next' />
+              <OutlinedButton text='Confirm' />
             </div>
           </div>
         </form>
