@@ -16,7 +16,8 @@ export default function Qr({ text }: QrProps): JSX.Element {
       element.innerHTML = qr.createImgTag(8, 2);
     }
     // document.getElementsByClassName('qr')[0].innerHTML = qr.createImgTag();
-  }, []);
+  });
+
   return (
     <div className={styles.container}>
       <div className={styles.qr} id='qr'></div>

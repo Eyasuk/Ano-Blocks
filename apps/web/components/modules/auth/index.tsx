@@ -10,22 +10,25 @@ import { UserLoginInfo } from 'utils/types/userType';
 
 import styles from './auth.module.scss';
 
-export default function (): JSX.Element {
+export default function Auth(): JSX.Element {
   const router = useRouter();
   const [passInputError, setPassError] = useState<boolean>(false);
   const { setUserLoggedin, setUserInfo } = useUser();
 
   const handleSumbit = async (event: any) => {
     event.preventDefault();
+
     if (!event.target) {
       setPassError(false);
       return;
     }
     const auth = await checkUserWithPassword(event.target.password.value);
+
     if (!auth) {
       setPassError(true);
       return;
     }
+
     if (
       typeof auth.hdPriv == 'string' &&
       typeof auth.priv == 'string' &&
@@ -38,6 +41,7 @@ export default function (): JSX.Element {
         pubad: auth.pubad,
         pubkey: auth.pubkey,
       };
+
       setUserInfo(user);
       setUserLoggedin(true);
       router.push('/');

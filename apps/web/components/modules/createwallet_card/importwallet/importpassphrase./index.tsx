@@ -17,6 +17,7 @@ export default function ImportPassphrase({
   const passphraseFetchedRef = useRef<boolean | null>(false);
   //const [userPassphrase, setPassphrase] = useState<Array<string>>(
   //);
+
   useEffect(() => {
     for (let i = 0; i < 12; i++) {
       const c = document.getElementById('input' + i) as HTMLInputElement;
