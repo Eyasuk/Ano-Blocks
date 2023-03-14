@@ -9,8 +9,8 @@ import { useUser } from 'utils/context/user';
 import styles from './header.module.scss';
 
 export default function Header(): JSX.Element {
-  const { setUserLoggedin, setUserInfo } = useUser();
   const router = useRouter();
+  const { setUserLoggedin, setUserInfo } = useUser();
 
   const handelLogout = () => {
     logout();
@@ -18,6 +18,7 @@ export default function Header(): JSX.Element {
     setUserLoggedin(false);
     router.push('/intro');
   };
+
   return (
     <header className={styles.container}>
       <div className={styles.logo}>
