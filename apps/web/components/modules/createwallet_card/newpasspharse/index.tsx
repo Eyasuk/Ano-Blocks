@@ -9,10 +9,11 @@ import { downloadFile } from 'utils/helpers/downloadfile';
 import { PassphraseTypes } from './types';
 import styles from './newpassphrase.module.scss';
 
-export default function Introduction({
+export default function NewPassphrase({
   passPhrase,
   setpassPhrase,
   stateChanger,
+  setExtraPassphrase,
 }: PassphraseTypes): JSX.Element {
   const passphraseFetchedRef = useRef<boolean | null>(false);
   const [extraWord, setExtraWord] = useState<boolean>(false);
@@ -30,6 +31,10 @@ export default function Introduction({
 
   const buttonAction = () => {
     stateChanger(2);
+    const extraWordInput = document.getElementById(
+      'extraword'
+    ) as HTMLInputElement;
+    setExtraPassphrase(extraWordInput.value);
   };
 
   const handleSwitch = () => {

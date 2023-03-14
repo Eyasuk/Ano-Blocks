@@ -15,6 +15,7 @@ export default function CreatePassword({
   setPassword,
   passphrase,
   stateChanger,
+  extraPassphrase,
 }: PasswordTypes): JSX.Element {
   const router = useRouter();
   const [passInputError, setPassError] = useState<boolean>(false);
@@ -36,7 +37,7 @@ export default function CreatePassword({
       return;
     }
     setPassword(event.target.password.value);
-    const account = await createWallet(passphrase);
+    const account = await createWallet(passphrase, extraPassphrase);
     const userLogin = signUp(account, event.target.password.value);
     setUserInfo(account);
     setUserLoggedin(true);

@@ -1,22 +1,22 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
+import { Switch } from 'antd';
 import { OutlinedButton } from 'components/elements/buttons';
-
+import Input from 'components/elements/input';
+import { notification } from 'components/elements/notification';
 import { PassphraseTypes } from './types';
 
 import styles from './importphrase.module.scss';
-import Input from 'components/elements/input';
-import { notification } from 'components/elements/notification';
 
 export default function ImportPassphrase({
   passPhrase,
   setpassPhrase,
   stateChanger,
+  setExtraPassphrase,
 }: PassphraseTypes): JSX.Element {
   const [copy, setCopie] = useState<boolean>(false);
+  const [extraWord, setExtraWord] = useState<boolean>(false);
   const passphraseFetchedRef = useRef<boolean | null>(false);
-  //const [userPassphrase, setPassphrase] = useState<Array<string>>(
-  //);
 
   useEffect(() => {
     for (let i = 0; i < 12; i++) {
@@ -42,10 +42,15 @@ export default function ImportPassphrase({
 
   const handleSumbit = async (event: any) => {
     event.preventDefault();
+
     if (!event.target) {
       return;
     }
+    const extraWordInput = document.getElementById(
+      'extraword'
+    ) as HTMLInputElement;
 
+    setExtraPassphrase(extraWordInput.value);
     for (let i = 0; i < 12; i++) {
       if (!event.target['input' + i].value) {
         notification({
@@ -75,6 +80,14 @@ export default function ImportPassphrase({
       }
     }
     setpassPhrase(temp);
+  };
+
+  const handleSwitch = () => {
+    const extraWordInput = document.getElementById(
+      'extraword'
+    ) as HTMLInputElement;
+    if (extraWord) extraWordInput.value = '';
+    setExtraWord((prev) => !prev);
   };
 
   return (
@@ -107,6 +120,24 @@ export default function ImportPassphrase({
               </div>
             );
           })}
+        </div>
+        <div className={styles.extraWord}>
+          <div className={styles.extraWordSwitch}>
+            <p className={styles.extraWordLabel}>Add Extra Word</p>
+            <Switch
+              onChange={handleSwitch}
+              className={styles.switch}
+              checked={extraWord}
+            />
+          </div>
+          <div className={styles.extraWordInput}>
+            <Input
+              id='extraword'
+              inputType='text'
+              error={false}
+              disabled={!extraWord}
+            />
+          </div>
         </div>
         <span className={styles.icons}>
           <div className={styles.button}>

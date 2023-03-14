@@ -21,9 +21,12 @@ export async function generateSeed(memonic: string): Promise<string> {
   return seedString;
 }
 
-export async function createWallet(memonic: string[]): Promise<UserLoginInfo> {
+export async function createWallet(
+  memonic: string[],
+  extraWord?: string
+): Promise<UserLoginInfo> {
   const memonicString = memonic.join(' ');
-  const seed = await mnemonicToSeed(memonicString);
+  const seed = await mnemonicToSeed(memonicString, extraWord);
   const hdkey1 = HDKey.fromMasterSeed(seed);
   let privateKeyString = '';
 
