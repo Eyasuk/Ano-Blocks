@@ -20,14 +20,9 @@ export async function signUp(
 }
 
 export function checkIfUserLogin() {
-  //check cookies
   const cookie = getCookie('userData');
   if (!cookie) return false;
   return cookie.toString();
-
-  //if then set password modal
-  //if password correct set user info
-  //set login true
 }
 
 export async function checkUserWithPassword(password: string) {
