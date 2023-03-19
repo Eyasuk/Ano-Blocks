@@ -1,18 +1,26 @@
 'use client';
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Input from 'components/elements/input';
 import { OutlinedButton } from 'components/elements/buttons';
 import { GlassCard } from 'components/elements/cards';
 import { notification } from 'components/elements/notification';
-import { checkUserWithPassword } from 'utils/helpers/userSession';
+import {
+  checkUserWithPassword,
+  setUserSession,
+} from 'utils/helpers/userSession';
 import { useUser } from 'utils/context/user';
 import { UserLoginInfo } from 'utils/types/userType';
 
 import styles from './auth.module.scss';
+import { Routes } from 'utils/constants/routes';
 
 export default function Auth(): JSX.Element {
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const redirectUrl = searchParams.get('redirect') ?? '/';
+
   const [passInputError, setPassError] = useState<boolean>(false);
   const { setUserLoggedin, setUserInfo } = useUser();
 
@@ -48,9 +56,16 @@ export default function Auth(): JSX.Element {
         pubkey: auth.pubkey,
       };
 
+      await setUserSession(event.target.password.value);
       setUserInfo(user);
       setUserLoggedin(true);
-      router.push('/');
+
+      if (redirectUrl in Object.values(Routes.authorizedRoutes)) {
+        router.push(redirectUrl);
+        return;
+      } else {
+        router.push('/');
+      }
     }
   };
 

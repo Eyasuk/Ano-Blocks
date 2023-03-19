@@ -1,9 +1,14 @@
 'use client';
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { redirect, useRouter, usePathname } from 'next/navigation';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { UserLoginInfo } from 'utils/types/userType';
-import { checkIfUserLogin } from 'utils/helpers/userSession';
-import { Router } from 'next/router';
+import {
+  checkIfUserLogin,
+  checkUserSession,
+  checkUserWithPassword,
+} from 'utils/helpers/userSession';
+import { RouteType } from 'utils/types/routeTypes';
+import { Routes } from 'utils/constants/routes';
 
 interface UserState {
   userLoggedin: boolean;
@@ -32,30 +37,55 @@ interface UserProviderProps {
 export const UserProvider = ({ children }: UserProviderProps): JSX.Element => {
   const router = useRouter();
   const currentPath = usePathname();
+  const searchParams = useSearchParams();
+
   const [userLoggedin, setUserLoggedin] = useState<boolean>(false);
   const [userInfo, setUserInfo] = useState<UserLoginInfo>(null);
   const [showPasswordModal, setPasswordModal] = useState<boolean>(false);
 
-  //check cookies
-  //if then set password modal
-  //if password correct set user info
-  //set login true
-  const redirectTo = (path: string): void => {
+  const redirectTo = async (path: string): Promise<void> => {
     const user = checkIfUserLogin();
+
     if (!user) {
-      if (path === '/intro' || path === '/new' || path === '/import') {
-        router.push(path);
-      } else {
-        router.push('/intro');
-      }
-    } else {
-      if (path === '/intro' || path === '/new' || path === '/import') {
-        router.push('/');
-      } else if (!userLoggedin) {
-        router.push('/auth');
-      }
+      if (path in Object.values(Routes.authorizationRoutes)) router.push(path);
+      else router.push(Routes.authenticationRoutes.new);
+      return;
     }
+
+    if (userLoggedin) return;
+
+    const userSession = await checkUserSession();
+
+    if (userSession) {
+      if (typeof userSession.password == 'string') {
+        const auth = await checkUserWithPassword(userSession.password);
+
+        if (
+          auth &&
+          typeof auth.hdPriv == 'string' &&
+          typeof auth.priv == 'string' &&
+          typeof auth.pubad == 'string' &&
+          typeof auth.pubkey == 'string'
+        ) {
+          const user: UserLoginInfo = {
+            hdPriv: auth.hdPriv,
+            priv: auth.priv,
+            pubad: auth.pubad,
+            pubkey: auth.pubkey,
+          };
+
+          setUserInfo(user);
+          setUserLoggedin(true);
+        }
+      }
+      return;
+    }
+
+    const params = new URLSearchParams(searchParams);
+    params.set('redirect', path);
+    router.push(`${Routes.authorizationRoutes.auth}`);
   };
+
   useEffect(() => {
     redirectTo(currentPath ?? '/intro');
   }, [currentPath]);

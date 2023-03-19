@@ -5,7 +5,7 @@ import Input from 'components/elements/input';
 import { OutlinedButton } from 'components/elements/buttons';
 import { notification } from 'components/elements/notification';
 import { createWallet } from 'utils/helpers/createWallet';
-import { signUp } from 'utils/helpers/userSession';
+import { setUserSession, signUp } from 'utils/helpers/userSession';
 import { useUser } from 'utils/context/user';
 import { PasswordTypes } from './types';
 
@@ -39,6 +39,8 @@ export default function CreatePassword({
     setPassword(event.target.password.value);
     const account = await createWallet(passphrase, extraPassphrase);
     const userLogin = signUp(account, event.target.password.value);
+    await setUserSession(event.target.password.value);
+
     setUserInfo(account);
     setUserLoggedin(true);
     router.push('/');
