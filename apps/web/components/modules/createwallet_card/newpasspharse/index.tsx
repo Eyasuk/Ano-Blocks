@@ -7,26 +7,28 @@ import {
   FilledButton,
   IconButton,
 } from 'components/elements/buttons';
-import { generatePassPhrase } from 'utils/services/wallet/generateMnemonic';
+import { generatePassPhrase } from 'utils/helpers/createWallet';
 import { downloadFile } from 'utils/helpers/downloadfile';
 import { PassphraseTypes } from './types';
 import styles from './newpassphrase.module.scss';
 
 export default function Introduction({
+  passPhrase,
+  setpassPhrase,
   stateChanger,
 }: PassphraseTypes): JSX.Element {
-  const [passphrase, setPassphrase] = useState<string[]>([]);
+  //const [passphrase, setPassphrase] = useState<string[]>([]);
   const passphraseFetchedRef = useRef<boolean | null>(false);
 
   useEffect(() => {
     if (passphraseFetchedRef.current) return;
     passphraseFetchedRef.current = true;
     const temp = generatePassPhrase();
-    setPassphrase(temp);
+    setpassPhrase(temp);
   }, []);
 
   const downloadPassPhrase = () => {
-    downloadFile(passphrase, 'ano', true);
+    if (passPhrase != null) downloadFile(passPhrase, 'ano', true);
   };
 
   const buttonAction = () => {
@@ -42,7 +44,7 @@ export default function Introduction({
         be recovered with out passphrase!!
       </p>
       <div className={styles.passphrase}>
-        {passphrase.map((content, index) => {
+        {passPhrase.map((content, index) => {
           return (
             <div className={styles.wordinputfield} key={index}>
               <p className={styles.index}>{index + 1 + '.'}</p>
