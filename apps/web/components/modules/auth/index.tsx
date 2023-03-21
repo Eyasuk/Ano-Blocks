@@ -60,7 +60,7 @@ export default function Auth(): JSX.Element {
       setUserInfo(user);
       setUserLoggedin(true);
 
-      if (redirectUrl in Object.values(Routes.authorizedRoutes)) {
+      if (Object.values(Routes.authorizedRoutes).includes(redirectUrl)) {
         router.push(redirectUrl);
         return;
       } else {

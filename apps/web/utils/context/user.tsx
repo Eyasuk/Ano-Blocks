@@ -47,10 +47,14 @@ export const UserProvider = ({ children }: UserProviderProps): JSX.Element => {
     const user = checkIfUserLogin();
 
     if (!user) {
-      if (path in Object.values(Routes.authorizationRoutes)) router.push(path);
-      else router.push(Routes.authenticationRoutes.new);
+      if (Object.values(Routes.authenticationRoutes).includes(path))
+        router.push(path);
+      else router.push(Routes.authenticationRoutes.intro);
       return;
     }
+
+    if (Object.values(Routes.authorizationRoutes).includes(path))
+      router.push(Routes.authorizedRoutes.home);
 
     if (userLoggedin) return;
 
@@ -83,12 +87,13 @@ export const UserProvider = ({ children }: UserProviderProps): JSX.Element => {
 
     const params = new URLSearchParams(searchParams);
     params.set('redirect', path);
-    router.push(`${Routes.authorizationRoutes.auth}`);
+    const redirect = params;
+    router.push(`${Routes.authorizationRoutes.auth}?${redirect}`);
   };
 
   useEffect(() => {
     redirectTo(currentPath ?? '/intro');
-  }, [currentPath]);
+  }, []);
 
   return (
     <UserContext.Provider
