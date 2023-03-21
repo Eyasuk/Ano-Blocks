@@ -16,7 +16,6 @@ export function generatePassPhrase(): string[] {
 
 export async function generateSeed(memonic: string): Promise<string> {
   const seed = await mnemonicToSeed(memonic);
-  //Sconst seedString = Buffer.from(seed).toString('hex');
   const seedString = toHex(sha256(seed));
   return seedString;
 }

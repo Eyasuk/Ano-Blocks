@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { OutlinedButton, FilledButton } from 'components/elements/buttons';
+import { notification } from 'components/elements/notification';
 import { chooseRandomPasspharse } from 'utils/helpers/chooseRandomPassPharse';
 import { useUser } from 'utils/context/user';
 import { RandomPassphraseType, ConfirmPasspraseProps } from './types';
@@ -49,7 +50,12 @@ export default function ConfirmPassphrase({
         correctChoosen[i] = true;
       }
     }
-    if (!allWordSelected) console.log('choose all words');
+    if (!allWordSelected)
+      notification({
+        message: 'Choose all words',
+        description: 'Choose all words with the correct sequence',
+        messageType: 'warning',
+      });
     else if (correctChoosen.includes(false))
       setPassphraseCoosen(correctChoosen);
     else {

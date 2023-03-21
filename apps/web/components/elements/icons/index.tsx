@@ -7,7 +7,7 @@ import {
   SettingOutlined,
   LogoutOutlined,
 } from '@ant-design/icons';
-// import { CopyOutlined, QrcodeOutlined,} from '@ant-design/types';
+
 export function CopyIcon({ ...rest }: any): any {
   return <CopyOutlined {...rest} style={{ fontSize: '170%' }} />;
 }
