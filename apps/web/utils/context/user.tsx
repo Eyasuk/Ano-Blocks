@@ -128,7 +128,7 @@ export const UserProvider = ({ children }: UserProviderProps): JSX.Element => {
     const params = new URLSearchParams(searchParams);
     console.log(23);
 
-    params.set('redirect', path);
+    //params.set('redirect', path);
     console.log(24);
 
     const redirect = params;
