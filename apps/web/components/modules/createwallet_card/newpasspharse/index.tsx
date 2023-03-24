@@ -1,24 +1,22 @@
 'use client';
-import { useState, useEffect, useRef } from 'react';
-import { CopyOutlined, DownloadOutlined } from '@ant-design/icons';
-import { GlassCard } from 'components/elements/cards';
-import {
-  OutlinedButton,
-  FilledButton,
-  IconButton,
-} from 'components/elements/buttons';
+import { useEffect, useRef, useState } from 'react';
+import { Switch } from 'antd';
+import { DownloadOutlined } from '@ant-design/icons';
+import { OutlinedButton, IconButton } from 'components/elements/buttons';
+import Input from 'components/elements/input';
 import { generatePassPhrase } from 'utils/helpers/createWallet';
 import { downloadFile } from 'utils/helpers/downloadfile';
 import { PassphraseTypes } from './types';
 import styles from './newpassphrase.module.scss';
 
-export default function Introduction({
+export default function NewPassphrase({
   passPhrase,
   setpassPhrase,
   stateChanger,
+  setExtraPassphrase,
 }: PassphraseTypes): JSX.Element {
-  //const [passphrase, setPassphrase] = useState<string[]>([]);
   const passphraseFetchedRef = useRef<boolean | null>(false);
+  const [extraWord, setExtraWord] = useState<boolean>(false);
 
   useEffect(() => {
     if (passphraseFetchedRef.current) return;
@@ -33,6 +31,18 @@ export default function Introduction({
 
   const buttonAction = () => {
     stateChanger(2);
+    const extraWordInput = document.getElementById(
+      'extraword'
+    ) as HTMLInputElement;
+    setExtraPassphrase(extraWordInput.value);
+  };
+
+  const handleSwitch = () => {
+    const extraWordInput = document.getElementById(
+      'extraword'
+    ) as HTMLInputElement;
+    if (extraWord) extraWordInput.value = '';
+    setExtraWord((prev) => !prev);
   };
 
   return (
@@ -52,6 +62,24 @@ export default function Introduction({
             </div>
           );
         })}
+      </div>
+      <div className={styles.extraWord}>
+        <div className={styles.extraWordSwitch}>
+          <p className={styles.extraWordLabel}>Add Extra Word</p>
+          <Switch
+            onChange={handleSwitch}
+            className={styles.switch}
+            checked={extraWord}
+          />
+        </div>
+        <div className={styles.extraWordInput}>
+          <Input
+            id='extraword'
+            inputType='text'
+            error={false}
+            disabled={!extraWord}
+          />
+        </div>
       </div>
       <span className={styles.icons}>
         <IconButton icon={<DownloadOutlined />} onClick={downloadPassPhrase} />

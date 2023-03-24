@@ -14,6 +14,7 @@ export default function NewWallet() {
   const [steps, setSteps] = useState<1 | 2 | 3>(1);
   const [passphrase, setPassphrase] = useState<string[]>([]);
   const [password, setPassword] = useState<string>('');
+  const [extraPassphrase, setExtraPassPhrase] = useState<string | undefined>();
 
   return (
     <Welcome>
@@ -27,17 +28,27 @@ export default function NewWallet() {
                     stateChanger={setSteps}
                     passPhrase={passphrase}
                     setpassPhrase={setPassphrase}
+                    setExtraPassphrase={setExtraPassPhrase}
                   />
                 );
               case 2:
                 return (
-                  <CreatePassword
+                  <ConfirmPassphrase
+                    passphrase={passphrase}
+                    password={password}
                     stateChanger={setSteps}
-                    setPassword={setPassword}
                   />
                 );
               case 3:
-                return <ConfirmPassphrase passphrase={passphrase} />;
+                return (
+                  <CreatePassword
+                    stateChanger={setSteps}
+                    setPassword={setPassword}
+                    passphrase={passphrase}
+                    extraPassphrase={extraPassphrase}
+                  />
+                );
+
               default:
                 null;
             }

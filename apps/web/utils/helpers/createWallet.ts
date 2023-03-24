@@ -16,14 +16,16 @@ export function generatePassPhrase(): string[] {
 
 export async function generateSeed(memonic: string): Promise<string> {
   const seed = await mnemonicToSeed(memonic);
-  //Sconst seedString = Buffer.from(seed).toString('hex');
   const seedString = toHex(sha256(seed));
   return seedString;
 }
 
-export async function createWallet(memonic: string[]): Promise<UserLoginInfo> {
+export async function createWallet(
+  memonic: string[],
+  extraWord?: string
+): Promise<UserLoginInfo> {
   const memonicString = memonic.join(' ');
-  const seed = await mnemonicToSeed(memonicString);
+  const seed = await mnemonicToSeed(memonicString, extraWord);
   const hdkey1 = HDKey.fromMasterSeed(seed);
   let privateKeyString = '';
 
@@ -36,6 +38,7 @@ export async function createWallet(memonic: string[]): Promise<UserLoginInfo> {
   let priv = '',
     pubkey = '',
     pubad;
+
   if (account1.privateKey) priv = '0x' + toHex(account1.privateKey);
   if (account1.publicKey) pubkey = '0x' + toHex(account1.publicKey);
   if (account1.publicKey) pubad = publicKeyToAddress(toHex(account1.publicKey));

@@ -9,12 +9,12 @@
     flex-direction: row;
 
     .inputField {
-      background-color: transparent !important;
+      background-color: transparent;
       color: var(--white_500);
       border: 0;
       padding-left: 0.5em;
       width: 100%;
-      min-height: 2.5em;
+      min-height: 2em;
       font-size: var(--text_base);
       border: 2px solid var(--gray_500);
       border-radius: 8px;
@@ -38,6 +38,11 @@
       }
       &:-webkit-autofill:focus {
         border: 2px solid var(--green);
+      }
+
+      &:disabled {
+        background-color: var(--black_200);
+        border: 1px solid var(--gray_500);
       }
     }
   }
