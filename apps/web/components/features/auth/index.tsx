@@ -1,4 +1,3 @@
-'use client';
 import Welcome from 'components/layouts/welcome';
 import Auth from 'components/modules/auth';
 
