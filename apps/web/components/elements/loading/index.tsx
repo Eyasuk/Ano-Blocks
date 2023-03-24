@@ -1,6 +1,6 @@
 import styles from './loading.module.scss';
 
-export default function Page(): JSX.Element {
+export default function Loading(): JSX.Element {
   return (
     <div className={styles.welcome}>
       <div className={styles.logo}>
