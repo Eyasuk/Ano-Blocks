@@ -51,7 +51,7 @@ export const UserProvider = ({ children }: UserProviderProps): JSX.Element => {
 
       if (Object.values(Routes.authenticationRoutes).includes(path)) {
         console.log(2);
-
+        return;
         // router.push(path);
         console.log(3);
       } else {
