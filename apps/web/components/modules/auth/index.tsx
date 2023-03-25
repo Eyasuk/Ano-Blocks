@@ -27,10 +27,10 @@ export default function Auth(): JSX.Element {
   const handleSumbit = async (event: any) => {
     event.preventDefault();
 
-    if (!event.target) {
-      setPassError(false);
-      return;
-    }
+    // if (!event.target) {
+    //   setPassError(false);
+    //   return;
+    // }
     const auth = await checkUserWithPassword(event.target.password.value);
 
     if (!auth) {

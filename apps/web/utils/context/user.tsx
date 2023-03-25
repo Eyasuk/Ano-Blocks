@@ -53,7 +53,6 @@ export const UserProvider = ({ children }: UserProviderProps): JSX.Element => {
         console.log(2);
         return;
         // router.push(path);
-        console.log(3);
       } else {
         console.log(4);
 
