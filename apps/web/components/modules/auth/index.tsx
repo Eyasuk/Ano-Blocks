@@ -73,7 +73,7 @@ export default function Auth(): JSX.Element {
     <GlassCard>
       <div className={styles.layouts}>
         <p className={styles.title}>Enter Your Password</p>
-        <form onSubmit={handleSumbit}>
+        <form onSubmit={handleSumbit} method='post'>
           <div className={styles.form}>
             <Input
               label='Password'
