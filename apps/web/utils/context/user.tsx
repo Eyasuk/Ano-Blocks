@@ -64,7 +64,9 @@ export const UserProvider = ({ children }: UserProviderProps): JSX.Element => {
       return;
     }
     console.log(7);
-
+    if (Object.values(Routes.authorizationRoutes).includes(path)) {
+      return;
+    }
     if (Object.values(Routes.authenticationRoutes).includes(path)) {
       console.log(path);
       console.log(Object.values(Routes.authorizationRoutes));
