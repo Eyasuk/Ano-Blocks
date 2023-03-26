@@ -1,7 +1,7 @@
-import Header from 'components/modules/header';
 import { MenuBar } from 'components/modules/menu';
 import ThemeToggle from 'components/elements/themeToggle';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import { Layout } from 'antd';
+import CommonLayout from 'components/layouts/common';
 
 const { Content, Footer, Sider } = Layout;
 import styles from './layout.module.scss';
@@ -14,11 +14,10 @@ type Props = {
 export default function Default({ children }: Props): JSX.Element {
   return (
     // <div className={styles.default}>
-    <Theme>
+    <CommonLayout>
       <Layout style={{ minHeight: '100vh' }} className={styles.body}>
-        <ThemeToggle />
         <MenuBar />
-        <Layout className='site-layout'>
+        <Layout>
           <Content className={styles.contents}>
             <div className={styles.content}>{children}</div>
           </Content>
@@ -27,6 +26,6 @@ export default function Default({ children }: Props): JSX.Element {
         </Footer> */}
         </Layout>
       </Layout>
-    </Theme>
+    </CommonLayout>
   );
 }

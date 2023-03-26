@@ -1,6 +1,5 @@
 .container {
   .label {
-    color: var(--gray_500);
     margin: 1em 0em;
     display: block;
   }
@@ -10,7 +9,6 @@
 
     .inputField {
       background-color: transparent;
-      color: var(--white_500);
       border: 0;
       padding-left: 0.5em;
       width: 100%;

@@ -113,7 +113,7 @@ export default function ConfirmPassphrase({
           );
         })}
         <div className={styles.button}>
-          <Button text='Next' />
+          <Button text='Next' htmlType='submit' />
         </div>
       </form>
     </div>

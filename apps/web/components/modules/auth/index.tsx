@@ -74,7 +74,7 @@ export default function Auth(): JSX.Element {
   return (
     <GlassCard>
       <div className={styles.layouts}>
-        <Title className={styles.title} level={3}>
+        <Title className={styles.title} level={4}>
           Enter Your Password
         </Title>
         <form onSubmit={handleSumbit} method='post'>
@@ -90,7 +90,7 @@ export default function Auth(): JSX.Element {
               minLength={5}
             />
             <div className={styles.button}>
-              <Button text='Confirm' />
+              <Button text='Confirm' htmlType='submit' size='large' />
             </div>
           </div>
         </form>

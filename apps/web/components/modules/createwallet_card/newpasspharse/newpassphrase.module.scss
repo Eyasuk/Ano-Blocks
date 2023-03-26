@@ -15,7 +15,6 @@
     font-size: var(--text_tiny);
     max-width: 42ch;
     text-align: center;
-    color: var(--gray_500);
   }
   .passphrase {
     display: grid;
@@ -34,7 +33,6 @@
       min-width: 10ch;
       .index {
         margin-left: 10%;
-        color: var(--gray_500);
       }
       .content {
         margin-left: 3%;

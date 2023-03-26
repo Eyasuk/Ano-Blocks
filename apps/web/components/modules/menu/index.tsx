@@ -1,3 +1,4 @@
+'use client';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import {
@@ -77,7 +78,7 @@ export function MenuBar() {
           width={0}
         />
         {!title ? (
-          <Title level={3} className={styles.title}>
+          <Title level={4} className={styles.title}>
             AnoBlocks{' '}
           </Title>
         ) : null}

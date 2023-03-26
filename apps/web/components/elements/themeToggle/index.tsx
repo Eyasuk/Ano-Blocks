@@ -50,6 +50,8 @@ export default function ThemeToggle() {
       <Button
         className='btn'
         type='default'
+        size='large'
+        shape='circle'
         icon={darkTheme ? <DarkBulbIcon /> : <LightBulbIcon />}
       />
     </Dropdown>

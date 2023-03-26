@@ -81,7 +81,7 @@ export default function CreatePassword({
             minLength={5}
           />
           <div className={styles.button}>
-            <Button text='Finsh' />
+            <Button text='Finsh' htmlType='submit' />
           </div>
         </div>
       </form>
