@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { CopyIcon, QrIcon } from 'components/elements/icons';
-import { FilledButton, OutlinedButton } from 'components/elements/buttons';
+import Button from 'components/elements/buttons';
 import { GlassCard } from 'components/elements/cards';
 import QrAddress from 'components/modules/qrAddress';
 import { notification } from 'components/elements/notification';
@@ -55,8 +55,8 @@ export default function Wallet(): JSX.Element {
           </div>
 
           <div className={styles.leftButton}>
-            <FilledButton text='Receive' onClick={() => true} />
-            <OutlinedButton text='Send' onClick={() => true} />
+            <Button text='Receive' onClick={() => true} />
+            <Button text='Send' onClick={() => true} />
           </div>
         </div>
       </GlassCard>

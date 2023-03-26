@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
 import { Switch } from 'antd';
-import { OutlinedButton } from 'components/elements/buttons';
+import Button from 'components/elements/buttons';
 import Input from 'components/elements/input';
 import { notification } from 'components/elements/notification';
 import { PassphraseTypes } from './types';
@@ -145,7 +145,7 @@ export default function ImportPassphrase({
         </div>
         <span className={styles.icons}>
           <div className={styles.button}>
-            <OutlinedButton text='Next' />
+            <Button text='Next' />
           </div>
         </span>
       </div>

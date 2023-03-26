@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { OutlinedButton, FilledButton } from 'components/elements/buttons';
+import Button from 'components/elements/buttons';
 import { notification } from 'components/elements/notification';
 import { chooseRandomPasspharse } from 'utils/helpers/chooseRandomPassPharse';
 import { useUser } from 'utils/context/user';
@@ -113,7 +113,7 @@ export default function ConfirmPassphrase({
           );
         })}
         <div className={styles.button}>
-          <OutlinedButton text='Next' />
+          <Button text='Next' />
         </div>
       </form>
     </div>

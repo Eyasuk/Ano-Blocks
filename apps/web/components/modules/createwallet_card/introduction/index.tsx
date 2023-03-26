@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import NextImage from 'next/image';
 import { GlassCard } from 'components/elements/cards';
-import { OutlinedButton, FilledButton } from 'components/elements/buttons';
+import Button from 'components/elements/buttons';
 import { IntroductionData } from 'utils/constants/introdcationData';
 import { Typography } from 'antd';
 
@@ -48,12 +48,14 @@ export default function Introduction(): JSX.Element {
             })}
           </div>
           <div className={styles.button}>
-            <OutlinedButton
+            <Button
               text='Create Wallet'
+              type='primary'
               onClick={() => router.push('/new')}
             />
-            <FilledButton
+            <Button
               text='I have Wallet'
+              type='link'
               onClick={() => router.push('/import')}
             />
           </div>

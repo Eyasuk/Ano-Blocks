@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Input from 'components/elements/input';
-import { OutlinedButton } from 'components/elements/buttons';
+import Button from 'components/elements/buttons';
 import { notification } from 'components/elements/notification';
 import { createWallet } from 'utils/helpers/createWallet';
 import { setUserSession, signUp } from 'utils/helpers/userSession';
@@ -81,7 +81,7 @@ export default function CreatePassword({
             minLength={5}
           />
           <div className={styles.button}>
-            <OutlinedButton text='Finsh' />
+            <Button text='Finsh' />
           </div>
         </div>
       </form>

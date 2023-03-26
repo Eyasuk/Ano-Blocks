@@ -1,4 +1,4 @@
-import { FilledButton, OutlinedButton } from 'components/elements/buttons';
+import Button from 'components/elements/buttons';
 import { GlassCard } from 'components/elements/cards';
 import Input from 'components/elements/input';
 import { useUser } from 'utils/context/user';
@@ -16,7 +16,7 @@ export default function Send(): JSX.Element {
           <Input error={false} inputType='text' label='Reciver Address' />
           <Input error={false} inputType='text' label='Amount' />
           <Input error={false} inputType='text' label='Comment' />
-          <OutlinedButton text='Send' />
+          <Button text='Send' />
           {/* <h3>{'from : ' + userInfo?.pubad}</h3> */}
         </div>
       </GlassCard>

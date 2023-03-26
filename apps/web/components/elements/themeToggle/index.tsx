@@ -4,6 +4,7 @@ import React from 'react';
 
 import { Dropdown, MenuProps } from 'antd';
 import { DarkBulbIcon, LightBulbIcon } from 'components/elements/icons';
+import Button from 'components/elements/buttons';
 import { useTheme } from 'utils/context/antdTheme';
 import styles from './themeToggle.module.scss';
 
@@ -46,9 +47,11 @@ export default function ThemeToggle() {
         onClick,
       }}
     >
-      <button className='btn'>
-        {darkTheme ? <DarkBulbIcon /> : <LightBulbIcon />}
-      </button>
+      <Button
+        className='btn'
+        type='default'
+        icon={darkTheme ? <DarkBulbIcon /> : <LightBulbIcon />}
+      />
     </Dropdown>
   );
 }

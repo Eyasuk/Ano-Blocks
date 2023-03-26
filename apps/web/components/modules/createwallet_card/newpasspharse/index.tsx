@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Switch } from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
-import { OutlinedButton, IconButton } from 'components/elements/buttons';
+import Button from 'components/elements/buttons';
 import Input from 'components/elements/input';
 import { generatePassPhrase } from 'utils/helpers/createWallet';
 import { downloadFile } from 'utils/helpers/downloadfile';
@@ -86,9 +86,13 @@ export default function NewPassphrase({
         </div>
       </div>
       <span className={styles.icons}>
-        <IconButton icon={<DownloadOutlined />} onClick={downloadPassPhrase} />
+        <Button
+          icon={<DownloadOutlined />}
+          onClick={downloadPassPhrase}
+          type='default'
+        />
         <div className={styles.button}>
-          <OutlinedButton text='Next' onClick={buttonAction} />
+          <Button text='Next' onClick={buttonAction} />
         </div>
       </span>
     </div>

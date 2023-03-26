@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Input from 'components/elements/input';
-import { OutlinedButton } from 'components/elements/buttons';
+import Button from 'components/elements/buttons';
 import { GlassCard } from 'components/elements/cards';
 import { notification } from 'components/elements/notification';
 import {
@@ -90,7 +90,7 @@ export default function Auth(): JSX.Element {
               minLength={5}
             />
             <div className={styles.button}>
-              <OutlinedButton text='Confirm' />
+              <Button text='Confirm' />
             </div>
           </div>
         </form>

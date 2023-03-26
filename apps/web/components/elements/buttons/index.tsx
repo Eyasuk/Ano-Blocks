@@ -1,5 +1,6 @@
-import FilledButton from "./filled";
-import OutlinedButton from "./outlined";
-import IconButton from "./icon";
+import { Button as AntdButton } from 'antd';
+import ButtonProps from './types';
 
-export { FilledButton, OutlinedButton, IconButton };
+export default function Button({ text, ...rest }: ButtonProps): JSX.Element {
+  return <AntdButton {...rest}>{text}</AntdButton>;
+}
