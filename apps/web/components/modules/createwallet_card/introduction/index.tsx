@@ -5,7 +5,9 @@ import NextImage from 'next/image';
 import { GlassCard } from 'components/elements/cards';
 import { OutlinedButton, FilledButton } from 'components/elements/buttons';
 import { IntroductionData } from 'utils/constants/introdcationData';
+import { Typography } from 'antd';
 
+const { Title, Text } = Typography;
 import styles from './introduction.module.scss';
 
 export default function Introduction(): JSX.Element {
@@ -24,7 +26,7 @@ export default function Introduction(): JSX.Element {
     <div className={styles.container}>
       <GlassCard>
         <div className={styles.layouts}>
-          <p className={styles.title}>{IntroductionData[step].title}</p>
+          <Title className={styles.title}>{IntroductionData[step].title}</Title>
           <NextImage
             className={styles.image}
             src={IntroductionData[step].image}
@@ -32,9 +34,9 @@ export default function Introduction(): JSX.Element {
             width={150}
             height={200}
           />
-          <p className={styles.description}>
+          <Text className={styles.description}>
             {IntroductionData[step].description}
-          </p>
+          </Text>
           <div className={styles.progress}>
             {IntroductionData.map((_, index) => {
               return (

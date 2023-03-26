@@ -1,12 +1,7 @@
 .container {
-    background-color: transparent;
-    border: none;
-    color: var(--gray_500);
-    display: block;
-    margin: 0px 6px;
-    font-size: var(--text_lg);
-}
+  border: none;
 
-.container:hover {
-    color: var(--white_900);
+  display: block;
+  margin: 0px 6px;
+  font-size: var(--text_lg);
 }

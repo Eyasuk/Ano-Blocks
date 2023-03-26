@@ -5,7 +5,9 @@ import { OutlinedButton } from 'components/elements/buttons';
 import Input from 'components/elements/input';
 import { notification } from 'components/elements/notification';
 import { PassphraseTypes } from './types';
+import { Typography } from 'antd';
 
+const { Title, Text } = Typography;
 import styles from './importphrase.module.scss';
 
 export default function ImportPassphrase({
@@ -93,18 +95,20 @@ export default function ImportPassphrase({
   return (
     <form onSubmit={handleSumbit}>
       <div className={styles.layouts}>
-        <p className={styles.title}>Import Wallet</p>
-        <p className={styles.description}>
+        <Title className={styles.title} level={3}>
+          Import Wallet
+        </Title>
+        <Text className={styles.description}>
           {' '}
           Please Enter Your PassPhrase Correctly by Entering One by One or Copy
           it in The First Field!!
-        </p>
+        </Text>
 
         <div className={styles.passphrase}>
           {passPhrase.map((content, index) => {
             return (
               <div className={styles.input} key={index}>
-                <p className={styles.index}>{index + 1 + '.'}</p>
+                <Text className={styles.index}>{index + 1 + '.'}</Text>
                 <div className={styles.wordinputfield} key={index}>
                   <Input
                     value={passPhrase[index]}
@@ -123,7 +127,7 @@ export default function ImportPassphrase({
         </div>
         <div className={styles.extraWord}>
           <div className={styles.extraWordSwitch}>
-            <p className={styles.extraWordLabel}>Add Extra Word</p>
+            <Text className={styles.extraWordLabel}>Add Extra Word</Text>
             <Switch
               onChange={handleSwitch}
               className={styles.switch}

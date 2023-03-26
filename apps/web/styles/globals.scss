@@ -32,25 +32,23 @@ html,
 body {
   padding: 0;
   margin: 0;
-  background: -webkit-radial-gradient(center, var(--blue_900), var(--blue_500))
-    no-repeat;
-  background: -moz-radial-gradient(center, var(--blue_900), var(--blue_500))
-    no-repeat;
-  background: radial-gradient(
-      ellipse at center,
-      var(--blue_900),
-      var(--blue_500)
-    )
-    no-repeat;
-  background-size: cover;
+  // background: -webkit-radial-gradient(center, var(--blue_900), var(--blue_500))
+  //   no-repeat;
+  // background: -moz-radial-gradient(center, var(--blue_900), var(--blue_500))
+  //   no-repeat;
+  // background: radial-gradient(
+  //     ellipse at center,
+  //     var(--blue_900),
+  //     var(--blue_500)
+  //   )
+  //   no-repeat;
+  // background-size: cover;
   min-height: 100%;
   font-family: Montserrat, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
     Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  color: var(--white_900);
 }
 
 a {
-  color: inherit;
   text-decoration: none;
   font-size: var(--text_base);
 }

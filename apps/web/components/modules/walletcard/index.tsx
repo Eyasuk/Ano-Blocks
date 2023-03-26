@@ -8,7 +8,9 @@ import { notification } from 'components/elements/notification';
 import { useUser } from 'utils/context/user';
 import { shortenText } from 'utils/helpers/shortText';
 import { copyToClipBoard } from 'utils/helpers/copytext';
+import { Typography } from 'antd';
 
+const { Title, Text } = Typography;
 import styles from './walletcard.module.scss';
 
 export default function Wallet(): JSX.Element {
@@ -31,15 +33,17 @@ export default function Wallet(): JSX.Element {
       <GlassCard>
         <div className={styles.layout}>
           <div className={styles.column}>
-            <p className={styles.title}>Total portfolio value</p>
-            <h2>ETB 0.00</h2>
+            <Text className={styles.title}>Total portfolio value</Text>
+            <div>
+              <Title level={4}>ETB 0.00</Title>
+            </div>
           </div>
 
           <div className={styles.line}></div>
           <div className={(styles.column, styles.walletaddress)}>
-            <p className={styles.title}>Main account</p>
+            <Text className={styles.title}>Main account</Text>
             <div className={styles.walletinfo}>
-              <h2>{shortenText(userInfo?.pubad)}</h2>
+              <Title level={4}>{shortenText(userInfo?.pubad)}</Title>
               <div className={styles.icons}>
                 <CopyIcon className={styles.icon} onClick={handelCopy} />
                 <QrIcon

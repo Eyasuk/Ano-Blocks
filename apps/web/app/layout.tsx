@@ -1,4 +1,6 @@
+import { ConfigProvider } from 'antd';
 import { UserProvider } from 'utils/context/user';
+
 import '../styles/globals.scss';
 
 export default function Layout({ children }: any): JSX.Element {

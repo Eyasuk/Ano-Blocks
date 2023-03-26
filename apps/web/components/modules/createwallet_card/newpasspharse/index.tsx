@@ -8,7 +8,9 @@ import { generatePassPhrase } from 'utils/helpers/createWallet';
 import { downloadFile } from 'utils/helpers/downloadfile';
 import { PassphraseTypes } from './types';
 import styles from './newpassphrase.module.scss';
+import { Typography } from 'antd';
 
+const { Title, Text } = Typography;
 export default function NewPassphrase({
   passPhrase,
   setpassPhrase,
@@ -47,25 +49,27 @@ export default function NewPassphrase({
 
   return (
     <div className={styles.layouts}>
-      <p className={styles.title}>Create Wallet</p>
-      <p className={styles.description}>
+      <Title level={3} className={styles.title}>
+        Create Wallet
+      </Title>
+      <Text type='warning' className={styles.description}>
         {' '}
         Make Sure You copy a passphrase and store it in Safe Place! Fund Can not
         be recovered with out passphrase!!
-      </p>
+      </Text>
       <div className={styles.passphrase}>
         {passPhrase.map((content, index) => {
           return (
             <div className={styles.wordinputfield} key={index}>
-              <p className={styles.index}>{index + 1 + '.'}</p>
-              <p className={styles.content}>{content}</p>
+              <Text className={styles.index}>{index + 1 + '.'}</Text>
+              <Text className={styles.content}>{content}</Text>
             </div>
           );
         })}
       </div>
       <div className={styles.extraWord}>
         <div className={styles.extraWordSwitch}>
-          <p className={styles.extraWordLabel}>Add Extra Word</p>
+          <Text className={styles.extraWordLabel}>Add Extra Word</Text>
           <Switch
             onChange={handleSwitch}
             className={styles.switch}

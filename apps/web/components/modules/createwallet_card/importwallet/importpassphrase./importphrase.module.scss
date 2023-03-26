@@ -14,7 +14,6 @@
     font-size: var(--text_tiny);
     max-width: 42ch;
     text-align: center;
-    color: var(--gray_500);
   }
   .passphrase {
     display: grid;
@@ -28,7 +27,7 @@
       flex-direction: row;
       .index {
         margin-right: 0.12em;
-        color: var(--gray_500);
+
         align-self: center;
       }
       .wordinputfield {

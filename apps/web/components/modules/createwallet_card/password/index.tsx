@@ -8,7 +8,9 @@ import { createWallet } from 'utils/helpers/createWallet';
 import { setUserSession, signUp } from 'utils/helpers/userSession';
 import { useUser } from 'utils/context/user';
 import { PasswordTypes } from './types';
+import { Typography } from 'antd';
 
+const { Title, Text } = Typography;
 import styles from './password.module.scss';
 
 export default function CreatePassword({
@@ -48,12 +50,14 @@ export default function CreatePassword({
 
   return (
     <div className={styles.layouts}>
-      <p className={styles.title}>New Password</p>
-      <p className={styles.description}>
+      <Title level={3} className={styles.title}>
+        New Password
+      </Title>
+      <Text type='warning' className={styles.description}>
         {' '}
         Password will insure you wallet safe but It is temporary, If you forget
         your password you can recover using your passphrase!!
-      </p>
+      </Text>
       <form onSubmit={handleSumbit}>
         <div className={styles.form}>
           <Input

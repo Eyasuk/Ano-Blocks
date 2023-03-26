@@ -6,7 +6,9 @@ import { notification } from 'components/elements/notification';
 import { chooseRandomPasspharse } from 'utils/helpers/chooseRandomPassPharse';
 import { useUser } from 'utils/context/user';
 import { RandomPassphraseType, ConfirmPasspraseProps } from './types';
+import { Typography } from 'antd';
 
+const { Title, Text } = Typography;
 import styles from './confirmPassphrase.module.scss';
 
 export default function ConfirmPassphrase({
@@ -65,11 +67,13 @@ export default function ConfirmPassphrase({
 
   return (
     <div className={styles.layouts}>
-      <p className={styles.title}>Confirm PassPhrase</p>
-      <p className={styles.description}>
+      <Title className={styles.title} level={3}>
+        Confirm PassPhrase
+      </Title>
+      <Text type='warning' className={styles.description}>
         {' '}
         Correctly Enter Your PassPhrase in Order!!
-      </p>
+      </Text>
       <form onSubmit={handleSumbit}>
         {randomPassphrase?.choosenWords.map((items, index) => {
           return (
@@ -78,7 +82,7 @@ export default function ConfirmPassphrase({
                 <h2 className={styles.passphraseNo}>
                   {randomPassphrase.postion[index] + 1}
                 </h2>
-                <p>word</p>
+                <Text>word</Text>
               </div>
 
               <div className={styles.row}>
