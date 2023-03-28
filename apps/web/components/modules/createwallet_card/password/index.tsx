@@ -1,27 +1,27 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Input from 'components/elements/input';
+import { Typography } from 'antd';
 import Button from 'components/elements/buttons';
+import Input from 'components/elements/input';
 import { notification } from 'components/elements/notification';
+import { useUser } from 'utils/context/user';
 import { createWallet } from 'utils/helpers/createWallet';
 import { setUserSession, signUp } from 'utils/helpers/userSession';
-import { useUser } from 'utils/context/user';
 import { PasswordTypes } from './types';
-import { Typography } from 'antd';
+
+import styles from './password.module.scss';
 
 const { Title, Text } = Typography;
-import styles from './password.module.scss';
 
 export default function CreatePassword({
   setPassword,
   passphrase,
-  stateChanger,
   extraPassphrase,
 }: PasswordTypes): JSX.Element {
   const router = useRouter();
   const [passInputError, setPassError] = useState<boolean>(false);
-  const { setUserLoggedin, userLoggedin, setUserInfo } = useUser();
+  const { setUserLoggedin, setUserInfo } = useUser();
 
   const handleSumbit = async (event: any) => {
     event.preventDefault();
@@ -38,6 +38,7 @@ export default function CreatePassword({
       });
       return;
     }
+
     setPassword(event.target.password.value);
     const account = await createWallet(passphrase, extraPassphrase);
     const userLogin = signUp(account, event.target.password.value);
@@ -80,9 +81,12 @@ export default function CreatePassword({
             required
             minLength={5}
           />
-          <div className={styles.button}>
-            <Button text='Finsh' htmlType='submit' />
-          </div>
+          <Button
+            className={styles.button}
+            text='Finsh'
+            type='primary'
+            htmlType='submit'
+          />
         </div>
       </form>
     </div>
