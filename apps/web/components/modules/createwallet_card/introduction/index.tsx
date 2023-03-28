@@ -2,13 +2,14 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import NextImage from 'next/image';
-import { GlassCard } from 'components/elements/cards';
-import Button from 'components/elements/buttons';
-import { IntroductionData } from 'utils/constants/introdcationData';
 import { Typography } from 'antd';
+import Button from 'components/elements/buttons';
+import { GlassCard } from 'components/elements/cards';
+import { IntroductionData } from 'utils/constants/introdcationData';
+
+import styles from './introduction.module.scss';
 
 const { Title, Text } = Typography;
-import styles from './introduction.module.scss';
 
 export default function Introduction(): JSX.Element {
   const [step, setStep] = useState<number>(0);
@@ -18,7 +19,7 @@ export default function Introduction(): JSX.Element {
   useEffect(() => {
     const steps = setInterval(() => {
       setStep((prevStep) => (prevStep + 1) % lengthOfIntroData);
-    }, 4500);
+    }, 4000);
     return () => clearInterval(steps);
   }, [lengthOfIntroData]);
 
@@ -26,7 +27,9 @@ export default function Introduction(): JSX.Element {
     <div className={styles.container}>
       <GlassCard>
         <div className={styles.layouts}>
-          <Title className={styles.title}>{IntroductionData[step].title}</Title>
+          <Title className={styles.title} level={2}>
+            {IntroductionData[step].title}
+          </Title>
           <NextImage
             className={styles.image}
             src={IntroductionData[step].image}
@@ -52,11 +55,12 @@ export default function Introduction(): JSX.Element {
               text='Create Wallet'
               type='primary'
               onClick={() => router.push('/new')}
+              size='large'
             />
             <Button
               text='I have Wallet'
-              type='link'
               onClick={() => router.push('/import')}
+              size='large'
             />
           </div>
         </div>
