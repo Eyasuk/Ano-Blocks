@@ -61,13 +61,14 @@
   .buttons {
     display: flex;
     flex-direction: row;
-    justify-content: end;
+    justify-content: flex-end;
     width: 100%;
     margin-top: 0.2em;
     margin-bottom: 2.5em;
+    margin-right: 15%;
     .button {
       margin-left: 1em;
-      width: 30%;
+      width: 10em;
     }
   }
 }

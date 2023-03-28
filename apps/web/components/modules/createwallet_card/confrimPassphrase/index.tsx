@@ -1,25 +1,23 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { Typography } from 'antd';
 import Button from 'components/elements/buttons';
 import { notification } from 'components/elements/notification';
 import { chooseRandomPasspharse } from 'utils/helpers/chooseRandomPassPharse';
-import { useUser } from 'utils/context/user';
 import { RandomPassphraseType, ConfirmPasspraseProps } from './types';
-import { Typography } from 'antd';
+
+import styles from './confirmPassphrase.module.scss';
 
 const { Title, Text } = Typography;
-import styles from './confirmPassphrase.module.scss';
 
 export default function ConfirmPassphrase({
   passphrase,
-  password,
   stateChanger,
 }: ConfirmPasspraseProps): JSX.Element {
   const router = useRouter();
   const [randomPassphrase, setRandomPassphrase] =
     useState<RandomPassphraseType>();
-  const { setUserLoggedin, userLoggedin, setUserInfo } = useUser();
   const [passphraseCoosen, setPassphraseCoosen] = useState<boolean[]>(
     Array(4).fill(true)
   );
@@ -37,7 +35,6 @@ export default function ConfirmPassphrase({
     }
     let correctChoosen = Array(4).fill(false);
     let allWordSelected = true;
-    let allWordCorrect = true;
     for (let i = 0; i <= 3; i++) {
       const choosenWord = 'input' + i;
       if (!event.target[choosenWord].value) {
@@ -112,9 +109,12 @@ export default function ConfirmPassphrase({
             </div>
           );
         })}
-        <div className={styles.button}>
-          <Button text='Next' htmlType='submit' />
-        </div>
+        <Button
+          className={styles.button}
+          text='Next'
+          type='primary'
+          htmlType='submit'
+        />
       </form>
     </div>
   );
