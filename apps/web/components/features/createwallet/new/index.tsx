@@ -35,14 +35,12 @@ export default function NewWallet() {
                 return (
                   <ConfirmPassphrase
                     passphrase={passphrase}
-                    password={password}
                     stateChanger={setSteps}
                   />
                 );
               case 3:
                 return (
                   <CreatePassword
-                    stateChanger={setSteps}
                     setPassword={setPassword}
                     passphrase={passphrase}
                     extraPassphrase={extraPassphrase}
