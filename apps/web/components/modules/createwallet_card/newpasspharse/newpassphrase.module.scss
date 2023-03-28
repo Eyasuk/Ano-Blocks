@@ -1,5 +1,5 @@
 .layouts {
-  width: 32em;
+  width: 35em;
   margin-top: 2em;
   display: flex;
   flex-direction: column;
@@ -7,12 +7,10 @@
   align-items: center;
 
   .title {
-    margin-top: 0.8em;
     margin-bottom: 0.3em;
     font-size: var(--text_xl);
   }
   .description {
-    font-size: var(--text_tiny);
     max-width: 42ch;
     text-align: center;
   }
@@ -60,14 +58,16 @@
     }
   }
 
-  .icons {
+  .buttons {
     display: flex;
     flex-direction: row;
+    justify-content: end;
+    width: 100%;
     margin-top: 0.2em;
     margin-bottom: 2.5em;
-    margin-left: 13em;
     .button {
       margin-left: 1em;
+      width: 30%;
     }
   }
 }

@@ -1,16 +1,17 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import { Switch } from 'antd';
+import { Switch, Typography } from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
 import Button from 'components/elements/buttons';
 import Input from 'components/elements/input';
 import { generatePassPhrase } from 'utils/helpers/createWallet';
 import { downloadFile } from 'utils/helpers/downloadfile';
 import { PassphraseTypes } from './types';
+
 import styles from './newpassphrase.module.scss';
-import { Typography } from 'antd';
 
 const { Title, Text } = Typography;
+
 export default function NewPassphrase({
   passPhrase,
   setpassPhrase,
@@ -85,15 +86,14 @@ export default function NewPassphrase({
           />
         </div>
       </div>
-      <span className={styles.icons}>
+      <span className={styles.buttons}>
+        <Button icon={<DownloadOutlined />} onClick={downloadPassPhrase} />
         <Button
-          icon={<DownloadOutlined />}
-          onClick={downloadPassPhrase}
-          type='default'
+          className={styles.button}
+          text='Next'
+          type='primary'
+          onClick={buttonAction}
         />
-        <div className={styles.button}>
-          <Button text='Next' onClick={buttonAction} />
-        </div>
       </span>
     </div>
   );
