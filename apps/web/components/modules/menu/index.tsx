@@ -1,22 +1,24 @@
 'use client';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import {
-  DashboardOutlined,
-  DesktopOutlined,
-  FileOutlined,
-  PieChartOutlined,
-  TeamOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
+import { Layout, Menu, Typography } from 'antd';
 import type { MenuProps } from 'antd';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import {
+  CreditCardIcon,
+  DesktopIcon,
+  DaoIcon,
+  LockIcon,
+  LogoutIcon,
+  ReceiveIcon,
+  SendIcon,
+  SettingIcon,
+  SwapIcon,
+} from 'components/elements/icons';
 
-const { Header, Content, Footer, Sider } = Layout;
-import { Typography } from 'antd';
-
-const { Title } = Typography;
 import styles from './menu.module.scss';
+
+const { Sider } = Layout;
+const { Title } = Typography;
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -34,19 +36,24 @@ function getItem(
   } as MenuItem;
 }
 
-const items: MenuItem[] = [
-  getItem('Dashboard', '1', <DashboardOutlined />),
-  getItem('Option 2', '2', <DesktopOutlined />),
-  getItem('User', 'sub1', <UserOutlined />, [
-    getItem('Tom', '3'),
-    getItem('Bill', '4'),
-    getItem('Alex', '5'),
-  ]),
-  getItem('Team', 'sub2', <TeamOutlined />, [
-    getItem('Team 1', '6'),
-    getItem('Team 2', '8'),
-  ]),
-  getItem('Files', '9', <FileOutlined />),
+const mainRoutes: MenuItem[] = [
+  { type: 'divider' },
+  getItem('Dashboard', '1', <DesktopIcon />),
+  getItem('Dao', '2', <DaoIcon />),
+  { type: 'divider' },
+  getItem('Swap', '3', <SwapIcon />),
+  getItem('Send', '4', <SendIcon />),
+  getItem('Receive', '5', <ReceiveIcon />),
+  getItem('Buy/Sell', '6', <CreditCardIcon />),
+  { type: 'divider' },
+];
+
+const subRoutes: MenuItem[] = [
+  { type: 'divider' },
+  getItem('Setting', '1', <SettingIcon />),
+  getItem('Lock', '2', <LockIcon />),
+  getItem('Logout', '3', <LogoutIcon />),
+  { type: 'divider' },
 ];
 
 export function MenuBar() {
@@ -83,8 +90,10 @@ export function MenuBar() {
           </Title>
         ) : null}
       </div>
-
-      <Menu defaultSelectedKeys={['1']} items={items} theme='light' />
+      <div className={styles.menu}>
+        <Menu defaultSelectedKeys={['1']} items={mainRoutes} theme='light' />
+        <Menu items={subRoutes} theme='light' />
+      </div>
     </Sider>
   );
 }
