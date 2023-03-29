@@ -1,46 +1,29 @@
-.container {
-  width: 65%;
-  margin: 0 auto;
-  .layout {
-    display: flex;
-    flex-direction: row;
-    min-height: 9em;
-    padding: 0 3.2em;
-    align-items: center;
-    .column {
-      display: flex;
-      flex-direction: column;
-      .title {
-        margin-bottom: 0.8em;
-      }
+.layout {
+  min-height: 14em !important;
+  .balance {
+    .amount {
+      font-size: var(--text_lg);
+      margin-left: 0.3em;
     }
-    .walletaddress {
-      .title {
-        margin-bottom: 0.8em;
-      }
-      .walletinfo {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        .icons {
-          margin-left: 5em;
-          .icon {
-            margin-right: 0.7em;
-          }
+  }
+  .walletaddress {
+    .walletinfo {
+      display: flex;
+      flex-direction: row;
+      margin-top: 1em;
+      .icons {
+        margin-left: 2.5em;
+        .icon {
+          margin-right: 0.7em;
         }
       }
     }
-    .line {
-      border-left: 0.15em solid var(--gray_500);
-      border-radius: 20%;
-      height: 6em;
-      margin-left: 7em;
-      margin-right: 1.3em;
-    }
-    .leftButton {
-      margin-left: auto;
-      display: flex;
-      flex-direction: row;
-    }
+  }
+  .line {
+    border-left: 0.15em solid var(--gray_500);
+    border-radius: 20%;
+    height: 6em;
+    margin-left: 1em;
+    margin-right: 1.5em;
   }
 }

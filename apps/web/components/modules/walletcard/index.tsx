@@ -1,17 +1,17 @@
 'use client';
 import { useState } from 'react';
+import { Divider, Typography } from 'antd';
 import { CopyIcon, QrIcon } from 'components/elements/icons';
-import Button from 'components/elements/buttons';
 import { GlassCard } from 'components/elements/cards';
 import QrAddress from 'components/modules/qrAddress';
 import { notification } from 'components/elements/notification';
 import { useUser } from 'utils/context/user';
 import { shortenText } from 'utils/helpers/shortText';
 import { copyToClipBoard } from 'utils/helpers/copytext';
-import { Typography } from 'antd';
+
+import styles from './walletcard.module.scss';
 
 const { Title, Text } = Typography;
-import styles from './walletcard.module.scss';
 
 export default function Wallet(): JSX.Element {
   const { userInfo } = useUser();
@@ -29,34 +29,37 @@ export default function Wallet(): JSX.Element {
     });
   };
   return (
-    <div className={styles.container}>
+    <>
       <GlassCard>
         <div className={styles.layout}>
-          <div className={styles.column}>
-            <Text className={styles.title}>Total portfolio value</Text>
-            <div>
-              <Title level={4}>ETB 0.00</Title>
-            </div>
+          <Title className={styles.title} level={5} type='secondary'>
+            Total portfolio value
+          </Title>
+          <div className={styles.balance}>
+            <Text type='secondary'>ETB</Text>
+            <Text className={styles.amount}>0.00</Text>
           </div>
+          <Divider />
 
-          <div className={styles.line}></div>
           <div className={(styles.column, styles.walletaddress)}>
-            <Text className={styles.title}>Main account</Text>
+            <Title level={5} type='secondary'>
+              Main account
+            </Title>
             <div className={styles.walletinfo}>
               <Title level={4}>{shortenText(userInfo?.pubad)}</Title>
               <div className={styles.icons}>
-                <CopyIcon className={styles.icon} onClick={handelCopy} />
+                <CopyIcon
+                  className={styles.icon}
+                  style={{ fontSize: '170%' }}
+                  onClick={handelCopy}
+                />
                 <QrIcon
                   className={styles.icon}
+                  style={{ fontSize: '170%' }}
                   onClick={() => setQrOpen(!qrOpen)}
                 />
               </div>
             </div>
-          </div>
-
-          <div className={styles.leftButton}>
-            <Button text='Receive' onClick={() => true} />
-            <Button text='Send' onClick={() => true} />
           </div>
         </div>
       </GlassCard>
@@ -65,6 +68,6 @@ export default function Wallet(): JSX.Element {
         open={qrOpen}
         onCancel={handleCancel}
       />
-    </div>
+    </>
   );
 }
