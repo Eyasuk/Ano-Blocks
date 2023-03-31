@@ -58,13 +58,13 @@ const subRoutes: MenuItem[] = [
 
 export function MenuBar() {
   const [collapsed, setCollapsed] = useState(false);
-  const [title, setTitle] = useState(collapsed);
+  const [title, setTitle] = useState(!collapsed);
 
   useEffect(() => {
-    if (collapsed) setTitle((prev) => !prev);
+    if (collapsed) setTitle(false);
     else {
       setTimeout(() => {
-        setTitle((prev) => !prev);
+        setTitle(true);
       }, 150);
     }
   }, [collapsed]);
@@ -84,7 +84,7 @@ export function MenuBar() {
           height={0}
           width={0}
         />
-        {!title ? (
+        {title ? (
           <Title level={4} className={styles.title}>
             AnoBlocks{' '}
           </Title>
