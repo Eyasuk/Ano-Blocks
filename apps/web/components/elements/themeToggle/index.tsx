@@ -11,8 +11,6 @@ import styles from './themeToggle.module.scss';
 export default function ThemeToggle() {
   const { darkTheme, setDarkTheme } = useTheme();
   const onClick: MenuProps['onClick'] = ({ key }) => {
-    console.log(key);
-    console.log(darkTheme);
     setDarkTheme(key == 'dark');
   };
 
