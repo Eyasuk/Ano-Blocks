@@ -1,4 +1,5 @@
-export type ButtonProps = {
-  text: string;
-  onClick?: Function;
-};
+import { ButtonProps as AntdButtonProps } from 'antd';
+
+export default interface ButtonProps extends AntdButtonProps {
+  text?: string;
+}

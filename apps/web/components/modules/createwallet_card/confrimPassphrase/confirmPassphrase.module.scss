@@ -6,15 +6,12 @@
   justify-content: center;
   align-items: center;
   .title {
-    margin-top: 0.8em;
+    margin-top: 0.2em;
     margin-bottom: 0.3em;
-    font-size: var(--text_xl);
   }
   .description {
-    font-size: var(--text_tiny);
     max-width: 42ch;
     text-align: center;
-    color: var(--gray_500);
   }
   .passphraseChoice {
     display: flex;
@@ -61,7 +58,7 @@
           min-width: 100%;
         }
         .input:checked + .labels {
-          color: var(--green);
+          color: var(--green); //change
           border: 1px solid var(--green);
         }
         .input:checked + .error {
@@ -83,6 +80,7 @@
   .button {
     margin-top: 1.5em;
     margin-bottom: 2em;
-    margin-left: 69%;
+    margin-left: 65%;
+    width: 10em;
   }
 }

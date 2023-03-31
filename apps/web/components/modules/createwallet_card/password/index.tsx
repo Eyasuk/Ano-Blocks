@@ -1,25 +1,27 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { Typography } from 'antd';
+import Button from 'components/elements/buttons';
 import Input from 'components/elements/input';
-import { OutlinedButton } from 'components/elements/buttons';
 import { notification } from 'components/elements/notification';
+import { useUser } from 'utils/context/user';
 import { createWallet } from 'utils/helpers/createWallet';
 import { setUserSession, signUp } from 'utils/helpers/userSession';
-import { useUser } from 'utils/context/user';
 import { PasswordTypes } from './types';
 
 import styles from './password.module.scss';
 
+const { Title, Text } = Typography;
+
 export default function CreatePassword({
   setPassword,
   passphrase,
-  stateChanger,
   extraPassphrase,
 }: PasswordTypes): JSX.Element {
   const router = useRouter();
   const [passInputError, setPassError] = useState<boolean>(false);
-  const { setUserLoggedin, userLoggedin, setUserInfo } = useUser();
+  const { setUserLoggedin, setUserInfo } = useUser();
 
   const handleSumbit = async (event: any) => {
     event.preventDefault();
@@ -36,6 +38,7 @@ export default function CreatePassword({
       });
       return;
     }
+
     setPassword(event.target.password.value);
     const account = await createWallet(passphrase, extraPassphrase);
     const userLogin = signUp(account, event.target.password.value);
@@ -48,12 +51,14 @@ export default function CreatePassword({
 
   return (
     <div className={styles.layouts}>
-      <p className={styles.title}>New Password</p>
-      <p className={styles.description}>
+      <Title level={3} className={styles.title}>
+        New Password
+      </Title>
+      <Text type='warning' className={styles.description}>
         {' '}
         Password will insure you wallet safe but It is temporary, If you forget
         your password you can recover using your passphrase!!
-      </p>
+      </Text>
       <form onSubmit={handleSumbit}>
         <div className={styles.form}>
           <Input
@@ -76,9 +81,12 @@ export default function CreatePassword({
             required
             minLength={5}
           />
-          <div className={styles.button}>
-            <OutlinedButton text='Finsh' />
-          </div>
+          <Button
+            className={styles.button}
+            text='Finsh'
+            type='primary'
+            htmlType='submit'
+          />
         </div>
       </form>
     </div>

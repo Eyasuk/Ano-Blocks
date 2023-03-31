@@ -1,7 +1,4 @@
 .container {
-  background-image: var(--cardGradiant);
-  backdrop-filter: blur(2px);
-  /* Note: backdrop-filter has minimal browser support */
   border-radius: 20px;
   width: 100%;
 }

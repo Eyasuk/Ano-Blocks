@@ -1,23 +1,23 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { OutlinedButton, FilledButton } from 'components/elements/buttons';
+import { Typography } from 'antd';
+import Button from 'components/elements/buttons';
 import { notification } from 'components/elements/notification';
 import { chooseRandomPasspharse } from 'utils/helpers/chooseRandomPassPharse';
-import { useUser } from 'utils/context/user';
 import { RandomPassphraseType, ConfirmPasspraseProps } from './types';
 
 import styles from './confirmPassphrase.module.scss';
 
+const { Title, Text } = Typography;
+
 export default function ConfirmPassphrase({
   passphrase,
-  password,
   stateChanger,
 }: ConfirmPasspraseProps): JSX.Element {
   const router = useRouter();
   const [randomPassphrase, setRandomPassphrase] =
     useState<RandomPassphraseType>();
-  const { setUserLoggedin, userLoggedin, setUserInfo } = useUser();
   const [passphraseCoosen, setPassphraseCoosen] = useState<boolean[]>(
     Array(4).fill(true)
   );
@@ -35,7 +35,6 @@ export default function ConfirmPassphrase({
     }
     let correctChoosen = Array(4).fill(false);
     let allWordSelected = true;
-    let allWordCorrect = true;
     for (let i = 0; i <= 3; i++) {
       const choosenWord = 'input' + i;
       if (!event.target[choosenWord].value) {
@@ -65,11 +64,13 @@ export default function ConfirmPassphrase({
 
   return (
     <div className={styles.layouts}>
-      <p className={styles.title}>Confirm PassPhrase</p>
-      <p className={styles.description}>
+      <Title className={styles.title} level={3}>
+        Confirm PassPhrase
+      </Title>
+      <Text type='warning' className={styles.description}>
         {' '}
         Correctly Enter Your PassPhrase in Order!!
-      </p>
+      </Text>
       <form onSubmit={handleSumbit}>
         {randomPassphrase?.choosenWords.map((items, index) => {
           return (
@@ -78,7 +79,7 @@ export default function ConfirmPassphrase({
                 <h2 className={styles.passphraseNo}>
                   {randomPassphrase.postion[index] + 1}
                 </h2>
-                <p>word</p>
+                <Text>word</Text>
               </div>
 
               <div className={styles.row}>
@@ -108,9 +109,12 @@ export default function ConfirmPassphrase({
             </div>
           );
         })}
-        <div className={styles.button}>
-          <OutlinedButton text='Next' />
-        </div>
+        <Button
+          className={styles.button}
+          text='Next'
+          type='primary'
+          htmlType='submit'
+        />
       </form>
     </div>
   );

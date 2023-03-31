@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Input from 'components/elements/input';
-import { OutlinedButton } from 'components/elements/buttons';
+import Button from 'components/elements/buttons';
 import { GlassCard } from 'components/elements/cards';
 import { notification } from 'components/elements/notification';
 import {
@@ -14,7 +14,9 @@ import { UserLoginInfo } from 'utils/types/userType';
 
 import styles from './auth.module.scss';
 import { Routes } from 'utils/constants/routes';
+import { Typography } from 'antd';
 
+const { Title } = Typography;
 export default function Auth(): JSX.Element {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -72,8 +74,10 @@ export default function Auth(): JSX.Element {
   return (
     <GlassCard>
       <div className={styles.layouts}>
-        <p className={styles.title}>Enter Your Password</p>
-        <form onSubmit={handleSumbit}>
+        <Title className={styles.title} level={4}>
+          Enter Your Password
+        </Title>
+        <form onSubmit={handleSumbit} method='post'>
           <div className={styles.form}>
             <Input
               label='Password'
@@ -86,7 +90,7 @@ export default function Auth(): JSX.Element {
               minLength={5}
             />
             <div className={styles.button}>
-              <OutlinedButton text='Confirm' />
+              <Button text='Confirm' htmlType='submit' size='large' />
             </div>
           </div>
         </form>

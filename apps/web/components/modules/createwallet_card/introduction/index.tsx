@@ -2,11 +2,14 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import NextImage from 'next/image';
+import { Typography } from 'antd';
+import Button from 'components/elements/buttons';
 import { GlassCard } from 'components/elements/cards';
-import { OutlinedButton, FilledButton } from 'components/elements/buttons';
 import { IntroductionData } from 'utils/constants/introdcationData';
 
 import styles from './introduction.module.scss';
+
+const { Title, Text } = Typography;
 
 export default function Introduction(): JSX.Element {
   const [step, setStep] = useState<number>(0);
@@ -16,7 +19,7 @@ export default function Introduction(): JSX.Element {
   useEffect(() => {
     const steps = setInterval(() => {
       setStep((prevStep) => (prevStep + 1) % lengthOfIntroData);
-    }, 4500);
+    }, 4000);
     return () => clearInterval(steps);
   }, [lengthOfIntroData]);
 
@@ -24,7 +27,9 @@ export default function Introduction(): JSX.Element {
     <div className={styles.container}>
       <GlassCard>
         <div className={styles.layouts}>
-          <p className={styles.title}>{IntroductionData[step].title}</p>
+          <Title className={styles.title} level={2}>
+            {IntroductionData[step].title}
+          </Title>
           <NextImage
             className={styles.image}
             src={IntroductionData[step].image}
@@ -32,9 +37,9 @@ export default function Introduction(): JSX.Element {
             width={150}
             height={200}
           />
-          <p className={styles.description}>
+          <Text className={styles.description}>
             {IntroductionData[step].description}
-          </p>
+          </Text>
           <div className={styles.progress}>
             {IntroductionData.map((_, index) => {
               return (
@@ -46,13 +51,16 @@ export default function Introduction(): JSX.Element {
             })}
           </div>
           <div className={styles.button}>
-            <OutlinedButton
+            <Button
               text='Create Wallet'
+              type='primary'
               onClick={() => router.push('/new')}
+              size='large'
             />
-            <FilledButton
+            <Button
               text='I have Wallet'
               onClick={() => router.push('/import')}
+              size='large'
             />
           </div>
         </div>

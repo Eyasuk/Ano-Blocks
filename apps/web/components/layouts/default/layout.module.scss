@@ -1,17 +1,6 @@
-.default {
-    color: var(--white_500);
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0px;
-    left: 0px;
-    a {
-        color: var(--gray_500);
-    }
-    a:hover,
-    a:active {
-        color: var(--white_500);
-        text-decoration: underline var(--gray_500);
-        text-underline-offset: 0.5rem;
-    }
+.contents {
+  min-height: 100%;
+  padding-top: 4em;
+  padding-left: 2em;
+  width: 95%;
 }

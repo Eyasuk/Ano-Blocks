@@ -33,7 +33,6 @@ export default function NewWallet() {
               case 2:
                 return (
                   <CreatePassword
-                    stateChanger={setSteps}
                     setPassword={setPassword}
                     passphrase={passphrase}
                     extraPassphrase={extraPassphrase}
