@@ -64,9 +64,9 @@ export default function ChooseNetwork(): JSX.Element {
     <>
       <div className={styles.container}>
         <Button
+          className={styles.button}
           onClick={() => {
             setOpen((prev) => !prev);
-            //modal.confirm({});
           }}
         >
           Etherum
