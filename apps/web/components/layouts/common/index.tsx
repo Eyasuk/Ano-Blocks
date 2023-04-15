@@ -1,7 +1,7 @@
-'use client';
-import { App, Layout } from 'antd';
-import ThemeToggle from 'components/elements/themeToggle';
-import { Theme } from 'utils/context/antdTheme';
+"use client";
+import { App } from "antd";
+import ThemeToggle from "components/elements/themeToggle";
+import { Theme } from "utils/context/antdTheme";
 
 type Props = {
   children: React.ReactNode;

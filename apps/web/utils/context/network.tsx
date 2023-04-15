@@ -1,34 +1,52 @@
-//from network constant
-// for know then set it to
-import { createContext, useContext } from 'react';
-import { Rpcs } from 'utils/constants/rpcProvider';
+"use client";
+import { createContext, useContext, useState } from "react";
+import { Networks, NetworkType } from "utils/constants/rpcProvider";
 
-interface UserState {
-  userLoggedin: boolean;
-  showPasswordModal: boolean;
-  setPasswordModal(showPasswordModal: boolean): void;
-  setUserLoggedin(userLoggedin: boolean): void;
-  // userInfo: UserLoginInfo;
-  // setUserInfo(userInfo: UserLoginInfo): void;
+interface NetworkState {
+  choosenNetwork: NetworkType;
+  networks: Record<string, NetworkType>;
+  setChoosenNetwork(network: NetworkType): void;
+  addNetwork(newNetwork: NetworkType, networkKey: string): void;
 }
 
-const defaultUserState: UserState = {
-  userLoggedin: false,
-  showPasswordModal: false,
-  setPasswordModal: () => {},
-  setUserLoggedin: () => {},
-  // userInfo: null,
-  // setUserInfo: () => {},
+const defaultNetworkState: NetworkState = {
+  choosenNetwork: Networks.Polygon,
+  networks: Networks,
+  setChoosenNetwork: () => {},
+  addNetwork: (newNetwork: NetworkType, networkKey: string) => {},
 };
 
-const UserContext = createContext(defaultUserState);
+const NetworkContext = createContext(defaultNetworkState);
 
-interface UserProviderProps {
+interface NetworkProviderProps {
   children: React.ReactNode;
 }
 
-// export const UserProvider = ({ children }: UserProviderProps): JSX.Element => {
-// return <UserContext.Provider value={}>{children} </UserContext.Provider>;
-// /};
+export const NetworkProvider = ({
+  children,
+}: NetworkProviderProps): JSX.Element => {
+  const [choosenNetwork, setChoosenNetwork] = useState<NetworkType>(
+    Networks.Polygon
+  );
+  const [networks, setNetworks] =
+    useState<Record<string, NetworkType>>(Networks);
 
-export const useUser = () => useContext(UserContext);
+  const addNetwork = (newNetwork: NetworkType, networkKey: string) => {
+    setNetworks({ ...networks, [networkKey]: newNetwork });
+  };
+
+  return (
+    <NetworkContext.Provider
+      value={{
+        networks,
+        choosenNetwork,
+        setChoosenNetwork,
+        addNetwork,
+      }}
+    >
+      {children}{" "}
+    </NetworkContext.Provider>
+  );
+};
+
+export const useNetwork = () => useContext(NetworkContext);

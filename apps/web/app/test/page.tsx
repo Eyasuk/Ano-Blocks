@@ -1,4 +1,4 @@
-import NewWallet from "components/features/createwallet/exisisting";
+import NewWallet from 'components/elements/loading';
 
 export default function Page() {
   return (

@@ -1,39 +1,41 @@
-import { ConfigProvider } from 'antd';
-import { UserProvider } from 'utils/context/user';
+import { UserProvider } from "utils/context/user";
+import { NetworkProvider } from "utils/context/network";
 
-import '../styles/globals.scss';
+import "../styles/globals.scss";
 
 export default function Layout({ children }: any): JSX.Element {
   return (
-    <html lang='en'>
+    <html lang="en">
       <head>
         <title>AnoBlocks</title>
 
         <link
-          rel='apple-touch-icon'
-          sizes='180x180'
-          href='/apple-touch-icon.png'
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
         />
         <link
-          rel='icon'
-          type='image/png'
-          sizes='32x32'
-          href='/favicon-32x32.png'
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
         />
         <link
-          rel='icon'
-          type='image/png'
-          sizes='16x16'
-          href='/favicon-16x16.png'
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
         />
-        <link rel='manifest' href='/site.webmanifest' />
-        <link rel='mask-icon' href='/safari-pinned-tab.svg' color='#5bbad5' />
-        <meta name='msapplication-TileColor' content='#da532c' />
-        <meta name='theme-color' content='#ffffff' />
-        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+        <meta name="msapplication-TileColor" content="#da532c" />
+        <meta name="theme-color" content="#ffffff" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
       <body>
-        <UserProvider>{children}</UserProvider>
+        <UserProvider>
+          <NetworkProvider>{children}</NetworkProvider>
+        </UserProvider>
       </body>
     </html>
   );

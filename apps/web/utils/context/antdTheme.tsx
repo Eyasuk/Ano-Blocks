@@ -1,6 +1,7 @@
-'use client';
-import { useState, createContext, useContext, useEffect } from 'react';
-import { ConfigProvider, theme } from 'antd';
+"use client";
+import { useState, createContext, useContext } from "react";
+import { ConfigProvider, theme } from "antd";
+import { getCookie } from "cookies-next";
 
 interface ThemeState {
   darkTheme: boolean;
@@ -19,9 +20,9 @@ interface ThemeProviderProps {
 }
 
 export function Theme({ children }: ThemeProviderProps) {
-  const [darkTheme, setDarkTheme] = useState<boolean>(false);
-
-  useEffect(() => {}, []);
+  const [darkTheme, setDarkTheme] = useState<boolean>(
+    getCookie("theme") == "dark"
+  );
 
   return (
     <ThemeContext.Provider value={{ darkTheme, setDarkTheme }}>
@@ -30,7 +31,7 @@ export function Theme({ children }: ThemeProviderProps) {
           algorithm: darkTheme ? theme.darkAlgorithm : theme.defaultAlgorithm,
 
           token: {
-            colorPrimary: '#00ac7a',
+            colorPrimary: "#00ac7a",
           },
         }}
       >

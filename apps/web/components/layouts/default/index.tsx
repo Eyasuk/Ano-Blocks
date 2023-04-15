@@ -1,5 +1,5 @@
 import { MenuBar } from 'components/modules/menu';
-import { Layout, MenuProps } from 'antd';
+import { Layout} from 'antd';
 import CommonLayout from 'components/layouts/common';
 import ChooseNewtork from 'components/modules/choosenetwork';
 

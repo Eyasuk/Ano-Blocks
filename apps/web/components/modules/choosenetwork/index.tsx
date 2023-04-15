@@ -1,86 +1,32 @@
-import { WalletOutlined } from '@ant-design/icons';
-import { App, Button, Card, MenuProps } from 'antd';
-import Modal from 'components/elements/modal';
-import { useState } from 'react';
+import { useState } from "react";
+import { Menu, MenuProps } from "antd";
 
-import styles from './chooseNetwork.module.scss';
+import { useNetwork } from "utils/context/network";
+
+import styles from "./chooseNetwork.module.scss";
 
 export default function ChooseNetwork(): JSX.Element {
-  const [open, setOpen] = useState(false);
-  const { message, notification, modal } = App.useApp();
-
-  const items: MenuProps = {
-    title: 'Network',
-    items: [
-      {
-        label: 'NEWTORK1',
-        key: '0',
-
-        className: styles.d,
-      },
-      {
-        key: '1',
-        label: 'Network',
-      },
-      {
-        type: 'divider',
-      },
-      {
-        key: '12',
-        onClick: () => {
-          console.log('sth');
-        },
-        label: <button>c</button>,
-        icon: <WalletOutlined />,
-      },
-      {
-        key: '2',
-        label: (
-          <a
-            target='_blank'
-            rel='noopener noreferrer'
-            href='https://www.aliyun.com'
-          >
-            2nd menu item
-          </a>
-        ),
-      },
-      {
-        key: '3',
-        label: (
-          <a
-            target='_blank'
-            rel='noopener noreferrer'
-            href='https://www.luohanacademy.com'
-          >
-            3rd menu item
-          </a>
-        ),
-      },
-    ],
+  const { addNetwork, networks, setChoosenNetwork, choosenNetwork } =
+    useNetwork();
+  const onClick: MenuProps["onClick"] = (e) => {
+    setChoosenNetwork(networks[e.key]);
   };
 
   return (
-    <>
-      <div className={styles.container}>
-        <Button
-          className={styles.button}
-          onClick={() => {
-            setOpen((prev) => !prev);
-          }}
-        >
-          Etherum
-        </Button>
-      </div>
-      <Modal
-        className={styles.modal}
-        open={open}
-        closable={false}
-        onCancel={() => setOpen(false)}
+    <div className={styles.container}>
+      <Menu
+        onClick={onClick}
+        style={{ width: 180, borderRadius: 10 }}
+        defaultSelectedKeys={[choosenNetwork.name]}
+        mode="inline"
       >
-        {' '}
-        <div></div>
-      </Modal>
-    </>
+        <Menu.SubMenu title={"Network: " + choosenNetwork.name}>
+          {" "}
+          {Object.keys(networks).map((network) => {
+            return <Menu.Item key={network}>{network}</Menu.Item>;
+          })}
+        </Menu.SubMenu>
+      </Menu>
+    </div>
   );
 }
