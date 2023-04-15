@@ -1,19 +1,18 @@
 'use client';
-
 import React from 'react';
-
 import { Dropdown, MenuProps } from 'antd';
+import { setCookies } from 'cookies-next';
 import { DarkBulbIcon, LightBulbIcon } from 'components/elements/icons';
 import Button from 'components/elements/buttons';
 import { useTheme } from 'utils/context/antdTheme';
+
 import styles from './themeToggle.module.scss';
 
 export default function ThemeToggle() {
   const { darkTheme, setDarkTheme } = useTheme();
   const onClick: MenuProps['onClick'] = ({ key }) => {
-    console.log(key);
-    console.log(darkTheme);
     setDarkTheme(key == 'dark');
+    setCookies('theme',key);
   };
 
   const items: MenuProps['items'] = [

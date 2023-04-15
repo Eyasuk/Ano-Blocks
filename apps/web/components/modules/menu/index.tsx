@@ -16,6 +16,7 @@ import {
 } from 'components/elements/icons';
 
 import styles from './menu.module.scss';
+import Link from 'next/link';
 
 const { Sider } = Layout;
 const { Title } = Typography;
@@ -38,11 +39,23 @@ function getItem(
 
 const mainRoutes: MenuItem[] = [
   { type: 'divider' },
-  getItem('Dashboard', '1', <DesktopIcon />),
+  getItem(
+    'Dashboard',
+    '1',
+    <Link href='/'>
+      <DesktopIcon />
+    </Link>
+  ),
   getItem('Dao', '2', <DaoIcon />),
   { type: 'divider' },
   getItem('Swap', '3', <SwapIcon />),
-  getItem('Send', '4', <SendIcon />),
+  getItem(
+    'Send',
+    '4',
+    <Link href='/send'>
+      <SendIcon />
+    </Link>
+  ),
   getItem('Receive', '5', <ReceiveIcon />),
   getItem('Buy/Sell', '6', <CreditCardIcon />),
   { type: 'divider' },

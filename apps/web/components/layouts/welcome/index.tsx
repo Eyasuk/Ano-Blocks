@@ -1,9 +1,12 @@
-'use client';
-import Image from 'next/image';
-import CommonLayout from 'components/layouts/common';
-import styles from './welcome.module.scss';
-import { Layout, Typography } from 'antd';
+"use client";
+import { Layout, Typography } from "antd";
+import Image from "next/image";
+import CommonLayout from "components/layouts/common";
+
+import styles from "./welcome.module.scss";
+
 const { Title } = Typography;
+
 type Props = {
   children: React.ReactNode;
 };
@@ -15,8 +18,8 @@ export default function Welcome({ children }: Props): JSX.Element {
         <div className={styles.logo}>
           <Image
             className={styles.image}
-            alt='logo of ano block'
-            src='/icons/logo.svg'
+            alt="logo of ano block"
+            src="/icons/logo.svg"
             height={0}
             width={0}
           />
