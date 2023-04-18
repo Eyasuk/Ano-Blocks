@@ -1,6 +1,5 @@
 import { generateMnemonic, mnemonicToSeed } from 'ethereum-cryptography/bip39';
 import { sha256 } from 'ethereum-cryptography/sha256';
-import { keccak256, keccak512 } from 'ethereum-cryptography/keccak';
 import { HDKey } from 'ethereum-cryptography/hdkey';
 import { hexToBytes, toHex } from 'ethereum-cryptography/utils';
 import { wordlist } from 'ethereum-cryptography/bip39/wordlists/english';
