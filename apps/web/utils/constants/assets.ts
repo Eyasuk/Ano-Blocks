@@ -1,4 +1,4 @@
-interface AssetProps {
+export interface AssetProps {
   name: string;
   abbrev: string;
   imageUrl?: string;

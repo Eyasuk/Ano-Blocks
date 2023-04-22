@@ -1,10 +1,10 @@
 "use client";
-import Send from "components/features/send";
+import Swap from "components/features/swap";
 
 export default function Page() {
   return (
     <>
-      <Send />
+      <Swap />
     </>
   );
 }

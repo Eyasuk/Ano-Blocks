@@ -66,22 +66,20 @@ export default function Send(): JSX.Element {
             autoComplete="off"
           >
             <Form.Item label="Reciver Address" name="reciveraddress">
-              <div className={styles.assetInput}>
-                <Input
-                  onChange={onChangeAddress}
-                  autoCorrect="false"
-                  spellCheck={false}
-                  suffix={
-                    isAddress == "searching" ? (
-                      <Spin indicator={antIcon} />
-                    ) : isAddress == "address" ? (
-                      <CheckCircleTwoTone />
-                    ) : (
-                      <WarningTwoTone twoToneColor="#eb2f96" />
-                    )
-                  }
-                />
-              </div>
+              <Input
+                onChange={onChangeAddress}
+                autoCorrect="false"
+                spellCheck={false}
+                suffix={
+                  isAddress == "searching" ? (
+                    <Spin indicator={antIcon} />
+                  ) : isAddress == "address" ? (
+                    <CheckCircleTwoTone />
+                  ) : (
+                    <WarningTwoTone twoToneColor="#eb2f96" />
+                  )
+                }
+              />
             </Form.Item>
             <Form.Item label="Asset" name="asset">
               <Select
@@ -119,7 +117,7 @@ export default function Send(): JSX.Element {
             <Form.Item label="Amount" name="amount">
               <InputNumber
                 min={0}
-                addonBefore={<Button text="max 144$" type="link" />}
+                addonAfter={<Button text="max 144$" type="text" />}
                 width="222"
               />
             </Form.Item>
