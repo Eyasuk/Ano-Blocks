@@ -1,8 +1,8 @@
-'use client';
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
-import { Layout, Menu, Typography } from 'antd';
-import type { MenuProps } from 'antd';
+"use client";
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import { Layout, Menu, Typography } from "antd";
+import type { MenuProps } from "antd";
 import {
   CreditCardIcon,
   DesktopIcon,
@@ -13,15 +13,15 @@ import {
   SendIcon,
   SettingIcon,
   SwapIcon,
-} from 'components/elements/icons';
+} from "components/elements/icons";
 
-import styles from './menu.module.scss';
-import Link from 'next/link';
+import styles from "./menu.module.scss";
+import Link from "next/link";
 
 const { Sider } = Layout;
 const { Title } = Typography;
 
-type MenuItem = Required<MenuProps>['items'][number];
+type MenuItem = Required<MenuProps>["items"][number];
 
 function getItem(
   label: React.ReactNode,
@@ -38,35 +38,41 @@ function getItem(
 }
 
 const mainRoutes: MenuItem[] = [
-  { type: 'divider' },
+  { type: "divider" },
   getItem(
-    'Dashboard',
-    '1',
-    <Link href='/'>
+    "Dashboard",
+    "1",
+    <Link href="/">
       <DesktopIcon />
     </Link>
   ),
-  getItem('Dao', '2', <DaoIcon />),
-  { type: 'divider' },
-  getItem('Swap', '3', <SwapIcon />),
+  getItem("Dao", "2", <DaoIcon />),
+  { type: "divider" },
   getItem(
-    'Send',
-    '4',
-    <Link href='/send'>
+    "Swap",
+    "3",
+    <Link href="/swap">
+      <SwapIcon />
+    </Link>
+  ),
+  getItem(
+    "Send",
+    "4",
+    <Link href="/send">
       <SendIcon />
     </Link>
   ),
-  getItem('Receive', '5', <ReceiveIcon />),
-  getItem('Buy/Sell', '6', <CreditCardIcon />),
-  { type: 'divider' },
+  getItem("Receive", "5", <ReceiveIcon />),
+  getItem("Buy/Sell", "6", <CreditCardIcon />),
+  { type: "divider" },
 ];
 
 const subRoutes: MenuItem[] = [
-  { type: 'divider' },
-  getItem('Setting', '1', <SettingIcon />),
-  getItem('Lock', '2', <LockIcon />),
-  getItem('Logout', '3', <LogoutIcon />),
-  { type: 'divider' },
+  { type: "divider" },
+  getItem("Setting", "1", <SettingIcon />),
+  getItem("Lock", "2", <LockIcon />),
+  getItem("Logout", "3", <LogoutIcon />),
+  { type: "divider" },
 ];
 
 export function MenuBar() {
@@ -87,25 +93,25 @@ export function MenuBar() {
       collapsible
       collapsed={collapsed}
       onCollapse={(value: boolean) => setCollapsed((prev) => !prev)}
-      theme='light'
+      theme="light"
     >
       <div className={styles.logo}>
         <Image
           className={styles.image}
-          alt='logo of ano block'
-          src='/icons/logo.svg'
+          alt="logo of ano block"
+          src="/icons/logo.svg"
           height={0}
           width={0}
         />
         {title ? (
           <Title level={4} className={styles.title}>
-            AnoBlocks{' '}
+            AnoBlocks{" "}
           </Title>
         ) : null}
       </div>
       <div className={styles.menu}>
-        <Menu defaultSelectedKeys={['1']} items={mainRoutes} theme='light' />
-        <Menu items={subRoutes} theme='light' />
+        <Menu defaultSelectedKeys={["1"]} items={mainRoutes} theme="light" />
+        <Menu items={subRoutes} theme="light" />
       </div>
     </Sider>
   );

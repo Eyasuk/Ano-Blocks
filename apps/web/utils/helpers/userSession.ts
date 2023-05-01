@@ -1,6 +1,7 @@
 import { SignJWT, jwtVerify } from 'jose';
 import { setCookie, getCookie, deleteCookie } from 'cookies-next';
 import { UserLoginInfo } from 'utils/types/userType';
+import { hash } from 'bcryptjs';
 
 export async function signUp(
   data: UserLoginInfo,
@@ -52,6 +53,7 @@ export async function checkUserSession() {
 export async function setUserSession(password: string) {
   const secret = new TextEncoder().encode(process.env.NEXT_PUBLIC_JWT_KEY);
   const alg = 'HS256';
+  const hashPassword = hash(password,4);
   const jwt = await new SignJWT({ password: password })
     .setProtectedHeader({ alg })
     .setIssuedAt()
