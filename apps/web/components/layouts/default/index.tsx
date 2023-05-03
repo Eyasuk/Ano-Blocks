@@ -1,9 +1,9 @@
-import { MenuBar } from 'components/modules/menu';
-import { Layout} from 'antd';
-import CommonLayout from 'components/layouts/common';
-import ChooseNewtork from 'components/modules/choosenetwork';
+import { MenuBar } from "components/modules/menu";
+import { Layout } from "antd";
+import CommonLayout from "components/layouts/common";
+import ChooseNewtork from "components/modules/choosenetwork";
 
-import styles from './layout.module.scss';
+import styles from "./layout.module.scss";
 
 const { Content, Footer } = Layout;
 
@@ -14,7 +14,7 @@ type Props = {
 export default function Default({ children }: Props): JSX.Element {
   return (
     <CommonLayout>
-      <Layout style={{ minHeight: '100vh' }} className={styles.body}>
+      <Layout style={{ minHeight: "100vh" }} className={styles.body}>
         <MenuBar />
         <ChooseNewtork />
         <Layout>

@@ -69,7 +69,13 @@ const mainRoutes: MenuItem[] = [
 
 const subRoutes: MenuItem[] = [
   { type: "divider" },
-  getItem("Setting", "1", <SettingIcon />),
+  getItem(
+    "Setting",
+    "1",
+    <Link href="/setting">
+      <SettingIcon />
+    </Link>
+  ),
   getItem("Lock", "2", <LockIcon />),
   getItem("Logout", "3", <LogoutIcon />),
   { type: "divider" },
