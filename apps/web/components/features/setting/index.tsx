@@ -3,7 +3,11 @@ import { Tabs } from "antd";
 import type { TabsProps } from "antd";
 import Default from "components/layouts/default";
 import { GlassCard } from "components/elements/cards";
-import { GeneralSetting, AdvancedSetting } from "components/modules/settings";
+import {
+  GeneralSetting,
+  AdvancedSetting,
+  ContactSetting,
+} from "components/modules/settings";
 
 import styles from "./setting.module.scss";
 
@@ -21,7 +25,7 @@ const items: TabsProps["items"] = [
   {
     key: "3",
     label: `Contacts`,
-    children: `Content of Tab Pane 3`,
+    children: <ContactSetting />,
   },
 ];
 export default function Setting(): JSX.Element {

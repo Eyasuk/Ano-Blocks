@@ -62,7 +62,7 @@ const mainRoutes: MenuItem[] = [
       <SendIcon />
     </Link>
   ),
-  getItem("Receive", "5", <ReceiveIcon />),
+  getItem("Deposit/Withdraw", "5", <ReceiveIcon />),
   getItem("Buy/Sell", "6", <CreditCardIcon />),
   { type: "divider" },
 ];

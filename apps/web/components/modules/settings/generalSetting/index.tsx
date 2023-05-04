@@ -86,7 +86,11 @@ export function GeneralSetting() {
         </span>
       </div>
       <div className={styles.options}>
-        <Button text="Confirm Change" type="primary" />
+        <Button
+          className={styles.button}
+          text="Confirm Change"
+          type="primary"
+        />
       </div>
     </div>
   );
