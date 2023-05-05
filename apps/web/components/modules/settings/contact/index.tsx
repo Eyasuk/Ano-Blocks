@@ -26,14 +26,6 @@ interface Item {
   address: string;
 }
 
-const originData: Item[] = [];
-for (let i = 0; i < 5; i++) {
-  originData.push({
-    key: i.toString(),
-    name: `Edward ${i}`,
-    address: `0x5AE434AE34FFD43BBC54566777`,
-  });
-}
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
 interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
@@ -48,7 +40,7 @@ interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
 
 export function ContactSetting() {
   const [form] = Form.useForm();
-  const [data, setData] = useState(originData);
+  const [data, setData] = useState<Item[]>([]);
   const [editingKey, setEditingKey] = useState("");
   const [isAddress, setIsAddress] = useState<
     "notAddress" | "searching" | "address" | null
@@ -122,7 +114,7 @@ export function ContactSetting() {
   };
 
   const handleDelete = (key: React.Key) => {
-    const newData = data.filter((item) => item.key !== key);
+    const newData = data.filter((item: Item) => item.key !== key);
     setData(newData);
   };
 

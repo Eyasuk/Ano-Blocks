@@ -52,7 +52,7 @@ export default function Loading(): JSX.Element {
               width="37.7157"
               height="31.806"
               filterUnits="userSpaceOnUse"
-              color-interpolation-filters="sRGB"
+              colorInterpolationFilters="sRGB"
             >
               <feFlood flood-opacity="0" result="BackgroundImageFix" />
               <feColorMatrix
@@ -87,7 +87,7 @@ export default function Loading(): JSX.Element {
               width="9.61875"
               height="87.8343"
               filterUnits="userSpaceOnUse"
-              color-interpolation-filters="sRGB"
+              colorInterpolationFilters="sRGB"
             >
               <feFlood flood-opacity="0" result="BackgroundImageFix" />
               <feColorMatrix
