@@ -47,7 +47,6 @@ export function MenuBar() {
   const lockPage = () => {
     lock();
     router.push("/auth");
-    console.log("Ffff");
   };
 
   const mainRoutes: MenuItem[] = [
@@ -59,7 +58,13 @@ export function MenuBar() {
         <DesktopIcon />
       </Link>
     ),
-    getItem("Dao", "2", <DaoIcon />),
+    getItem(
+      "Dao",
+      "2",
+      <Link href="/dao">
+        <DaoIcon />
+      </Link>
+    ),
     { type: "divider" },
     getItem(
       "Swap",
