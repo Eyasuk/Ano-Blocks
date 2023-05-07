@@ -5,12 +5,23 @@ import { useNetwork } from "utils/context/network";
 
 import styles from "./chooseNetwork.module.scss";
 
+type MenuItem = Required<MenuProps>["items"][number];
+
 export default function ChooseNetwork(): JSX.Element {
   const { addNetwork, networks, setChoosenNetwork, choosenNetwork } =
     useNetwork();
+
   const onClick: MenuProps["onClick"] = (e) => {
     setChoosenNetwork(networks[e.key]);
   };
+
+  const menu: MenuItem[] = Object.keys(networks).map((network) => {
+    return { key: network, label: network };
+  });
+
+  const menuItems: MenuItem[] = [
+    { label: `Network: ${choosenNetwork.name}`, key: "sub", children: menu },
+  ];
 
   return (
     <div className={styles.container}>
@@ -19,14 +30,9 @@ export default function ChooseNetwork(): JSX.Element {
         style={{ width: 180, borderRadius: 10 }}
         defaultSelectedKeys={[choosenNetwork.name]}
         mode="inline"
-      >
-        <Menu.SubMenu title={"Network: " + choosenNetwork.name}>
-          {" "}
-          {Object.keys(networks).map((network) => {
-            return <Menu.Item key={network}>{network}</Menu.Item>;
-          })}
-        </Menu.SubMenu>
-      </Menu>
+        items={menuItems}
+        title={"Networks"}
+      />
     </div>
   );
 }
