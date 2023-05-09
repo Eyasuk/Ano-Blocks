@@ -26,7 +26,12 @@ export default function Vote({ proposalIndex }: VoteProp): JSX.Element {
             <Text>345542</Text>
           </Button>
         </div>
-        <Progress percent={100} success={{ percent: 50 }} type="line" />
+        <Progress
+          percent={100}
+          success={{ percent: 50 }}
+          type="line"
+          showInfo={false}
+        />
 
         <Divider />
         <div>

@@ -4,8 +4,12 @@ import type { ColumnsType, TableProps } from "antd/es/table";
 import { MoreOutlined } from "@ant-design/icons";
 import { GlassCard } from "components/elements/cards";
 import { Assets as assets, AssetProps } from "utils/constants/assets";
+import { useNetwork } from "utils/context/network";
 
 import styles from "./assets.module.scss";
+import { useEffect, useState } from "react";
+import { useUser } from "utils/context/user";
+import { AddressLike, formatEther, toBigInt, toNumber } from "ethers";
 
 const { Title, Text } = Typography;
 
@@ -98,22 +102,42 @@ const columns: ColumnsType<DataType> = [
   },
 ];
 
-const mapDataForAssetsTable = (items: AssetProps, index: number) => {
-  return {
-    key: index.toString(),
-    name: items.name,
-    abbrv: items.abbrev,
-    imageUrl: items.imageUrl,
-    price: 1890,
-    priceChange: 12,
-    value: 1000,
-    amount: 2000,
-  };
-};
-
-const data: DataType[] = assets.map(mapDataForAssetsTable);
-
 export default function Assets(): JSX.Element {
+  const { provider } = useNetwork();
+  const { userInfo } = useUser();
+  const [amount, setAmount] = useState("0");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const w = await provider?.getBalance(userInfo?.pubad as AddressLike);
+      console.log(w);
+      let p;
+      if (w) {
+        p = formatEther(w);
+      }
+      console.log(p);
+      console.log(typeof p);
+
+      if (p) setAmount(p);
+      else setAmount("0");
+    };
+    fetchData();
+  });
+
+  const mapDataForAssetsTable = (items: AssetProps, index: number) => {
+    return {
+      key: index.toString(),
+      name: items.name,
+      abbrv: items.abbrev,
+      imageUrl: items.imageUrl,
+      price: 1890,
+      priceChange: 12,
+      value: Number(amount),
+      amount: 2000,
+    };
+  };
+
+  const data: DataType[] = assets.map(mapDataForAssetsTable);
   return (
     <GlassCard>
       <div className={styles.layout}>

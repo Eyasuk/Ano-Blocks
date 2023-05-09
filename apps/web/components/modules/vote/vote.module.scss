@@ -1,8 +1,6 @@
 .container {
   .status {
     display: flex;
-    margin-left: 2em;
-    margin-right: 2em;
     justify-content: space-between;
     * {
       font-size: var(--text_base);
@@ -11,13 +9,14 @@
   .votes {
     display: flex;
     justify-content: space-between;
-    margin: 2em;
+    margin-top: 2em;
+    margin-bottom: 2em;
     .voteCount {
       display: flex;
       min-width: 12em;
       justify-content: space-between;
       align-items: center;
-      padding: 1em;
+      // padding: 1em;
       border: 1px solid var(--gray_500);
       min-width: 46% !important;
       height: 5em;

@@ -22,7 +22,7 @@ export const Networks: Record<string, NetworkType> = {
   },
   Local: {
     name: "Local",
-    rpcLink: "http://127.0.0.1:7545",
+    rpcLink: "HTTP://127.0.0.1:8545",
     currency: "Eth",
     type: "Test",
   },

@@ -1,6 +1,4 @@
-import { useState } from "react";
 import { Menu, MenuProps } from "antd";
-
 import { useNetwork } from "utils/context/network";
 
 import styles from "./chooseNetwork.module.scss";
@@ -8,11 +6,10 @@ import styles from "./chooseNetwork.module.scss";
 type MenuItem = Required<MenuProps>["items"][number];
 
 export default function ChooseNetwork(): JSX.Element {
-  const { addNetwork, networks, setChoosenNetwork, choosenNetwork } =
-    useNetwork();
+  const { addNetwork, networks, changeNetwork, choosenNetwork } = useNetwork();
 
   const onClick: MenuProps["onClick"] = (e) => {
-    setChoosenNetwork(networks[e.key]);
+    changeNetwork(networks[e.key]);
   };
 
   const menu: MenuItem[] = Object.keys(networks).map((network) => {
