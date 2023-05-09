@@ -6,8 +6,6 @@ import Postion from "components/modules/position_summary";
 import Assets from "components/modules/assets";
 import Wallet from "components/modules/walletcard";
 import { useUser } from "utils/context/user";
-import { useNetwork } from "utils/context/network";
-import { useEffect } from "react";
 
 export default function HomePage(): JSX.Element {
   const { userLoggedin } = useUser();

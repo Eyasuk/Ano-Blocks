@@ -9,6 +9,7 @@ import {
   CreditCardIcon,
   DesktopIcon,
   DaoIcon,
+  HistoryIcon,
   LockIcon,
   LogoutIcon,
   ReceiveIcon,
@@ -65,23 +66,30 @@ export function MenuBar() {
         <DaoIcon />
       </Link>
     ),
+    getItem(
+      "Transactions",
+      "3",
+      <Link href="/transactions">
+        <HistoryIcon />
+      </Link>
+    ),
     { type: "divider" },
     getItem(
       "Swap",
-      "3",
+      "4",
       <Link href="/swap">
         <SwapIcon />
       </Link>
     ),
     getItem(
       "Send",
-      "4",
+      "5",
       <Link href="/send">
         <SendIcon />
       </Link>
     ),
-    getItem("Deposit/Withdraw", "5", <ReceiveIcon />),
-    getItem("Buy/Sell", "6", <CreditCardIcon />),
+    getItem("Deposit/Withdraw", "6", <ReceiveIcon />),
+    getItem("Buy/Sell", "7", <CreditCardIcon />),
     { type: "divider" },
   ];
 
