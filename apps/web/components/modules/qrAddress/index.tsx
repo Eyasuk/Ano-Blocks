@@ -1,9 +1,9 @@
-import Modal from 'components/elements/modal';
-import Qr from 'components/elements/qr';
-import { useUser } from 'utils/context/user';
-import { QrAddressProps } from './types';
+import Modal from "components/elements/modal";
+import Qr from "components/elements/qr";
+import { useUser } from "utils/context/user";
+import { QrAddressProps } from "./types";
 
-import styles from './qrAddress.module.scss';
+import styles from "./qrAddress.module.scss";
 
 export default function QrAddress({
   address,

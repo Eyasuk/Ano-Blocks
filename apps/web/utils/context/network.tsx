@@ -45,7 +45,6 @@ export const NetworkProvider = ({
       setChoosenNetwork(network);
       const provider = new JsonRpcProvider(network.rpcLink);
       setProvider(provider);
-      console.log(provider);
     } catch (error) {
       console.log(error);
     }

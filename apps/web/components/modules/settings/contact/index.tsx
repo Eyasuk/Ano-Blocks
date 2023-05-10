@@ -1,25 +1,21 @@
 import { ethers } from "ethers";
-import React, { useState } from "react";
-import {
-  Form,
-  Input,
-  List,
-  Popconfirm,
-  Table,
-  Typography,
-  Spin,
-  Button,
-} from "antd";
+import React, { useEffect, useState } from "react";
+import { Form, Input, Popconfirm, Table, Typography, Spin, Button } from "antd";
 import {
   CheckCircleTwoTone,
   LoadingOutlined,
   WarningTwoTone,
 } from "@ant-design/icons";
 import { notification } from "components/elements/notification";
+import {
+  getItemFromLocalStorage,
+  setItemInLocalStorage,
+} from "utils/helpers/localStorage";
 
 import styles from "./contact.module.scss";
 
 const { Text, Title } = Typography;
+
 interface Item {
   key: string;
   name: string;
@@ -48,6 +44,13 @@ export function ContactSetting() {
   const [isAddressForNewInput, setIsAddressForNewInput] = useState<
     "error" | "searching" | "address" | null
   >(null);
+
+  useEffect(() => {
+    const contact = getItemFromLocalStorage("contacts", true);
+    if (contact.length > 0) {
+      setData(contact as Item[]);
+    }
+  }, []);
 
   const onChangeAddress = (event: any) => {
     let timer;
@@ -117,6 +120,10 @@ export function ContactSetting() {
     const newData = data.filter((item: Item) => item.key !== key);
     setData(newData);
   };
+
+  useEffect(() => {
+    setItemInLocalStorage("contacts", data, true);
+  }, [data]);
 
   const EditableCell: React.FC<EditableCellProps> = ({
     editing,

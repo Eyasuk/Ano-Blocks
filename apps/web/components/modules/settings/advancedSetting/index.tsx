@@ -1,17 +1,35 @@
-import { useState } from "react";
-import { InputNumber, Select, Typography } from "antd";
+import { useEffect } from "react";
+import { InputNumber, Typography } from "antd";
 import Button from "components/elements/buttons";
-import { Curriences } from "utils/constants/currencies";
+import { useSetting } from "utils/context/settings";
+import { SettingProps } from "utils/types/settingTypes";
+import {
+  getItemFromLocalStorage,
+  setItemInLocalStorage,
+} from "utils/helpers/localStorage";
 
 import styles from "./advancedSetting.module.scss";
 
 const { Text, Title } = Typography;
 
 export function AdvancedSetting() {
-  const [hideAssets, setHideAssets] = useState<boolean>(false);
+  const { userSetting, setUserSetting } = useSetting();
 
-  const hideAssetChange = () => {
-    setHideAssets((prev) => !prev);
+  useEffect(() => {
+    const settings = getItemFromLocalStorage("settings", true);
+    setUserSetting(settings);
+  }, []);
+
+  const onChangeAutoLock = (value: number | null) => {
+    if (value == null) value = 3;
+    const settings: SettingProps = {
+      lockerTimer: value,
+    };
+    setUserSetting({ ...userSetting, ...settings });
+  };
+
+  const saveSetting = () => {
+    setItemInLocalStorage("settings", userSetting, true);
   };
 
   return (
@@ -21,7 +39,12 @@ export function AdvancedSetting() {
         <Text type="secondary">
           Set the idle time in minutes before AnoBlock will become locked.
         </Text>
-        <InputNumber min={3} max={60} />
+        <InputNumber
+          min={3}
+          max={60}
+          onChange={onChangeAutoLock}
+          value={userSetting.lockerTimer}
+        />
       </div>
       <div className={styles.options}>
         <Title level={5}>Backup Your data</Title>
@@ -45,6 +68,7 @@ export function AdvancedSetting() {
           className={styles.button}
           text="Confirm Change"
           type="primary"
+          onClick={saveSetting}
         />
       </div>
     </div>

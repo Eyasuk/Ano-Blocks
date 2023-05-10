@@ -6,11 +6,11 @@ export interface CurrencyProps {
 
 export const Curriences: CurrencyProps[] = [
   {
-    name: "Etb",
+    name: "ETB",
     country: "Ethiopia",
   },
   {
-    name: "Usd",
+    name: "USD",
     country: "USA",
   },
 ];

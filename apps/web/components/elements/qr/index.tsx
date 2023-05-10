@@ -1,25 +1,19 @@
-import { useEffect } from 'react';
-import qrcode from 'qrcode-generator';
-import { QrProps } from './types';
+import { QRCode } from "antd";
+import { QrProps } from "./types";
 
-import styles from './qr.module.scss';
+import styles from "./qr.module.scss";
 
 export default function Qr({ text }: QrProps): JSX.Element {
-  useEffect(() => {
-    const typeNumber: TypeNumber = 4;
-    const errorCorrectionLevel: ErrorCorrectionLevel = 'L';
-    const qr = qrcode(typeNumber, errorCorrectionLevel);
-    qr.addData(text);
-    qr.make();
-    const element = document.getElementById('qr');
-    if (element) {
-      element.innerHTML = qr.createImgTag(8, 2);
-    }
-  });
-
   return (
     <div className={styles.container}>
-      <div className={styles.qr} id='qr'></div>
+      <QRCode
+        className={styles.qr}
+        errorLevel="L"
+        value={text}
+        icon={"./icons/logo.svg"}
+        iconSize={25}
+        size={300}
+      />
     </div>
   );
 }
