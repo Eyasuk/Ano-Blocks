@@ -1,12 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Layout, Menu, Typography } from "antd";
 import type { MenuProps } from "antd";
 import {
   CreditCardIcon,
   DesktopIcon,
   DaoIcon,
+  HistoryIcon,
   LockIcon,
   LogoutIcon,
   ReceiveIcon,
@@ -14,9 +17,9 @@ import {
   SettingIcon,
   SwapIcon,
 } from "components/elements/icons";
+import { lock } from "utils/helpers/userSession";
 
 import styles from "./menu.module.scss";
-import Link from "next/link";
 
 const { Sider } = Layout;
 const { Title } = Typography;
@@ -37,47 +40,72 @@ function getItem(
   } as MenuItem;
 }
 
-const mainRoutes: MenuItem[] = [
-  { type: "divider" },
-  getItem(
-    "Dashboard",
-    "1",
-    <Link href="/">
-      <DesktopIcon />
-    </Link>
-  ),
-  getItem("Dao", "2", <DaoIcon />),
-  { type: "divider" },
-  getItem(
-    "Swap",
-    "3",
-    <Link href="/swap">
-      <SwapIcon />
-    </Link>
-  ),
-  getItem(
-    "Send",
-    "4",
-    <Link href="/send">
-      <SendIcon />
-    </Link>
-  ),
-  getItem("Receive", "5", <ReceiveIcon />),
-  getItem("Buy/Sell", "6", <CreditCardIcon />),
-  { type: "divider" },
-];
-
-const subRoutes: MenuItem[] = [
-  { type: "divider" },
-  getItem("Setting", "1", <SettingIcon />),
-  getItem("Lock", "2", <LockIcon />),
-  getItem("Logout", "3", <LogoutIcon />),
-  { type: "divider" },
-];
-
 export function MenuBar() {
+  const router = useRouter();
   const [collapsed, setCollapsed] = useState(false);
   const [title, setTitle] = useState(!collapsed);
+
+  const lockPage = () => {
+    lock();
+    router.push("/auth");
+  };
+
+  const mainRoutes: MenuItem[] = [
+    { type: "divider" },
+    getItem(
+      "Dashboard",
+      "1",
+      <Link href="/">
+        <DesktopIcon />
+      </Link>
+    ),
+    getItem(
+      "Dao",
+      "2",
+      <Link href="/dao">
+        <DaoIcon />
+      </Link>
+    ),
+    getItem(
+      "Transactions",
+      "3",
+      <Link href="/transactions">
+        <HistoryIcon />
+      </Link>
+    ),
+    { type: "divider" },
+    getItem(
+      "Swap",
+      "4",
+      <Link href="/swap">
+        <SwapIcon />
+      </Link>
+    ),
+    getItem(
+      "Send",
+      "5",
+      <Link href="/send">
+        <SendIcon />
+      </Link>
+    ),
+    getItem("Deposit/Withdraw", "6", <ReceiveIcon />),
+    getItem("Buy/Sell", "7", <CreditCardIcon />),
+    { type: "divider" },
+  ];
+
+  const subRoutes: MenuItem[] = [
+    { type: "divider" },
+    getItem(
+      "Setting",
+      "1",
+      <Link href="/setting">
+        <SettingIcon />
+      </Link>
+    ),
+    getItem("Lock", "2", <LockIcon onClick={lockPage} />),
+    getItem("Logout", "3", <LogoutIcon />),
+    { type: "divider" },
+  ];
 
   useEffect(() => {
     if (collapsed) setTitle(false);

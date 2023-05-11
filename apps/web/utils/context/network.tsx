@@ -1,19 +1,22 @@
 "use client";
 import { createContext, useContext, useState } from "react";
+import { JsonRpcProvider, Wallet } from "ethers";
 import { Networks, NetworkType } from "utils/constants/rpcProvider";
 
 interface NetworkState {
   choosenNetwork: NetworkType;
   networks: Record<string, NetworkType>;
-  setChoosenNetwork(network: NetworkType): void;
+  changeNetwork(network: NetworkType): void;
   addNetwork(newNetwork: NetworkType, networkKey: string): void;
+  provider: JsonRpcProvider | undefined;
 }
 
 const defaultNetworkState: NetworkState = {
   choosenNetwork: Networks.Polygon,
   networks: Networks,
-  setChoosenNetwork: () => {},
+  changeNetwork: () => {},
   addNetwork: (newNetwork: NetworkType, networkKey: string) => {},
+  provider: undefined,
 };
 
 const NetworkContext = createContext(defaultNetworkState);
@@ -31,8 +34,21 @@ export const NetworkProvider = ({
   const [networks, setNetworks] =
     useState<Record<string, NetworkType>>(Networks);
 
+  const [provider, setProvider] = useState<JsonRpcProvider>();
+
   const addNetwork = (newNetwork: NetworkType, networkKey: string) => {
     setNetworks({ ...networks, [networkKey]: newNetwork });
+  };
+
+  const changeNetwork = (network: NetworkType) => {
+    try {
+      setChoosenNetwork(network);
+      const provider = new JsonRpcProvider(network.rpcLink);
+      setProvider(provider);
+      console.log(provider);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -40,8 +56,9 @@ export const NetworkProvider = ({
       value={{
         networks,
         choosenNetwork,
-        setChoosenNetwork,
+        changeNetwork,
         addNetwork,
+        provider,
       }}
     >
       {children}{" "}

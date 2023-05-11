@@ -1,23 +1,8 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import { ethers } from "ethers";
-import {
-  Col,
-  Form,
-  Input,
-  InputNumber,
-  Row,
-  Select,
-  Space,
-  Spin,
-  Typography,
-} from "antd";
-import {
-  CheckCircleTwoTone,
-  LoadingOutlined,
-  WarningTwoTone,
-} from "@ant-design/icons";
+import { Form, InputNumber, Select, Typography } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 import { GlassCard } from "components/elements/cards";
 import Button from "components/elements/buttons";
 import { useUser } from "utils/context/user";
@@ -26,6 +11,7 @@ import { Assets, AssetProps } from "utils/constants/assets";
 import styles from "./swap.module.scss";
 
 const { Title } = Typography;
+
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
 export default function Send(): JSX.Element {
@@ -161,7 +147,7 @@ export default function Send(): JSX.Element {
             </Form.Item>
 
             <Form.Item>
-              <Button text="Send" type="primary" htmlType="submit" />
+              <Button text="Swap" type="primary" htmlType="submit" />
             </Form.Item>
           </Form>
         </div>

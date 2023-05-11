@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import {
   BulbFilled,
   BulbOutlined,
@@ -8,6 +8,7 @@ import {
   DesktopOutlined,
   EyeOutlined,
   EyeInvisibleOutlined,
+  HistoryOutlined,
   LockOutlined,
   LogoutOutlined,
   QrcodeOutlined,
@@ -15,7 +16,7 @@ import {
   SendOutlined,
   SettingOutlined,
   SwapOutlined,
-} from '@ant-design/icons';
+} from "@ant-design/icons";
 
 export function CreditCardIcon({ ...rest }: any): any {
   return <CreditCardOutlined {...rest} />;
@@ -43,6 +44,10 @@ export function EyeIcon({ ...rest }: any): any {
 
 export function EyeInvisibleIcon({ ...rest }: any): any {
   return <EyeInvisibleOutlined {...rest} />;
+}
+
+export function HistoryIcon({ ...rest }: any): any {
+  return <HistoryOutlined {...rest} />;
 }
 
 export function LockIcon({ ...rest }: any): any {

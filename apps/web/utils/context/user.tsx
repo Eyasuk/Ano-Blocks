@@ -1,13 +1,13 @@
-'use client';
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import { useRouter, usePathname, useSearchParams } from 'next/navigation';
-import { UserLoginInfo } from 'utils/types/userType';
+"use client";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { UserLoginInfo } from "utils/types/userType";
 import {
   checkIfUserLogin,
   checkUserSession,
   checkUserWithPassword,
-} from 'utils/helpers/userSession';
-import { Routes } from 'utils/constants/routes';
+} from "utils/helpers/userSession";
+import { Routes } from "utils/constants/routes";
 
 interface UserState {
   userLoggedin: boolean;
@@ -68,15 +68,15 @@ export const UserProvider = ({ children }: UserProviderProps): JSX.Element => {
     const userSession = await checkUserSession();
 
     if (userSession) {
-      if (typeof userSession.password == 'string') {
+      if (typeof userSession.password == "string") {
         const auth = await checkUserWithPassword(userSession.password);
 
         if (
           auth &&
-          typeof auth.hdPriv == 'string' &&
-          typeof auth.priv == 'string' &&
-          typeof auth.pubad == 'string' &&
-          typeof auth.pubkey == 'string'
+          typeof auth.hdPriv == "string" &&
+          typeof auth.priv == "string" &&
+          typeof auth.pubad == "string" &&
+          typeof auth.pubkey == "string"
         ) {
           const user: UserLoginInfo = {
             hdPriv: auth.hdPriv,
@@ -93,13 +93,13 @@ export const UserProvider = ({ children }: UserProviderProps): JSX.Element => {
     }
 
     const params = new URLSearchParams(searchParams);
-    params.set('redirect', path);
+    params.set("redirect", path);
     const redirect = params;
     router.push(`${Routes.authorizationRoutes.auth}?${redirect}`);
   };
 
   useEffect(() => {
-    redirectTo(currentPath ?? '/intro');
+    redirectTo(currentPath ?? "/intro");
   }, []);
 
   return (
@@ -113,7 +113,7 @@ export const UserProvider = ({ children }: UserProviderProps): JSX.Element => {
         setPasswordModal,
       }}
     >
-      {children}{' '}
+      {children}{" "}
     </UserContext.Provider>
   );
 };

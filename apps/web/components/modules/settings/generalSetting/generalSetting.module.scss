@@ -1,0 +1,16 @@
+.options {
+  margin-top: 1em;
+  margin-bottom: 2em;
+  display: flex;
+  flex-direction: column;
+  max-width: 40%;
+  .currencies {
+    min-width: 20em;
+  }
+  .hideAssetsLabel {
+    margin-left: 0.8em;
+  }
+  .button {
+    max-width: 12em;
+  }
+}

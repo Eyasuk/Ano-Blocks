@@ -1,15 +1,15 @@
-'use client';
-import { useState } from 'react';
-import { Divider, Typography } from 'antd';
-import { CopyIcon, QrIcon } from 'components/elements/icons';
-import { GlassCard } from 'components/elements/cards';
-import QrAddress from 'components/modules/qrAddress';
-import { notification } from 'components/elements/notification';
-import { useUser } from 'utils/context/user';
-import { shortenText } from 'utils/helpers/shortText';
-import { copyToClipBoard } from 'utils/helpers/copytext';
+"use client";
+import { useState } from "react";
+import { Divider, Typography } from "antd";
+import { CopyIcon, QrIcon } from "components/elements/icons";
+import { GlassCard } from "components/elements/cards";
+import QrAddress from "components/modules/qrAddress";
+import { notification } from "components/elements/notification";
+import { useUser } from "utils/context/user";
+import { shortenText } from "utils/helpers/shortText";
+import { copyToClipBoard } from "utils/helpers/copytext";
 
-import styles from './walletcard.module.scss';
+import styles from "./walletcard.module.scss";
 
 const { Title, Text } = Typography;
 
@@ -21,28 +21,28 @@ export default function Wallet(): JSX.Element {
   };
 
   const handelCopy = () => {
-    const response = copyToClipBoard(userInfo?.pubad ?? '');
+    const response = copyToClipBoard(userInfo?.pubad ?? "");
     notification({
-      messageType: 'success',
-      message: 'Copied!',
-      description: 'You Copied the address',
+      messageType: "success",
+      message: "Copied!",
+      description: "You Copied the address",
     });
   };
   return (
     <>
       <GlassCard>
         <div className={styles.layout}>
-          <Title className={styles.title} level={5} type='secondary'>
+          <Title className={styles.title} level={5} type="secondary">
             Total portfolio value
           </Title>
           <div className={styles.balance}>
-            <Text type='secondary'>ETB</Text>
+            <Text type="secondary">ETB</Text>
             <Text className={styles.amount}>0.00</Text>
           </div>
           <Divider />
 
           <div className={(styles.column, styles.walletaddress)}>
-            <Title level={5} type='secondary'>
+            <Title level={5} type="secondary">
               Main account
             </Title>
             <div className={styles.walletinfo}>
@@ -50,12 +50,12 @@ export default function Wallet(): JSX.Element {
               <div className={styles.icons}>
                 <CopyIcon
                   className={styles.icon}
-                  style={{ fontSize: '170%' }}
+                  style={{ fontSize: "170%" }}
                   onClick={handelCopy}
                 />
                 <QrIcon
                   className={styles.icon}
-                  style={{ fontSize: '170%' }}
+                  style={{ fontSize: "170%" }}
                   onClick={() => setQrOpen(!qrOpen)}
                 />
               </div>
@@ -64,7 +64,7 @@ export default function Wallet(): JSX.Element {
         </div>
       </GlassCard>
       <QrAddress
-        address={userInfo?.pubad ?? ''}
+        address={userInfo?.pubad ?? ""}
         open={qrOpen}
         onCancel={handleCancel}
       />

@@ -1,6 +1,6 @@
-import { Card } from 'antd';
+import { Card } from "antd";
 
-import styles from './transparentCard.module.scss';
+import styles from "./transparentCard.module.scss";
 
 type Props = {
   children: React.ReactNode;
