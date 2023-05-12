@@ -1,13 +1,10 @@
-import { createContext, useContext, useState } from "react";
-import { Curriences } from "utils/constants/currencies";
-
-interface SettingProps {
-  currencyConversion: "f" | "f";
-  primaryCurrency: "Matic" | "Fiat";
-  language: string;
-  hideAssets: boolean;
-  lockerTimer: number;
-}
+"use client";
+import { createContext, useContext, useEffect, useState } from "react";
+import {
+  getItemFromLocalStorage,
+  setItemInLocalStorage,
+} from "utils/helpers/localStorage";
+import { SettingProps } from "utils/types/settingTypes";
 
 interface SettingState {
   userSetting: SettingProps;
@@ -16,7 +13,7 @@ interface SettingState {
 
 const defaultSettingState: SettingState = {
   userSetting: {
-    currencyConversion: "f",
+    currencyConversion: "ETB",
     primaryCurrency: "Matic",
     language: "d",
     hideAssets: false,
@@ -25,26 +22,29 @@ const defaultSettingState: SettingState = {
   setUserSetting: () => {},
 };
 
-Curriences.map((items: any, index: number) => {
-  return items.name;
-});
+//ToDo
+// Curriences.map((items: any, index: number) => {
+//   return items.name;
+// });
 
-const UserSettingContext = createContext(defaultSettingState);
+const SettingContext = createContext(defaultSettingState);
 
-interface UserProviderProps {
+interface SettingProviderProps {
   children: React.ReactNode;
 }
 
-export const UserProvider = ({ children }: UserProviderProps): JSX.Element => {
+export const SettingProvider = ({
+  children,
+}: SettingProviderProps): JSX.Element => {
   const [userSetting, setUserSetting] = useState<SettingProps>(
     defaultSettingState.userSetting
   );
 
   return (
-    <UserSettingContext.Provider value={{ userSetting, setUserSetting }}>
+    <SettingContext.Provider value={{ userSetting, setUserSetting }}>
       {children}{" "}
-    </UserSettingContext.Provider>
+    </SettingContext.Provider>
   );
 };
 
-export const useUser = () => useContext(UserSettingContext);
+export const useSetting = () => useContext(SettingContext);

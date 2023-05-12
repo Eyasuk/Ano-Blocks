@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import NextImage from "next/image";
 import { Button, Table, Typography } from "antd";
 import type { ColumnsType, TableProps } from "antd/es/table";
@@ -5,11 +6,10 @@ import { MoreOutlined } from "@ant-design/icons";
 import { GlassCard } from "components/elements/cards";
 import { Assets as assets, AssetProps } from "utils/constants/assets";
 import { useNetwork } from "utils/context/network";
+import { prices, userAssets } from "utils/helpers/assets";
+import { useUser } from "utils/context/user";
 
 import styles from "./assets.module.scss";
-import { useEffect, useState } from "react";
-import { useUser } from "utils/context/user";
-import { AddressLike, formatEther, toBigInt, toNumber } from "ethers";
 
 const { Title, Text } = Typography;
 
@@ -89,7 +89,7 @@ const columns: ColumnsType<DataType> = [
     render: (value, record) => {
       return (
         <span>
-          <Text strong>{record.value}</Text>
+          <Text strong>{record.amount}</Text>
           <Text type="secondary">{" " + record.abbrv}</Text>
         </span>
       );
@@ -103,41 +103,44 @@ const columns: ColumnsType<DataType> = [
 ];
 
 export default function Assets(): JSX.Element {
-  const { provider } = useNetwork();
+  const { provider, choosenNetwork } = useNetwork();
   const { userInfo } = useUser();
-  const [amount, setAmount] = useState("0");
+  const [data, setData] = useState<DataType[]>();
 
   useEffect(() => {
-    const fetchData = async () => {
-      const w = await provider?.getBalance(userInfo?.pubad as AddressLike);
-      console.log(w);
-      let p;
-      if (w) {
-        p = formatEther(w);
+    const work = async () => {
+      if (provider) {
+        const assetsBalance = await userAssets(
+          userInfo?.pubad ?? "",
+          provider,
+          choosenNetwork
+        );
+        const price = await prices();
+        console.log(assetsBalance);
+        console.log((price as any)["Matic"]["price"]);
+        console.log((assetsBalance as any)["Matic"]);
+
+        const mapDataForAssetsTable = (items: AssetProps, index: number) => {
+          return {
+            key: index.toString(),
+            name: items.name,
+            abbrv: items.abbrev,
+            imageUrl: items.imageUrl,
+            price: (price as any)[items.name]["price"],
+            priceChange: (price as any)[items.name]["change"].toPrecision(3),
+            amount: (assetsBalance as any)[items.name],
+            value:
+              (price as any)[items.name]["price"] *
+              (assetsBalance as any)[items.name],
+          };
+        };
+        const temp: DataType[] = assets.map(mapDataForAssetsTable);
+        setData(temp);
       }
-      console.log(p);
-      console.log(typeof p);
-
-      if (p) setAmount(p);
-      else setAmount("0");
     };
-    fetchData();
-  });
+    work();
+  }, [provider]);
 
-  const mapDataForAssetsTable = (items: AssetProps, index: number) => {
-    return {
-      key: index.toString(),
-      name: items.name,
-      abbrv: items.abbrev,
-      imageUrl: items.imageUrl,
-      price: 1890,
-      priceChange: 12,
-      value: Number(amount),
-      amount: 2000,
-    };
-  };
-
-  const data: DataType[] = assets.map(mapDataForAssetsTable);
   return (
     <GlassCard>
       <div className={styles.layout}>

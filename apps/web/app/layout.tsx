@@ -1,5 +1,6 @@
 import { UserProvider } from "utils/context/user";
 import { NetworkProvider } from "utils/context/network";
+import { SettingProvider } from "utils/context/settings";
 
 import "../styles/globals.scss";
 
@@ -33,9 +34,11 @@ export default function Layout({ children }: any): JSX.Element {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
       <body>
-        <UserProvider>
-          <NetworkProvider>{children}</NetworkProvider>
-        </UserProvider>
+        <SettingProvider>
+          <UserProvider>
+            <NetworkProvider>{children}</NetworkProvider>
+          </UserProvider>
+        </SettingProvider>
       </body>
     </html>
   );

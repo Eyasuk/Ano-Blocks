@@ -25,8 +25,8 @@ export default function Loading(): JSX.Element {
             </mask>
             <path
               d="M1.14819 60.5524C1.14819 59.1585 2.28147 58.0286 3.67945 58.0286H34.3076C35.7056 58.0286 36.8389 59.1585 36.8389 60.5524V85.2857C36.8389 86.6795 35.7056 87.8095 34.3076 87.8095H3.67945C2.28147 87.8095 1.14819 86.6795 1.14819 85.2857V60.5524Z"
-              stroke-width="15.1875"
-              shape-rendering="crispEdges"
+              strokeWidth="15.1875"
+              shapeRendering="crispEdges"
               mask="url(#path-1-inside-1_87_34)"
             />
           </g>
@@ -36,7 +36,7 @@ export default function Loading(): JSX.Element {
             </mask>
             <path
               d="M32.3115 10.3108C33.7927 8.41734 36.8387 9.46169 36.8387 11.863V52.4761C36.8387 53.87 35.7054 54.9999 34.3074 54.9999H2.5357C0.427702 54.9999 -0.756683 52.5812 0.539804 50.9239L32.3115 10.3108Z"
-              stroke-width="15.1875"
+              strokeWidth="15.1875"
               mask="url(#path-2-inside-2_87_34)"
             />
           </g>
@@ -54,7 +54,7 @@ export default function Loading(): JSX.Element {
               filterUnits="userSpaceOnUse"
               colorInterpolationFilters="sRGB"
             >
-              <feFlood flood-opacity="0" result="BackgroundImageFix" />
+              <feFlood floodOpacity="0" result="BackgroundImageFix" />
               <feColorMatrix
                 in="SourceAlpha"
                 type="matrix"
@@ -89,7 +89,7 @@ export default function Loading(): JSX.Element {
               filterUnits="userSpaceOnUse"
               colorInterpolationFilters="sRGB"
             >
-              <feFlood flood-opacity="0" result="BackgroundImageFix" />
+              <feFlood floodOpacity="0" result="BackgroundImageFix" />
               <feColorMatrix
                 in="SourceAlpha"
                 type="matrix"

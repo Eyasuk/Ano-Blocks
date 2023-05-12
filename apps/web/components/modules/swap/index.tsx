@@ -50,24 +50,15 @@ export default function Send(): JSX.Element {
     return false;
   }
 
-  //   const x = Assets.filter(removeValue);
+  // data.filter((item: Item) => item.key !== key);
+  //const x = Assets.filter(removeValue);
 
   return (
     <div className={styles.container}>
       <GlassCard>
         <div className={styles.layout}>
           <Title level={4}>Swap</Title>
-          <Form
-            name="send"
-            size="large"
-            layout="vertical"
-            //style={{ maxWidth: 600 }}
-            // wrapperCol={{ span: 15 }}
-            // initialValues={{ remember: true }}
-            // onFinish={onFinish}
-            // onFinishFailed={onFinishFailed}
-            autoComplete="off"
-          >
+          <Form name="send" size="large" layout="vertical" autoComplete="off">
             <Form.Item label="Swap From" name="swapfrom">
               {selectAsset ? (
                 <Select
@@ -76,7 +67,8 @@ export default function Send(): JSX.Element {
                   optionFilterProp="children"
                   defaultActiveFirstOption
                   onChange={onChangeAsset}
-                  //onSearch={onSearch}
+                  //onSearch={onS                  //onSearch={onSearch}
+
                   filterOption={(input, option) =>
                     (option?.label ?? "")
                       .toLowerCase()
@@ -88,7 +80,7 @@ export default function Send(): JSX.Element {
                       value: value.name,
                       label: value.abbrev,
                     };
-                  })}
+                  }).filter((value) => value.value != swapToAsset)}
                 />
               ) : (
                 <div className={styles.swapFrom}>
@@ -142,7 +134,7 @@ export default function Send(): JSX.Element {
                     value: value.name,
                     label: value.abbrev,
                   };
-                })}
+                }).filter((value) => value.value != swapFromAsset)}
               />
             </Form.Item>
 
