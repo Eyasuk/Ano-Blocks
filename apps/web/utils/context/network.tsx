@@ -59,9 +59,15 @@ export const NetworkProvider = ({
 
   useEffect(() => {
     const userNetwork = getItemFromLocalStorage("network");
-    setChoosenNetwork(Networks[userNetwork]);
-    const provider = new JsonRpcProvider(Networks[userNetwork].rpcLink);
-    setProvider(provider);
+    if (userNetwork && Networks[userNetwork]) {
+      setChoosenNetwork(Networks[userNetwork]);
+      const provider = new JsonRpcProvider(Networks[userNetwork].rpcLink);
+      setProvider(provider);
+    } else {
+      setChoosenNetwork(Networks.Mumbai);
+      const provider = new JsonRpcProvider(Networks.Mumbai.rpcLink);
+      setProvider(provider);
+    }
   }, []);
 
   return (

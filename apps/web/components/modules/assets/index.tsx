@@ -10,6 +10,8 @@ import { prices, userAssets } from "utils/helpers/assets";
 import { useUser } from "utils/context/user";
 
 import styles from "./assets.module.scss";
+import Link from "next/link";
+import { recoverAddress } from "ethers";
 
 const { Title, Text } = Typography;
 
@@ -86,7 +88,7 @@ const columns: ColumnsType<DataType> = [
     title: "Amount",
     dataIndex: "amount",
     sorter: (a, b) => a.amount - b.amount,
-    render: (value, record) => {
+    render: (_value, record) => {
       return (
         <span>
           <Text strong>{record.amount}</Text>
@@ -98,7 +100,11 @@ const columns: ColumnsType<DataType> = [
   {
     title: "",
     dataIndex: "more",
-    render: () => <Button icon={<MoreOutlined />} />,
+    render: (_value, record) => (
+      <Link href={"asset/" + record.name.toLowerCase()}>
+        <Button icon={<MoreOutlined />} />{" "}
+      </Link>
+    ),
   },
 ];
 
@@ -109,34 +115,39 @@ export default function Assets(): JSX.Element {
 
   useEffect(() => {
     const work = async () => {
-      if (provider) {
-        const assetsBalance = await userAssets(
-          userInfo?.pubad ?? "",
-          provider,
-          choosenNetwork
-        );
-        const price = await prices();
+      try {
+        if (provider && userInfo?.pubad) {
+          const assetsBalance = await userAssets(
+            userInfo?.pubad,
+            provider,
+            choosenNetwork
+          );
 
-        const mapDataForAssetsTable = (items: AssetProps, index: number) => {
-          return {
-            key: index.toString(),
-            name: items.name,
-            abbrv: items.abbrev,
-            imageUrl: items.imageUrl,
-            price: (price as any)[items.name]["price"],
-            priceChange: (price as any)[items.name]["change"].toPrecision(3),
-            amount: (assetsBalance as any)[items.name],
-            value:
-              (price as any)[items.name]["price"] *
-              (assetsBalance as any)[items.name],
+          const price = await prices();
+          const mapDataForAssetsTable = (items: AssetProps, index: number) => {
+            return {
+              key: index.toString(),
+              name: items.name,
+              abbrv: items.abbrev,
+              imageUrl: items.imageUrl,
+              price: (price as any)[items.name]["price"],
+              priceChange: (price as any)[items.name]["change"].toPrecision(3),
+              amount: (assetsBalance as any)[items.name],
+              value:
+                (price as any)[items.name]["price"] *
+                (assetsBalance as any)[items.name],
+            };
           };
-        };
-        const temp: DataType[] = assets.map(mapDataForAssetsTable);
-        setData(temp);
+
+          const temp: DataType[] = assets.map(mapDataForAssetsTable);
+          setData(temp);
+        }
+      } catch (err) {
+        console.log(err);
       }
     };
     work();
-  }, [provider]);
+  }, [provider, userInfo]);
 
   return (
     <GlassCard>
