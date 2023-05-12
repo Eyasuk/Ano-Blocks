@@ -116,9 +116,6 @@ export default function Assets(): JSX.Element {
           choosenNetwork
         );
         const price = await prices();
-        console.log(assetsBalance);
-        console.log((price as any)["Matic"]["price"]);
-        console.log((assetsBalance as any)["Matic"]);
 
         const mapDataForAssetsTable = (items: AssetProps, index: number) => {
           return {

@@ -2,7 +2,10 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { JsonRpcProvider, Wallet } from "ethers";
 import { Networks, NetworkType } from "utils/constants/rpcProvider";
-import { setItemInLocalStorage } from "utils/helpers/localStorage";
+import {
+  getItemFromLocalStorage,
+  setItemInLocalStorage,
+} from "utils/helpers/localStorage";
 
 interface NetworkState {
   choosenNetwork: NetworkType;
@@ -35,9 +38,7 @@ export const NetworkProvider = ({
   const [networks, setNetworks] =
     useState<Record<string, NetworkType>>(Networks);
 
-  const defaultNetwork = new JsonRpcProvider(Networks.Mumbai.rpcLink);
-
-  const [provider, setProvider] = useState<JsonRpcProvider>(defaultNetwork);
+  const [provider, setProvider] = useState<JsonRpcProvider>();
 
   const addNetwork = (newNetwork: NetworkType, networkKey: string) => {
     setNetworks({ ...networks, [networkKey]: newNetwork });
@@ -56,7 +57,12 @@ export const NetworkProvider = ({
     }
   };
 
-  useEffect(() => {});
+  useEffect(() => {
+    const userNetwork = getItemFromLocalStorage("network");
+    setChoosenNetwork(Networks[userNetwork]);
+    const provider = new JsonRpcProvider(Networks[userNetwork].rpcLink);
+    setProvider(provider);
+  }, []);
 
   return (
     <NetworkContext.Provider
