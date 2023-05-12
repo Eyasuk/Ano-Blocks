@@ -1,7 +1,8 @@
 "use client";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { JsonRpcProvider, Wallet } from "ethers";
 import { Networks, NetworkType } from "utils/constants/rpcProvider";
+import { setItemInLocalStorage } from "utils/helpers/localStorage";
 
 interface NetworkState {
   choosenNetwork: NetworkType;
@@ -34,7 +35,9 @@ export const NetworkProvider = ({
   const [networks, setNetworks] =
     useState<Record<string, NetworkType>>(Networks);
 
-  const [provider, setProvider] = useState<JsonRpcProvider>();
+  const defaultNetwork = new JsonRpcProvider(Networks.Mumbai.rpcLink);
+
+  const [provider, setProvider] = useState<JsonRpcProvider>(defaultNetwork);
 
   const addNetwork = (newNetwork: NetworkType, networkKey: string) => {
     setNetworks({ ...networks, [networkKey]: newNetwork });
@@ -45,10 +48,15 @@ export const NetworkProvider = ({
       setChoosenNetwork(network);
       const provider = new JsonRpcProvider(network.rpcLink);
       setProvider(provider);
+      setItemInLocalStorage("network", network.name);
     } catch (error) {
+      console.log("error occured on changing network");
       console.log(error);
+      return;
     }
   };
+
+  useEffect(() => {});
 
   return (
     <NetworkContext.Provider

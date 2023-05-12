@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import NextImage from "next/image";
 import { Button, Table, Typography } from "antd";
 import type { ColumnsType, TableProps } from "antd/es/table";
@@ -5,12 +6,10 @@ import { MoreOutlined } from "@ant-design/icons";
 import { GlassCard } from "components/elements/cards";
 import { Assets as assets, AssetProps } from "utils/constants/assets";
 import { useNetwork } from "utils/context/network";
+import { prices, userAssets } from "utils/helpers/assets";
+import { useUser } from "utils/context/user";
 
 import styles from "./assets.module.scss";
-import { useEffect, useState } from "react";
-import { useUser } from "utils/context/user";
-import { AddressLike, formatEther } from "ethers";
-import { prices, userAssets } from "utils/helpers/assets";
 
 const { Title, Text } = Typography;
 
@@ -90,7 +89,7 @@ const columns: ColumnsType<DataType> = [
     render: (value, record) => {
       return (
         <span>
-          <Text strong>{record.value}</Text>
+          <Text strong>{record.amount}</Text>
           <Text type="secondary">{" " + record.abbrv}</Text>
         </span>
       );
@@ -117,6 +116,9 @@ export default function Assets(): JSX.Element {
           choosenNetwork
         );
         const price = await prices();
+        console.log(assetsBalance);
+        console.log((price as any)["Matic"]["price"]);
+        console.log((assetsBalance as any)["Matic"]);
 
         const mapDataForAssetsTable = (items: AssetProps, index: number) => {
           return {
@@ -126,10 +128,10 @@ export default function Assets(): JSX.Element {
             imageUrl: items.imageUrl,
             price: (price as any)[items.name]["price"],
             priceChange: (price as any)[items.name]["change"].toPrecision(3),
+            amount: (assetsBalance as any)[items.name],
             value:
               (price as any)[items.name]["price"] *
               (assetsBalance as any)[items.name],
-            amount: (assetsBalance as any)[items.name],
           };
         };
         const temp: DataType[] = assets.map(mapDataForAssetsTable);

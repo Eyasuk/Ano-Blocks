@@ -16,7 +16,7 @@ export async function userAssets(
   if (maticBalance) {
     formatedMatic = formatEther(maticBalance);
   } else {
-    throw "no balance";
+    formatedMatic = "0";
   }
   return {
     Matic: Number(formatedMatic),
