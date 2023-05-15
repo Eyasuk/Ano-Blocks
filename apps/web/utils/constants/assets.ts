@@ -3,6 +3,7 @@ export interface AssetProps {
   abbrev: string;
   imageUrl?: string;
   contractAddress?: {};
+  coingeckoId?: string;
 }
 
 export const Assets: AssetProps[] = [
@@ -13,6 +14,7 @@ export const Assets: AssetProps[] = [
     contractAddress: {
       Local: "",
     },
+    coingeckoId: "matic-network",
   },
   {
     name: "Ether",
@@ -23,6 +25,7 @@ export const Assets: AssetProps[] = [
       Mumbai: "0xA6FA4fB5f76172d178d61B04b0ecd319C5d1C0aa",
       Local: "",
     },
+    coingeckoId: "ethereum",
   },
   {
     name: "EtbCoin",

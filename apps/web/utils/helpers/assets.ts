@@ -1,5 +1,6 @@
 import { Provider, AddressLike, Contract, formatEther } from "ethers";
 import { NetworkType } from "utils/constants/rpcProvider";
+import moment from "moment";
 import etherumAbi from "utils/abis/etherum_abi.json";
 
 export async function userAssets(
@@ -48,6 +49,32 @@ export async function prices() {
         price: 55,
         change: 0.0001,
       },
+    };
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function assetPriceInfo(day: number) {
+  try {
+    const response = await fetch(
+      " https://api.coingecko.com/api/v3/coins/matic-network/market_chart?vs_currency=usd&days=7"
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch data");
+    }
+    const data = await response.json();
+    let price: number[] = [];
+    let date: string[] = [];
+    data.prices.forEach((item: [number, number]) => {
+      price.push(item[1]);
+      date.push(moment.unix(item[0] / 1000).format("dd-MM"));
+    });
+
+    return {
+      dates: date,
+      prices: price,
     };
   } catch (err) {
     console.log(err);

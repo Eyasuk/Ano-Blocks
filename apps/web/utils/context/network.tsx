@@ -1,6 +1,6 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
-import { JsonRpcProvider, Wallet } from "ethers";
+import { JsonRpcProvider } from "ethers";
 import { Networks, NetworkType } from "utils/constants/rpcProvider";
 import {
   getItemFromLocalStorage,
