@@ -16,7 +16,7 @@
   "devDependencies": {
     "eslint-config-custom": "workspace:*",
     "prettier": "2.8.3",
-    "sass": "^1.57.1",
+    "sass": "^1.62.1",
     "turbo": "latest"
   },
   "engines": {
@@ -25,6 +25,6 @@
   "packageManager": "pnpm@7.25.1",
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
-    "antd": "^5.3.2"
+    "antd": "^5.4.7"
   }
 }

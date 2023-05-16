@@ -42,17 +42,6 @@ export default function Send(): JSX.Element {
     setSelectAsset(true);
   };
 
-  function removeValue(value: AssetProps, index: number, arr: AssetProps[]) {
-    if (value.name === swapFromAsset) {
-      arr.splice(index, 1);
-      return true;
-    }
-    return false;
-  }
-
-  // data.filter((item: Item) => item.key !== key);
-  //const x = Assets.filter(removeValue);
-
   return (
     <div className={styles.container}>
       <GlassCard>
@@ -67,8 +56,6 @@ export default function Send(): JSX.Element {
                   optionFilterProp="children"
                   defaultActiveFirstOption
                   onChange={onChangeAsset}
-                  //onSearch={onS                  //onSearch={onSearch}
-
                   filterOption={(input, option) =>
                     (option?.label ?? "")
                       .toLowerCase()

@@ -54,17 +54,7 @@ export default function Send(): JSX.Element {
       <GlassCard>
         <div className={styles.layout}>
           <Title level={4}>Send</Title>
-          <Form
-            name="send"
-            size="large"
-            layout="vertical"
-            //style={{ maxWidth: 600 }}
-            // wrapperCol={{ span: 15 }}
-            // initialValues={{ remember: true }}
-            // onFinish={onFinish}
-            // onFinishFailed={onFinishFailed}
-            autoComplete="off"
-          >
+          <Form name="send" size="large" layout="vertical" autoComplete="off">
             <Form.Item label="Reciver Address" name="reciveraddress">
               <Input
                 onChange={onChangeAddress}
@@ -98,7 +88,6 @@ export default function Send(): JSX.Element {
                   )
                 }
                 onChange={onChangeAsset}
-                //onSearch={onSearch}
                 filterOption={(input, option) =>
                   (option?.label ?? "")
                     .toLowerCase()

@@ -1,13 +1,18 @@
 import NextImage from "next/image";
 import { Divider, Typography } from "antd";
+import Button from "components/elements/buttons";
 import { GlassCard } from "components/elements/cards";
+import { useUserBalance } from "utils/context/userBalance";
+import { useSetting } from "utils/context/settings";
 
 import styles from "./etbcwallet.module.scss";
-import Button from "components/elements/buttons";
 
 const { Title, Text } = Typography;
 
 export default function EtbcWallet(): JSX.Element {
+  const { userBalance } = useUserBalance();
+  const { userSetting } = useSetting();
+
   return (
     <GlassCard>
       <div className={styles.layout}>
@@ -24,7 +29,7 @@ export default function EtbcWallet(): JSX.Element {
           />
 
           <Text type="secondary">ETBC </Text>
-          <Text className={styles.amount}>0.00 </Text>
+          <Text className={styles.amount}>{userBalance.EtbCoin.total}</Text>
         </div>
         <Divider />
         <div className={styles.aprs}>
