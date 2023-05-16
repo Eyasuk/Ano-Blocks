@@ -30,51 +30,45 @@ ChartJS.register(
 );
 
 export default function CurrencyInfo({ asset }: any) {
-  const [assetChartData, setAssetChartData] = useState<any>({
-    labels: [1, 2, 1, 2, 3, 4, 1, 2, 3, 1, 4, 1, 3, 1, 2, 3],
-    datasets: [
-      {
-        label: "Price",
-        fill: false,
-        lineTension: 0.1,
-        backgroundColor: "#00ac7a",
-        borderColor: "#00ac7a",
-        borderWidth: 1,
-        data: [2, 3, 1, 39, 34, 1, 2, 34, 1, 2, 3, 4, 12, 3, 33, 4],
-      },
-    ],
-  });
+  const [assetChartData, setAssetChartData] = useState<any>();
   const { userSetting } = useSetting();
 
   useEffect(() => {
     const work = async () => {
-      try {
-        const assetPrice = await assetPriceInfo(7);
-        if (assetPrice) {
-          const data = {
-            labels: assetPrice.dates,
-            datasets: [
-              {
-                label: "Price",
-                fill: false,
-                lineTension: 0.1,
-                backgroundColor: "#00ac7a",
-                borderColor: "#00ac7a",
-                borderWidth: 1,
+      if (asset) {
+        try {
+          const assetPrice = await assetPriceInfo(7, asset.coingeckoId);
+          if (assetPrice) {
+            const data = {
+              labels: assetPrice.dates,
+              datasets: [
+                {
+                  label: "Price",
+                  fill: false,
+                  lineTension: 0.1,
+                  backgroundColor: "#00ac7a",
+                  borderColor: "#00ac7a",
+                  borderWidth: 1,
 
-                data: assetPrice.prices ?? [],
-              },
-            ],
-          };
-          setAssetChartData(data);
+                  data:
+                    userSetting.currencyConversion == "ETB"
+                      ? assetPrice.prices.map((items) => {
+                          return items * 55;
+                        })
+                      : assetPrice.prices ?? [],
+                },
+              ],
+            };
+            setAssetChartData(data);
+          }
+        } catch (err) {
+          console.log(err);
         }
-      } catch (err) {
-        console.log(err);
       }
     };
 
     work();
-  }, []);
+  }, [asset]);
 
   return (
     <GlassCard>
