@@ -29,7 +29,7 @@ export default function EtbcWallet(): JSX.Element {
           />
 
           <Text type="secondary">ETBC </Text>
-          <Text className={styles.amount}>0.00 </Text>
+          <Text className={styles.amount}>{userBalance.EtbCoin.total}</Text>
         </div>
         <Divider />
         <div className={styles.aprs}>

@@ -46,8 +46,8 @@ export async function prices() {
         change: data.ethereum.usd_24h_change,
       },
       EtbCoin: {
-        price: 55,
-        change: 0.0001,
+        price: 1,
+        change: 0.01,
       },
     };
   } catch (err) {

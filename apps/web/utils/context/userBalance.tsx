@@ -10,6 +10,7 @@ interface assetValueProp {
   totalInUsd: number;
   totalInbirr: number;
   change: number;
+  price: number;
 }
 
 export interface userBalanceProp {
@@ -28,9 +29,9 @@ interface UserBalanceState {
 
 const defaultUserBalanceState: UserBalanceState = {
   userBalance: {
-    EtbCoin: { total: 0, totalInbirr: 0, totalInUsd: 0, change: 0 },
-    Ether: { total: 0, totalInbirr: 0, totalInUsd: 0, change: 0 },
-    Matic: { total: 0, totalInbirr: 0, totalInUsd: 0, change: 0 },
+    EtbCoin: { total: 0, totalInbirr: 0, totalInUsd: 0, change: 0, price: 0 },
+    Ether: { total: 0, totalInbirr: 0, totalInUsd: 0, change: 0, price: 0 },
+    Matic: { total: 0, totalInbirr: 0, totalInUsd: 0, change: 0, price: 0 },
     TotalInUsd: 0,
     TotalInBirr: 0,
   },
@@ -66,33 +67,67 @@ export const UserBalanceProvider = ({
 
           const balance: userBalanceProp = {
             EtbCoin: {
-              total: assetsBalance.EtbCoin,
-              totalInbirr:
-                (price?.EtbCoin.price ?? 0) * assetsBalance.EtbCoin * 55,
-              totalInUsd: (price?.EtbCoin.price ?? 0) * assetsBalance.EtbCoin,
-              change: price?.EtbCoin.change ?? 0,
+              total: Number(assetsBalance.EtbCoin.toPrecision(4)),
+              totalInbirr: Number(
+                (
+                  (price?.EtbCoin.price ?? 0) *
+                  assetsBalance.EtbCoin *
+                  55
+                ).toPrecision(4)
+              ),
+              totalInUsd: Number(
+                (
+                  (price?.EtbCoin.price ?? 0) * assetsBalance.EtbCoin
+                ).toPrecision(4)
+              ),
+              change: Number((price?.EtbCoin.change ?? 0).toPrecision(4)),
+              price: Number((price?.EtbCoin.price ?? 0).toPrecision(4)),
             },
             Ether: {
-              total: assetsBalance.Ether,
-              totalInbirr: (price?.Ether.price ?? 0) * assetsBalance.Ether * 55,
-              totalInUsd: (price?.Ether.price ?? 0) * assetsBalance.Ether,
-              change: price?.Ether.change ?? 0,
+              total: Number(assetsBalance.Ether.toPrecision(4)),
+              totalInbirr: Number(
+                (
+                  (price?.Ether.price ?? 0) *
+                  assetsBalance.Ether *
+                  55
+                ).toPrecision(4)
+              ),
+              totalInUsd: Number(
+                ((price?.Ether.price ?? 0) * assetsBalance.Ether).toPrecision(4)
+              ),
+              change: Number((price?.Ether.change ?? 0).toPrecision(4)),
+              price: Number((price?.Ether.price ?? 0).toPrecision(4)),
             },
             Matic: {
-              total: assetsBalance.Matic,
-              totalInbirr: (price?.Matic.price ?? 0) * assetsBalance.Matic * 55,
-              totalInUsd: (price?.Matic.price ?? 0) * assetsBalance.Matic,
-              change: price?.Matic.change ?? 0,
+              total: Number(assetsBalance.Matic.toPrecision(4)),
+              totalInbirr: Number(
+                (
+                  (price?.Matic.price ?? 0) *
+                  assetsBalance.Matic *
+                  55
+                ).toPrecision(4)
+              ),
+              totalInUsd: Number(
+                ((price?.Matic.price ?? 0) * assetsBalance.Matic).toPrecision(4)
+              ),
+              change: Number((price?.Matic.change ?? 0).toPrecision(4)),
+              price: Number((price?.Matic.price ?? 0).toPrecision(4)),
             },
-            TotalInUsd:
-              (price?.Ether.price ?? 0) * assetsBalance.Ether +
-              (price?.EtbCoin.price ?? 0) * assetsBalance.EtbCoin +
-              (price?.Matic.price ?? 0) * assetsBalance.Matic,
-            TotalInBirr:
-              ((price?.Ether.price ?? 0) * assetsBalance.Ether +
+            TotalInUsd: Number(
+              (
+                (price?.Ether.price ?? 0) * assetsBalance.Ether +
                 (price?.EtbCoin.price ?? 0) * assetsBalance.EtbCoin +
-                (price?.Matic.price ?? 0) * assetsBalance.Matic) *
-              55,
+                (price?.Matic.price ?? 0) * assetsBalance.Matic
+              ).toPrecision()
+            ),
+            TotalInBirr: Number(
+              (
+                ((price?.Ether.price ?? 0) * assetsBalance.Ether +
+                  (price?.EtbCoin.price ?? 0) * assetsBalance.EtbCoin +
+                  (price?.Matic.price ?? 0) * assetsBalance.Matic) *
+                55
+              ).toPrecision()
+            ),
           };
 
           setUserBalance(balance);

@@ -46,8 +46,13 @@ export default function Wallet(): JSX.Element {
             <Text type="secondary">{userSetting.currencyConversion}</Text>
             <Text className={styles.amount}>
               {userSetting.currencyConversion == "ETB"
-                ? userBalance.TotalInBirr
+                ? userBalance.TotalInBirr.toPrecision(4)
                 : userBalance.TotalInUsd}
+            </Text>
+            <Text type="secondary">
+              {userSetting.currencyConversion != "ETB"
+                ? `   ETB ${userBalance.TotalInBirr.toPrecision(4)}`
+                : `   USD ${userBalance.TotalInUsd}`}
             </Text>
           </div>
           <Divider />
