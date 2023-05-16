@@ -9,7 +9,7 @@ import styles from "./currencyStatistics.module.scss";
 
 const { Text, Title } = Typography;
 
-export default function currencyStatistics({ asset }: any) {
+export default function CurrencyStatistics({ asset }: any) {
   const [data, setData] = useState<any>();
   const { userSetting } = useSetting();
 
