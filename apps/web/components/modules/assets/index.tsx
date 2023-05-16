@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import NextImage from "next/image";
+import Link from "next/link";
 import { Button, Table, Typography } from "antd";
-import type { ColumnsType, TableProps } from "antd/es/table";
+import type { ColumnsType } from "antd/es/table";
 import { MoreOutlined } from "@ant-design/icons";
 import { GlassCard } from "components/elements/cards";
 import { Assets as assets, AssetProps } from "utils/constants/assets";
@@ -10,8 +11,6 @@ import { prices, userAssets } from "utils/helpers/assets";
 import { useUser } from "utils/context/user";
 
 import styles from "./assets.module.scss";
-import Link from "next/link";
-import { recoverAddress } from "ethers";
 
 const { Title, Text } = Typography;
 

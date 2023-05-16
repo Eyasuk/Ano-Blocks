@@ -22,11 +22,6 @@ const defaultSettingState: SettingState = {
   setUserSetting: () => {},
 };
 
-//ToDo
-// Curriences.map((items: any, index: number) => {
-//   return items.name;
-// });
-
 const SettingContext = createContext(defaultSettingState);
 
 interface SettingProviderProps {
@@ -39,6 +34,13 @@ export const SettingProvider = ({
   const [userSetting, setUserSetting] = useState<SettingProps>(
     defaultSettingState.userSetting
   );
+
+  useEffect(() => {
+    const settings = getItemFromLocalStorage("settings", true);
+    if (settings) {
+      setUserSetting(settings);
+    }
+  }, []);
 
   return (
     <SettingContext.Provider value={{ userSetting, setUserSetting }}>

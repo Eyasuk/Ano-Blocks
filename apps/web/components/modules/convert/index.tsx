@@ -1,40 +1,26 @@
-import { useEffect, useState } from "react";
-import { Divider, Form, Input, InputNumber, Select, Typography } from "antd";
+import { useState } from "react";
+import { Divider, Form, Input, Select, Typography } from "antd";
 import { GlassCard } from "components/elements/cards";
-import { AssetProps, Assets } from "utils/constants/assets";
+import { Curriences } from "utils/constants/currencies";
 
 import styles from "./convert.module.scss";
-import Button from "components/elements/buttons";
 
 const { Text, Title } = Typography;
 
-export default function Convert({ params }: { params: { slug: string } }) {
-  const [asset, setAsset] = useState<AssetProps>();
+export default function Convert({ asset }: any) {
   const [selectAsset, setSelectAsset] = useState<boolean>(false);
-  const [swapFromAsset, setSwapFromAsset] = useState<string>(Assets[0].name);
-
-  useEffect(() => {
-    Assets.forEach((item) => {
-      if (item.name.toLocaleLowerCase() == params.slug.toLocaleLowerCase()) {
-        setAsset(item);
-      }
-    });
-  }, []);
+  const [convertAsset, setConvertAsset] = useState<string>(Curriences[0].name);
 
   const onChangeAsset = (_v: any, option: any) => {
-    setSwapFromAsset(option.value);
+    setConvertAsset(option.value);
     setSelectAsset(false);
-  };
-
-  const onAssetSelect = () => {
-    setSelectAsset(true);
   };
 
   return (
     <GlassCard>
       {asset != undefined && (
         <div className={styles.layouts}>
-          <Title level={4}>{`${asset.name} Converter`}</Title>
+          <Title level={5}>{`${asset.name} Converter`}</Title>
           <Form>
             <Form.Item name="convert">
               <Input
@@ -62,11 +48,10 @@ export default function Convert({ params }: { params: { slug: string } }) {
                     .toLowerCase()
                     .includes(input.toLowerCase())
                 }
-                options={Assets.map((value) => {
+                options={Curriences.map((value) => {
                   return {
-                    icon: value.imageUrl,
                     value: value.name,
-                    label: value.abbrev,
+                    label: value.name,
                   };
                 })}
               />

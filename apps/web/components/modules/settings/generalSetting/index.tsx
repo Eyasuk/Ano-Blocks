@@ -1,76 +1,83 @@
 import { useEffect } from "react";
-import { Radio, RadioChangeEvent, Select, Switch, Typography } from "antd";
+import { Form, Radio, Select, Switch, Typography } from "antd";
 import Button from "components/elements/buttons";
+import { notification } from "components/elements/notification";
 import { Curriences } from "utils/constants/currencies";
 import { useSetting } from "utils/context/settings";
 import { SettingProps } from "utils/types/settingTypes";
-
-import styles from "./generalSetting.module.scss";
 import {
   getItemFromLocalStorage,
   setItemInLocalStorage,
 } from "utils/helpers/localStorage";
 
+import styles from "./generalSetting.module.scss";
+
 const { Text, Title } = Typography;
 
 export function GeneralSetting() {
+  const [form] = Form.useForm();
   const { userSetting, setUserSetting } = useSetting();
 
   const primaryCurrencyOptions = ["Matic", "Fiat"];
 
-  const hideAssetChange = () => {
-    const settings: SettingProps = {
-      hideAssets: !userSetting.hideAssets,
+  const saveSetting = (value: any) => {
+    const newSetting: SettingProps = {
+      currencyConversion: value["currency conversion"] ?? "ETB",
+      primaryCurrency: value["primary currency"] ?? "Fiat",
+      hideAssets: value["hide asset"] ?? false,
     };
-    setUserSetting({ ...userSetting, ...settings });
-  };
 
-  const onChangeCurrencyConversion = (_v: any, option: any) => {
-    const settings: SettingProps = {
-      currencyConversion: option.value,
-    };
-    setUserSetting({ ...userSetting, ...settings });
-  };
-
-  const onChangePrimaryCurrency = ({ target: { value } }: RadioChangeEvent) => {
-    const settings: SettingProps = {
-      primaryCurrency: value,
-    };
-    setUserSetting({ ...userSetting, ...settings });
-  };
-
-  const saveSetting = () => {
+    setUserSetting({ ...userSetting, ...newSetting });
     setItemInLocalStorage("settings", userSetting, true);
+    notification({
+      message: "Setting Saved",
+      description: "Setting Saved Successfully",
+      messageType: "success",
+    });
   };
 
   useEffect(() => {
     const settings = getItemFromLocalStorage("settings", true);
-    setUserSetting(settings);
+    form.setFieldsValue({
+      "currency conversion": settings.currencyConversion ?? "ETB",
+      "primary currency": settings.primaryCurrency ?? "Fiat",
+      "hide asset": settings.hideAssets ?? false,
+    });
+
+    setUserSetting({ ...settings, ...userSetting });
   }, []);
 
   return (
-    <div>
+    <Form
+      name="general-setting"
+      form={form}
+      layout="vertical"
+      autoComplete="off"
+      onFinish={saveSetting}
+    >
       <div className={styles.options}>
         <Title level={5}>Currency conversion</Title>
-        <Select
-          className={styles.currencies}
-          showSearch
-          placeholder="Select currencys"
-          optionFilterProp="children"
-          defaultActiveFirstOption
-          value={userSetting.currencyConversion}
-          filterOption={(input, option) =>
-            (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
-          }
-          options={Curriences.map((value) => {
-            return {
-              value: value.name,
-              label: value.name,
-            };
-          })}
-          onChange={onChangeCurrencyConversion}
-        />
+        <Form.Item name="currency conversion">
+          <Select
+            className={styles.currencies}
+            showSearch
+            placeholder="Select currencys"
+            optionFilterProp="children"
+            defaultActiveFirstOption
+            value={userSetting.currencyConversion}
+            filterOption={(input, option) =>
+              (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
+            }
+            options={Curriences.map((value) => {
+              return {
+                value: value.name,
+                label: value.name,
+              };
+            })}
+          />
+        </Form.Item>
       </div>
+
       <div className={styles.options}>
         <Title level={5}>Primary currency</Title>
         <Text type="secondary">
@@ -78,13 +85,9 @@ export function GeneralSetting() {
           of the chain (e.g. ETH). Select Fiat to prioritize displaying values
           in your selected fiat currency.
         </Text>
-        <Radio.Group
-          defaultValue={userSetting.primaryCurrency}
-          options={primaryCurrencyOptions}
-          onChange={onChangePrimaryCurrency}
-          value={userSetting.primaryCurrency}
-          optionType="button"
-        />
+        <Form.Item name="primary currency">
+          <Radio.Group options={primaryCurrencyOptions} optionType="button" />
+        </Form.Item>
       </div>
       <div className={styles.options}>
         {" "}
@@ -93,24 +96,23 @@ export function GeneralSetting() {
 
       <div className={styles.options}>
         <Title level={5}>Hide assets without balance</Title>
+        <Text strong>{userSetting.hideAssets ? "Hide" : "Show"}</Text>
         <span>
-          <Switch
-            defaultChecked={userSetting.hideAssets}
-            onChange={hideAssetChange}
-          />
-          <Text className={styles.hideAssetsLabel} strong>
-            {userSetting.hideAssets ? "Hide" : "Show"}
-          </Text>
+          <Form.Item name="hide asset">
+            <Switch />
+          </Form.Item>
         </span>
       </div>
       <div className={styles.options}>
-        <Button
-          className={styles.button}
-          text="Confirm Change"
-          type="primary"
-          onClick={saveSetting}
-        />
+        <Form.Item>
+          <Button
+            className={styles.button}
+            text="Confirm Change"
+            type="primary"
+            htmlType="submit"
+          />
+        </Form.Item>
       </div>
-    </div>
+    </Form>
   );
 }

@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Layout, Menu, Typography } from "antd";
 import type { MenuProps } from "antd";
 import {
@@ -42,8 +42,10 @@ function getItem(
 
 export function MenuBar() {
   const router = useRouter();
+  const currentPath = usePathname();
   const [collapsed, setCollapsed] = useState(false);
   const [title, setTitle] = useState(!collapsed);
+  const [selected, setSelected] = useState<string>();
 
   const lockPage = () => {
     lock();
@@ -54,21 +56,21 @@ export function MenuBar() {
     { type: "divider" },
     getItem(
       "Dashboard",
-      "1",
+      "/",
       <Link href="/">
         <DesktopIcon />
       </Link>
     ),
     getItem(
       "Dao",
-      "2",
+      "/dao",
       <Link href="/dao">
         <DaoIcon />
       </Link>
     ),
     getItem(
       "Transactions",
-      "3",
+      "/transactions",
       <Link href="/transactions">
         <HistoryIcon />
       </Link>
@@ -76,14 +78,14 @@ export function MenuBar() {
     { type: "divider" },
     getItem(
       "Swap",
-      "4",
+      "/swap",
       <Link href="/swap">
         <SwapIcon />
       </Link>
     ),
     getItem(
       "Send",
-      "5",
+      "/send",
       <Link href="/send">
         <SendIcon />
       </Link>
@@ -116,6 +118,10 @@ export function MenuBar() {
     }
   }, [collapsed]);
 
+  useEffect(() => {
+    if (currentPath) setSelected(currentPath);
+  }, [currentPath]);
+
   return (
     <Sider
       collapsible
@@ -138,7 +144,12 @@ export function MenuBar() {
         ) : null}
       </div>
       <div className={styles.menu}>
-        <Menu defaultSelectedKeys={["1"]} items={mainRoutes} theme="light" />
+        <Menu
+          defaultSelectedKeys={["1"]}
+          items={mainRoutes}
+          theme="light"
+          selectedKeys={[currentPath ?? "/"]}
+        />
         <Menu items={subRoutes} theme="light" />
       </div>
     </Sider>

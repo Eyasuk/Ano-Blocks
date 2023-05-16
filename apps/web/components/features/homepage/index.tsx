@@ -18,16 +18,16 @@ export default function HomePage(): JSX.Element {
           { xs: 15, sm: 4, md: 4, lg: 20 },
         ]}
       >
-        <Col className="gutter-row" md={10} xs={24} span={12}>
+        <Col md={10} xs={24} span={12}>
           {userLoggedin && <Wallet />}
         </Col>
-        <Col className="gutter-row" md={12} xs={24} span={22}>
+        <Col md={12} xs={24} span={22}>
           <EtbcWallet />
         </Col>
-        <Col className="gutter-row" md={12} xs={24} lg={12} span={6}>
+        <Col md={12} xs={24} lg={12} span={6}>
           <Assets />
         </Col>
-        <Col className="gutter-row" md={12} xs={24} lg={10} span={6}>
+        <Col md={12} xs={24} lg={10} span={6}>
           <Postion />
         </Col>
       </Row>

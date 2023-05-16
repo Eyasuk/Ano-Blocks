@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Typography } from "antd";
 import {
   Chart as ChartJS,
@@ -13,7 +13,6 @@ import {
 } from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import { GlassCard } from "components/elements/cards";
-import { Assets, AssetProps } from "utils/constants/assets";
 import { useSetting } from "utils/context/settings";
 import { assetPriceInfo } from "utils/helpers/assets";
 
@@ -30,8 +29,7 @@ ChartJS.register(
   Legend
 );
 
-export default function CurrencyInfo({ params }: { params: { slug: string } }) {
-  const [asset, setAsset] = useState<AssetProps>();
+export default function CurrencyInfo({ asset }: any) {
   const [assetChartData, setAssetChartData] = useState<any>({
     labels: [1, 2, 1, 2, 3, 4, 1, 2, 3, 1, 4, 1, 3, 1, 2, 3],
     datasets: [
@@ -49,18 +47,9 @@ export default function CurrencyInfo({ params }: { params: { slug: string } }) {
   const { userSetting } = useSetting();
 
   useEffect(() => {
-    Assets.forEach((item) => {
-      if (item.name.toLocaleLowerCase() == params.slug.toLocaleLowerCase()) {
-        setAsset(item);
-      }
-    });
-  }, []);
-
-  useEffect(() => {
     const work = async () => {
       try {
         const assetPrice = await assetPriceInfo(7);
-        console.log(assetPrice?.dates);
         if (assetPrice) {
           const data = {
             labels: assetPrice.dates,

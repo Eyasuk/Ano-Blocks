@@ -88,7 +88,6 @@ export default function Send(): JSX.Element {
                   )
                 }
                 onChange={onChangeAsset}
-                //onSearch={onSearch}
                 filterOption={(input, option) =>
                   (option?.label ?? "")
                     .toLowerCase()

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Divider, Typography } from "antd";
 import { CopyIcon, QrIcon } from "components/elements/icons";
 import { GlassCard } from "components/elements/cards";
@@ -8,6 +8,8 @@ import { notification } from "components/elements/notification";
 import { useUser } from "utils/context/user";
 import { shortenText } from "utils/helpers/shortText";
 import { copyToClipBoard } from "utils/helpers/copytext";
+import { useUserBalance } from "utils/context/userBalance";
+import { useSetting } from "utils/context/settings";
 
 import styles from "./walletcard.module.scss";
 
@@ -15,7 +17,11 @@ const { Title, Text } = Typography;
 
 export default function Wallet(): JSX.Element {
   const { userInfo } = useUser();
+  const { userBalance } = useUserBalance();
+  const { userSetting, setUserSetting } = useSetting();
+
   const [qrOpen, setQrOpen] = useState<boolean>(false);
+
   const handleCancel = () => {
     setQrOpen(false);
   };
@@ -28,6 +34,7 @@ export default function Wallet(): JSX.Element {
       description: "You Copied the address",
     });
   };
+
   return (
     <>
       <GlassCard>
@@ -36,8 +43,12 @@ export default function Wallet(): JSX.Element {
             Total portfolio value
           </Title>
           <div className={styles.balance}>
-            <Text type="secondary">ETB</Text>
-            <Text className={styles.amount}>0.00</Text>
+            <Text type="secondary">{userSetting.currencyConversion}</Text>
+            <Text className={styles.amount}>
+              {userSetting.currencyConversion == "ETB"
+                ? userBalance.TotalInBirr
+                : userBalance.TotalInUsd}
+            </Text>
           </div>
           <Divider />
 
