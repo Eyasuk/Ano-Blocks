@@ -22,7 +22,6 @@ export default function Convert({ asset }: any) {
     let timer;
     clearTimeout(timer);
     timer = setTimeout(() => {
-      console.log(event.target.value);
       setInput(event.target.value);
     }, 1000);
   };
