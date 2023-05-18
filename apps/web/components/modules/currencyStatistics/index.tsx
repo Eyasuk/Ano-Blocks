@@ -15,12 +15,10 @@ export default function CurrencyStatistics({ asset }: any) {
 
   useEffect(() => {
     const work = async () => {
-      console.log(asset);
       if (asset) {
         try {
           const response = await assetInfo(asset.coingeckoId);
           setData(response);
-          console.log(response);
         } catch (err) {
           console.log(err);
         }
