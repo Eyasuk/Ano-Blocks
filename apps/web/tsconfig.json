@@ -5,7 +5,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "components/modules/sendConfirm"  ],
   "exclude": [
     "node_modules"
   ],
