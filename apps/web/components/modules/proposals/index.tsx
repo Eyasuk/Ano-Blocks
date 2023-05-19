@@ -1,17 +1,18 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Button, Table, Typography } from "antd";
 import { GlassCard } from "components/elements/cards";
 import Vote from "components/modules/vote";
-
+import Modal from "components/elements/modal";
 import { ProposalProp } from "./type";
 
 import styles from "./proposals.module.scss";
-import Modal from "components/elements/modal";
 
 const { Title, Text } = Typography;
 
 export default function Dao(): JSX.Element {
+  const router = useRouter();
   const [propsalModal, setPropsalModal] = useState<boolean>(false);
   const [selectedRow, setSelectedRow] = useState<number>();
   const onProposalSelected = (record: ProposalProp) => {
@@ -99,6 +100,9 @@ export default function Dao(): JSX.Element {
         className={styles.createProposalButton}
         type="primary"
         size="large"
+        onClick={() => {
+          router.push("/dao/create");
+        }}
       >
         Create Proposal
       </Button>

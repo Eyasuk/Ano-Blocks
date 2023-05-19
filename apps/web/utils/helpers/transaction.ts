@@ -67,10 +67,8 @@ export async function sendToken(
 
     const transferResult = await walletSigner.sendTransaction(tx);
     console.log(transferResult);
+    return { result: true, data: transferResult };
   } catch (err) {
-    console.log(err);
-  } finally {
-    // const x = 0;
-    // delete(x);
+    return { result: false, data: err };
   }
 }

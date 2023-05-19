@@ -77,17 +77,17 @@ export function MenuBar() {
     ),
     { type: "divider" },
     getItem(
-      "Swap",
-      "/swap",
-      <Link href="/swap">
-        <SwapIcon />
-      </Link>
-    ),
-    getItem(
       "Send",
       "/send",
       <Link href="/send">
         <SendIcon />
+      </Link>
+    ),
+    getItem(
+      "Swap",
+      "/swap",
+      <Link href="/swap">
+        <SwapIcon />
       </Link>
     ),
     getItem("Deposit/Withdraw", "6", <ReceiveIcon />),
