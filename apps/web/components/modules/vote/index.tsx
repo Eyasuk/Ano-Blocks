@@ -1,19 +1,19 @@
 import { Button, Divider, Progress, Typography } from "antd";
-import { VoteProp } from "./type";
 import { GlassCard } from "components/elements/cards";
+import { VoteProp } from "./type";
 
 import styles from "./vote.module.scss";
 
 const { Title, Text } = Typography;
 
-export default function Vote({ proposalIndex }: VoteProp): JSX.Element {
+export default function Vote({ proposal }: VoteProp): JSX.Element {
   return (
     <div className={styles.container}>
       <GlassCard>
-        <Title level={4}>{"Proposal " + proposalIndex}</Title>
+        <Title level={4}>{"Proposal " + proposal.name}</Title>
         <div className={styles.status}>
-          <Text strong>Exectuted</Text>
-          <Text strong>20/12/1012</Text>
+          <Text strong>{proposal.status}</Text>
+          <Text strong>{proposal.endDate}</Text>
         </div>
         <div className={styles.votes}>
           <Button className={`${styles.voteCount} ${styles.voteFor}`}>
@@ -35,11 +35,7 @@ export default function Vote({ proposalIndex }: VoteProp): JSX.Element {
 
         <Divider />
         <div>
-          <Text>
-            {" "}
-            Withdrawal of 1000 for charty from researve to build a school and a
-            systems,
-          </Text>
+          <Text>{proposal.description}</Text>
         </div>
       </GlassCard>
     </div>

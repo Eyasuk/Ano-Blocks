@@ -1,14 +1,14 @@
-'use client';
-import { useEffect, useRef, useState } from 'react';
-import { Switch, Typography } from 'antd';
-import { DownloadOutlined } from '@ant-design/icons';
-import Button from 'components/elements/buttons';
-import Input from 'components/elements/input';
-import { generatePassPhrase } from 'utils/helpers/createWallet';
-import { downloadFile } from 'utils/helpers/downloadfile';
-import { PassphraseTypes } from './types';
+"use client";
+import { useEffect, useRef, useState } from "react";
+import { Switch, Typography } from "antd";
+import { DownloadOutlined } from "@ant-design/icons";
+import Button from "components/elements/buttons";
+import Input from "components/elements/input";
+import { generatePassPhrase } from "utils/helpers/createWallet";
+import { downloadFile } from "utils/helpers/downloadfile";
+import { PassphraseTypes } from "./types";
 
-import styles from './newpassphrase.module.scss';
+import styles from "./newpassphrase.module.scss";
 
 const { Title, Text } = Typography;
 
@@ -29,22 +29,22 @@ export default function NewPassphrase({
   }, []);
 
   const downloadPassPhrase = () => {
-    if (passPhrase != null) downloadFile(passPhrase, 'ano', true);
+    if (passPhrase != null) downloadFile(passPhrase, "ano", true);
   };
 
   const buttonAction = () => {
     stateChanger(2);
     const extraWordInput = document.getElementById(
-      'extraword'
+      "extraword"
     ) as HTMLInputElement;
     setExtraPassphrase(extraWordInput.value);
   };
 
   const handleSwitch = () => {
     const extraWordInput = document.getElementById(
-      'extraword'
+      "extraword"
     ) as HTMLInputElement;
-    if (extraWord) extraWordInput.value = '';
+    if (extraWord) extraWordInput.value = "";
     setExtraWord((prev) => !prev);
   };
 
@@ -53,8 +53,8 @@ export default function NewPassphrase({
       <Title level={3} className={styles.title}>
         Create Wallet
       </Title>
-      <Text type='warning' className={styles.description}>
-        {' '}
+      <Text type="warning" className={styles.description}>
+        {" "}
         Make Sure You copy a passphrase and store it in Safe Place! Fund Can not
         be recovered with out passphrase!!
       </Text>
@@ -62,7 +62,7 @@ export default function NewPassphrase({
         {passPhrase.map((content, index) => {
           return (
             <div className={styles.wordinputfield} key={index}>
-              <Text className={styles.index}>{index + 1 + '.'}</Text>
+              <Text className={styles.index}>{index + 1 + "."}</Text>
               <Text className={styles.content}>{content}</Text>
             </div>
           );
@@ -79,8 +79,8 @@ export default function NewPassphrase({
         </div>
         <div className={styles.extraWordInput}>
           <Input
-            id='extraword'
-            inputType='text'
+            id="extraword"
+            inputType="text"
             error={false}
             disabled={!extraWord}
           />
@@ -90,8 +90,8 @@ export default function NewPassphrase({
         <Button icon={<DownloadOutlined />} onClick={downloadPassPhrase} />
         <Button
           className={styles.button}
-          text='Next'
-          type='primary'
+          text="Next"
+          type="primary"
           onClick={buttonAction}
         />
       </span>
