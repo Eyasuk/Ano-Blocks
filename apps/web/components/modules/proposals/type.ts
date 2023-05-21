@@ -9,6 +9,6 @@ export type ProposalProp = {
   startDate: string;
   endDate: string;
   vote: "Not Voted" | "Voted";
-  voteAgainst?: number;
-  voteFor?: number;
+  voteAgainst: number;
+  voteFor: number;
 };

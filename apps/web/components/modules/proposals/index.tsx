@@ -34,9 +34,9 @@ export default function Dao(): JSX.Element {
         if (response.success) {
           setProposalData(response.data);
         }
-        console.log(response);
 
         let data: ProposalProp[] = [];
+
         for (var i = 0; i < response.data.length; i++) {
           const temp: ProposalProp = {
             key: i,
@@ -58,8 +58,8 @@ export default function Dao(): JSX.Element {
                 : "Not Started",
 
             vote: response.IsVoted[i] ? "Voted" : "Not Voted",
-            voteFor: response.data[i][4],
-            voteAgainst: response.data[i][5],
+            voteFor: Number(response.data[i][5]),
+            voteAgainst: Number(response.data[i][4]),
           };
           data[i] = temp;
         }
@@ -82,8 +82,8 @@ export default function Dao(): JSX.Element {
     },
     {
       title: "Name",
-      dataIndex: "proposal",
-      key: "proposal",
+      dataIndex: "name",
+      key: "name",
     },
     {
       title: "Starting Date",

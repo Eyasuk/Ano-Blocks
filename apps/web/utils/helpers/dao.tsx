@@ -24,7 +24,7 @@ export async function createProposal(
     );
     await response.wait();
   } catch (err) {
-    console.log("");
+    console.log(err);
   }
 }
 
@@ -48,5 +48,29 @@ export async function getProposal(
     return { success: false, data: err };
   }
 }
-// contract: { address: string; abi: InterfaceAbi }
-//)
+
+export async function vote(
+  provider: Provider,
+  privateKey: string,
+  network: "Polygon" | "Local" | "Mumbai",
+  voteIndex: number,
+  voteFor: boolean
+) {
+  try {
+    const wallet = new Wallet(privateKey, provider);
+    const contract = new Contract(
+      Contracts.Dao[network],
+      Contracts.Dao.abi,
+      wallet
+    );
+
+    const response = await contract.voting(voteIndex + 1, voteFor);
+
+    await response.wait();
+    return { success: true, data: response };
+  } catch (err) {
+    console.log("ede");
+    console.log(err);
+    return { success: false, data: err };
+  }
+}
