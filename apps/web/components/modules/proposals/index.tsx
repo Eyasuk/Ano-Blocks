@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import { Button, Table, Typography } from "antd";
 import { GlassCard } from "components/elements/cards";
 import Vote from "components/modules/vote";
-import Modal from "components/elements/modal";
 import { getProposal } from "utils/helpers/dao";
 import { useNetwork } from "utils/context/network";
 import { useUser } from "utils/context/user";
@@ -32,42 +31,40 @@ export default function Dao(): JSX.Element {
           userInfo?.priv
         );
         if (response.success) {
-          setProposalData(response.data);
+          let data: ProposalProp[] = [];
+
+          for (var i = response.data.length - 1; i >= 0; i--) {
+            const temp: ProposalProp = {
+              key: i,
+              index: i,
+              name: response.data[i][0],
+              description: response.data[i][1],
+              startDate: new Date(
+                Number(response.data[i][2]) * 1000
+              ).toDateString(),
+              endDate: new Date(
+                Number(response.data[i][3]) * 1000
+              ).toDateString(),
+
+              status:
+                Date.now() > Number(response.data[i][3]) * 1000
+                  ? "Executed"
+                  : Date.now() >= Number(response.data[i][2]) * 1000
+                  ? "Ongoing"
+                  : "Not Started",
+
+              vote: response.IsVoted[i] ? "Voted" : "Not Voted",
+              voteFor: Number(response.data[i][5]),
+              voteAgainst: Number(response.data[i][4]),
+            };
+            data.push(temp);
+          }
+          setProposalData(data);
         }
-
-        let data: ProposalProp[] = [];
-
-        for (var i = 0; i < response.data.length; i++) {
-          const temp: ProposalProp = {
-            key: i,
-            index: i,
-            name: response.data[i][0],
-            description: response.data[i][1],
-            startDate: new Date(
-              Number(response.data[i][2]) * 1000
-            ).toDateString(),
-            endDate: new Date(
-              Number(response.data[i][3]) * 1000
-            ).toDateString(),
-
-            status:
-              Date.now() > Number(response.data[i][3]) * 1000
-                ? "Executed"
-                : Date.now() >= Number(response.data[i][2]) * 1000
-                ? "Ongoing"
-                : "Not Started",
-
-            vote: response.IsVoted[i] ? "Voted" : "Not Voted",
-            voteFor: Number(response.data[i][5]),
-            voteAgainst: Number(response.data[i][4]),
-          };
-          data[i] = temp;
-        }
-        setProposalData(data);
       }
     };
     work();
-  }, [provider]);
+  }, [provider, propsalModal]);
 
   const onProposalSelected = (record: ProposalProp) => {
     setSelectedRow(record.index);
@@ -145,11 +142,13 @@ export default function Dao(): JSX.Element {
           />
         </div>
       </GlassCard>
-      <Modal open={propsalModal} onCancel={() => setPropsalModal(false)}>
-        {selectedRow != undefined && proposalData && (
-          <Vote proposal={proposalData[selectedRow]} />
-        )}
-      </Modal>
+      {selectedRow != undefined && proposalData && (
+        <Vote
+          proposal={proposalData[proposalData.length - selectedRow - 1]}
+          open={propsalModal}
+          onCancel={() => setPropsalModal(false)}
+        />
+      )}
     </div>
   );
 }

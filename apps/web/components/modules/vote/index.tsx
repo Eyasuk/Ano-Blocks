@@ -1,21 +1,29 @@
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Button, Divider, Progress, Result, Typography } from "antd";
 import { GlassCard } from "components/elements/cards";
+import Modal from "components/elements/modal";
+import { notification } from "components/elements/notification";
 import { useUser } from "utils/context/user";
 import { useNetwork } from "utils/context/network";
 import { vote } from "utils/helpers/dao";
 import { VoteProp } from "./type";
 
 import styles from "./vote.module.scss";
-import { notification } from "components/elements/notification";
 
 const { Title, Text } = Typography;
 
-export default function Vote({ proposal }: VoteProp): JSX.Element {
+export default function Vote({
+  proposal,
+  open,
+  onCancel,
+}: VoteProp): JSX.Element {
+  const router = useRouter();
   const { userInfo } = useUser();
   const { choosenNetwork, provider } = useNetwork();
   const [buttonLoading, setButtonLoading] = useState<boolean[]>([false, false]);
   const [voting, setVoting] = useState<boolean>(true);
+
   const onVote = (index: boolean) => {
     const work = async () => {
       if (index) {
@@ -52,75 +60,88 @@ export default function Vote({ proposal }: VoteProp): JSX.Element {
     work();
   };
 
+  const onCancelModal = () => {
+    setVoting(true);
+    onCancel();
+  };
+
   return (
-    <div className={styles.container}>
-      <GlassCard>
-        {voting ? (
-          <div>
-            <Title level={4}>{"Proposal " + proposal.name}</Title>
-            <div className={styles.status}>
-              <Text strong>{proposal.status}</Text>
-              <Text strong>{proposal.endDate}</Text>
-            </div>
-            <div className={styles.votes}>
-              <Button
-                className={`${styles.voteCount} ${styles.voteFor}`}
-                disabled={
-                  proposal.status != "Ongoing" ||
-                  buttonLoading[1] ||
-                  proposal.vote == "Voted"
-                }
-                loading={buttonLoading[0]}
-                onClick={() => onVote(true)}
-              >
-                <Text>{"For\t" + " "} </Text>
-                <Text>{proposal.voteFor}</Text>
-              </Button>
-
-              <Button
-                className={`${styles.voteCount} ${styles.voteAganist}`}
-                disabled={
-                  proposal.status != "Ongoing" ||
-                  buttonLoading[0] ||
-                  proposal.vote == "Voted"
-                }
-                loading={buttonLoading[1]}
-                onClick={() => onVote(false)}
-              >
-                <Text>{"Against " + " "}</Text>
-                <Text>{proposal.voteAgainst}</Text>
-              </Button>
-            </div>
-            <Progress
-              percent={100}
-              success={{
-                percent:
-                  proposal.voteAgainst == 0 && proposal.voteFor == 0
-                    ? 50
-                    : (proposal.voteFor * 100) /
-                      (proposal.voteAgainst + proposal.voteFor),
-              }}
-              type="line"
-              showInfo={false}
-            />
-
-            <Divider />
+    <Modal open={open} onCancel={onCancelModal}>
+      <div className={styles.container}>
+        <GlassCard>
+          {voting ? (
             <div>
-              <Text>{proposal.description}</Text>
+              <Title level={4}>{"Proposal " + proposal.name}</Title>
+              <div className={styles.status}>
+                <Text strong>{proposal.status}</Text>
+                <Text strong>{proposal.endDate}</Text>
+              </div>
+              <div className={styles.votes}>
+                <Button
+                  className={`${styles.voteCount} ${styles.voteFor}`}
+                  disabled={
+                    proposal.status != "Ongoing" ||
+                    buttonLoading[1] ||
+                    proposal.vote == "Voted"
+                  }
+                  loading={buttonLoading[0]}
+                  onClick={() => onVote(true)}
+                >
+                  <Text>{"For\t" + " "} </Text>
+                  <Text>{proposal.voteFor}</Text>
+                </Button>
+
+                <Button
+                  className={`${styles.voteCount} ${styles.voteAganist}`}
+                  disabled={
+                    proposal.status != "Ongoing" ||
+                    buttonLoading[0] ||
+                    proposal.vote == "Voted"
+                  }
+                  loading={buttonLoading[1]}
+                  onClick={() => onVote(false)}
+                >
+                  <Text>{"Against " + " "}</Text>
+                  <Text>{proposal.voteAgainst}</Text>
+                </Button>
+              </div>
+              <Progress
+                percent={100}
+                success={{
+                  percent:
+                    proposal.voteAgainst == 0 && proposal.voteFor == 0
+                      ? 50
+                      : (proposal.voteFor * 100) /
+                        (proposal.voteAgainst + proposal.voteFor),
+                }}
+                type="line"
+                showInfo={false}
+              />
+
+              <Divider />
+              <div>
+                <Text>{proposal.description}</Text>
+              </div>
             </div>
-          </div>
-        ) : (
-          <Result
-            status="success"
-            title="your voted for "
-            extra={
-              <Button type="primary" key="console">
-                "Go to Dashbord"
-              </Button>
-            }
-          />
-        )}
-      </GlassCard>
-    </div>
+          ) : (
+            <Result
+              status="success"
+              title="Your voted was registered successfully"
+              extra={
+                <Button
+                  type="primary"
+                  key="console"
+                  onClick={() => {
+                    router.push("/");
+                  }}
+                >
+                  Go to Dashboard
+                </Button>
+              }
+            />
+          )}
+        </GlassCard>
+      </div>
+    </Modal>
   );
 }
