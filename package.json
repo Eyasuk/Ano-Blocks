@@ -24,7 +24,7 @@
   },
   "packageManager": "pnpm@7.25.1",
   "dependencies": {
-    "@ant-design/icons": "^5.0.1",
-    "antd": "^5.4.7"
+    "@ant-design/icons": "^5.1.0",
+    "antd": "^5.5.0"
   }
 }

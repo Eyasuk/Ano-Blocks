@@ -19,7 +19,9 @@ import styles from "./send.module.scss";
 
 const { Title } = Typography;
 
-const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+const antIcon = (
+  <LoadingOutlined style={{ fontSize: 24 }} spin rev={undefined} />
+);
 
 export default function Send(): JSX.Element {
   const [form] = Form.useForm();
@@ -116,9 +118,9 @@ export default function Send(): JSX.Element {
                     isAddress == "searching" ? (
                       <Spin indicator={antIcon} />
                     ) : isAddress == "address" ? (
-                      <CheckCircleTwoTone />
+                      <CheckCircleTwoTone rev={undefined} />
                     ) : (
-                      <WarningTwoTone twoToneColor="#eb2f96" />
+                      <WarningTwoTone twoToneColor="#eb2f96" rev={undefined} />
                     )
                   }
                 />

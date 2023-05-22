@@ -90,7 +90,13 @@ export function MenuBar() {
         <SwapIcon />
       </Link>
     ),
-    getItem("Deposit/Withdraw", "6", <ReceiveIcon />),
+    getItem(
+      "Deposit",
+      "/deposit",
+      <Link href="/deposit">
+        <ReceiveIcon />{" "}
+      </Link>
+    ),
     getItem("Buy/Sell", "7", <CreditCardIcon />),
     { type: "divider" },
   ];
