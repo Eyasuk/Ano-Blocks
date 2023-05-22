@@ -25,9 +25,11 @@ export default function Auth(): JSX.Element {
   const redirectUrl = searchParams.get("redirect") ?? "/";
 
   const [passInputError, setPassError] = useState<boolean>(false);
+  const [buttonLoading, setButtonLoading] = useState<boolean>(false);
   const { setUserLoggedin, setUserInfo } = useUser();
 
   const handleSumbit = async (event: any) => {
+    setButtonLoading(true);
     event.preventDefault();
 
     // if (!event.target) {
@@ -43,6 +45,8 @@ export default function Auth(): JSX.Element {
         messageType: "error",
       });
       setPassError(true);
+      setButtonLoading(false);
+
       return;
     }
 
@@ -64,12 +68,14 @@ export default function Auth(): JSX.Element {
       setUserLoggedin(true);
 
       if (Object.values(Routes.authorizedRoutes).includes(redirectUrl)) {
+        setButtonLoading(false);
         router.push(redirectUrl);
         return;
       } else {
         router.push("/");
       }
     }
+    setButtonLoading(false);
   };
 
   return (
@@ -91,7 +97,12 @@ export default function Auth(): JSX.Element {
               minLength={5}
             />
             <div className={styles.button}>
-              <Button text="Confirm" htmlType="submit" size="large" />
+              <Button
+                text="Confirm"
+                htmlType="submit"
+                size="large"
+                loading={buttonLoading}
+              />
             </div>
           </div>
         </form>

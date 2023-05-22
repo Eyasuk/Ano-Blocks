@@ -18,6 +18,7 @@ import {
   SwapIcon,
 } from "components/elements/icons";
 import { lock } from "utils/helpers/userSession";
+import { useUser } from "utils/context/user";
 
 import styles from "./menu.module.scss";
 
@@ -42,6 +43,7 @@ function getItem(
 
 export function MenuBar() {
   const router = useRouter();
+  const { setUserLoggedin } = useUser();
   const currentPath = usePathname();
   const [collapsed, setCollapsed] = useState(false);
   const [title, setTitle] = useState(!collapsed);
@@ -49,6 +51,7 @@ export function MenuBar() {
 
   const lockPage = () => {
     lock();
+    setUserLoggedin(false);
     router.push("/auth");
   };
 
@@ -110,7 +113,13 @@ export function MenuBar() {
         <SettingIcon />
       </Link>
     ),
-    getItem("Lock", "2", <LockIcon onClick={lockPage} />),
+    getItem(
+      "Lock",
+      "2",
+      <Link onClick={lockPage} href="/auth">
+        <LockIcon />
+      </Link>
+    ),
     getItem("Logout", "3", <LogoutIcon />),
     { type: "divider" },
   ];

@@ -1,13 +1,14 @@
-import { MenuBar } from "components/modules/menu";
 import { Layout } from "antd";
+import { MenuBar } from "components/modules/menu";
+import Loading from "components/elements/loading";
 import CommonLayout from "components/layouts/common";
 import ChooseNewtork from "components/modules/choosenetwork";
 import { SettingProvider } from "utils/context/settings";
 import { NetworkProvider } from "utils/context/network";
 import { UserBalanceProvider } from "utils/context/userBalance";
+import { useUser } from "utils/context/user";
 
 import styles from "./layout.module.scss";
-
 const { Content, Footer } = Layout;
 
 type Props = {
@@ -15,6 +16,8 @@ type Props = {
 };
 
 export default function Default({ children }: Props): JSX.Element {
+  const { userLoggedin } = useUser();
+
   return (
     <SettingProvider>
       <NetworkProvider>
@@ -25,7 +28,11 @@ export default function Default({ children }: Props): JSX.Element {
               <ChooseNewtork />
               <Layout>
                 <Content className={styles.contents}>
-                  <div className={styles.content}>{children}</div>
+                  {userLoggedin ? (
+                    <div className={styles.content}>{children}</div>
+                  ) : (
+                    <Loading />
+                  )}
                 </Content>
 
                 {/* <Footer style={{ textAlign: 'center' }}>
