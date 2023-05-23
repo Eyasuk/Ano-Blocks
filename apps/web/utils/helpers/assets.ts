@@ -23,13 +23,14 @@ export async function userAssets(
     Matic: Number(formatedMatic),
     EtbCoin: 0,
     Ether: 0,
+    Usdt: 0,
   };
 }
 
 export async function prices() {
   try {
     const response = await fetch(
-      "https://api.coingecko.com/api/v3/simple/price?ids=ethereum%2Cmatic-network&vs_currencies=usd%2Cbtc&include_24hr_change=true&precision=2"
+      "https://api.coingecko.com/api/v3/simple/price?ids=ethereum%2Cmatic-network%2Ctether&vs_currencies=usd%2Cbtc&include_24hr_change=true&precision=2"
     );
 
     if (!response.ok) {
@@ -44,6 +45,10 @@ export async function prices() {
       Ether: {
         price: data.ethereum.usd,
         change: data.ethereum.usd_24h_change,
+      },
+      Usdt: {
+        price: data.tether.usd,
+        change: data.tether.usd_24h_change,
       },
       EtbCoin: {
         price: 1,
