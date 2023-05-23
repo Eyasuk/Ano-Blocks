@@ -105,7 +105,7 @@ export default function Assets(): JSX.Element {
       dataIndex: "more",
       render: (_value, record) => (
         <Link href={"asset/" + record.name.toLowerCase()}>
-          <Button icon={<MoreOutlined />} />{" "}
+          <Button icon={<MoreOutlined rev={undefined} />} />{" "}
         </Link>
       ),
     },
@@ -139,8 +139,11 @@ export default function Assets(): JSX.Element {
                 : (userBalance as any)[items.name]["totalInUsd"],
           };
         };
+        console.log(assets);
 
         const temp: DataType[] = assets.map(mapDataForAssetsTable);
+        console.log("temp");
+        console.log(temp);
         setData(temp);
       } catch (err) {
         console.log(err);

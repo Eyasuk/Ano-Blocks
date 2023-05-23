@@ -5,11 +5,8 @@ import EtbcWallet from "components/modules/etbcwalletcard";
 import Postion from "components/modules/position_summary";
 import Assets from "components/modules/assets";
 import Wallet from "components/modules/walletcard";
-import { useUser } from "utils/context/user";
 
 export default function HomePage(): JSX.Element {
-  const { userLoggedin } = useUser();
-
   return (
     <Default>
       <Row
@@ -19,7 +16,7 @@ export default function HomePage(): JSX.Element {
         ]}
       >
         <Col md={10} xs={24} span={12}>
-          {userLoggedin && <Wallet />}
+          <Wallet />
         </Col>
         <Col md={12} xs={24} span={22}>
           <EtbcWallet />

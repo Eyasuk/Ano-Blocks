@@ -17,6 +17,7 @@ export interface userBalanceProp {
   Matic: assetValueProp;
   EtbCoin: assetValueProp;
   Ether: assetValueProp;
+  Usdt: assetValueProp;
   TotalInUsd: number;
   TotalInBirr: number;
 }
@@ -32,6 +33,7 @@ const defaultUserBalanceState: UserBalanceState = {
     EtbCoin: { total: 0, totalInbirr: 0, totalInUsd: 0, change: 0, price: 0 },
     Ether: { total: 0, totalInbirr: 0, totalInUsd: 0, change: 0, price: 0 },
     Matic: { total: 0, totalInbirr: 0, totalInUsd: 0, change: 0, price: 0 },
+    Usdt: { total: 0, totalInbirr: 0, totalInUsd: 0, change: 0, price: 0 },
     TotalInUsd: 0,
     TotalInBirr: 0,
   },
@@ -97,6 +99,21 @@ export const UserBalanceProvider = ({
               ),
               change: Number((price?.Ether.change ?? 0).toPrecision(4)),
               price: Number((price?.Ether.price ?? 0).toPrecision(4)),
+            },
+            Usdt: {
+              total: Number(assetsBalance.Usdt.toPrecision(4)),
+              totalInbirr: Number(
+                (
+                  (price?.Usdt.price ?? 0) *
+                  assetsBalance.Usdt *
+                  55
+                ).toPrecision(4)
+              ),
+              totalInUsd: Number(
+                ((price?.Usdt.price ?? 0) * assetsBalance.Usdt).toPrecision(4)
+              ),
+              change: Number((price?.Usdt.change ?? 0).toPrecision(4)),
+              price: Number((price?.Usdt.price ?? 0).toPrecision(4)),
             },
             Matic: {
               total: Number(assetsBalance.Matic.toPrecision(4)),

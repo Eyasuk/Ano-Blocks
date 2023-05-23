@@ -12,7 +12,9 @@ import styles from "./swap.module.scss";
 
 const { Title } = Typography;
 
-const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+const antIcon = (
+  <LoadingOutlined style={{ fontSize: 24 }} spin rev={undefined} />
+);
 
 export default function Send(): JSX.Element {
   const { userInfo } = useUser();

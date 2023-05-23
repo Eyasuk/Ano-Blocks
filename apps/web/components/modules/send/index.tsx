@@ -10,11 +10,8 @@ import {
 } from "@ant-design/icons";
 import { GlassCard } from "components/elements/cards";
 import Button from "components/elements/buttons";
-import { notification } from "components/elements/notification";
 import SendConfirm from "components/modules/sendConfirm";
-import { useUser } from "utils/context/user";
 import { Assets } from "utils/constants/assets";
-import { sendToken } from "utils/helpers/transaction";
 import { useNetwork } from "utils/context/network";
 import { useUserBalance } from "utils/context/userBalance";
 
@@ -22,11 +19,12 @@ import styles from "./send.module.scss";
 
 const { Title } = Typography;
 
-const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+const antIcon = (
+  <LoadingOutlined style={{ fontSize: 24 }} spin rev={undefined} />
+);
 
 export default function Send(): JSX.Element {
   const [form] = Form.useForm();
-  const { userInfo } = useUser();
   const { userBalance } = useUserBalance();
   const { provider, choosenNetwork } = useNetwork();
   const [assetIcon, setAssetIcon] = useState<string>("");
@@ -67,50 +65,6 @@ export default function Send(): JSX.Element {
       });
   };
 
-  const verifyTx = (value: any) => {
-    console.log(value);
-    console.log(form.getFieldValue("amount"));
-    const work = async () => {
-      try {
-        if (isAddress != "address") {
-          notification({
-            message: "Invalid Address",
-            description: "enter valid address",
-            messageType: "error",
-          });
-          return;
-        }
-
-        if (provider && userInfo) {
-          if (choosenNetwork.currency == value.asset) {
-            await sendToken(
-              provider,
-              0.3,
-              userInfo.priv,
-              userInfo?.pubad,
-              value.receiveraddress
-            );
-          } else {
-            // await sendContractToken(
-            //   provider,userInfo.priv,value.receiveraddress,{
-            //     Assets.
-            //   }
-            // )
-          }
-        }
-      } catch (err) {
-        notification({
-          message: "error occured",
-          messageType: "error",
-          description: err as string,
-        });
-      }
-    };
-    //
-    setConfirmOpen(true);
-    //work();
-  };
-
   return (
     <>
       {form.getFieldValue("asset") && (
@@ -132,7 +86,9 @@ export default function Send(): JSX.Element {
               size="large"
               layout="vertical"
               autoComplete="off"
-              onFinish={verifyTx}
+              onFinish={() => {
+                setConfirmOpen(true);
+              }}
             >
               <Form.Item
                 label="Receiver Address"
@@ -141,6 +97,16 @@ export default function Send(): JSX.Element {
                   {
                     required: true,
                     message: `Please Input Receiver!`,
+                  },
+                  {
+                    message: "invalid address",
+                    validator: (_, value) => {
+                      if (ethers.isAddress(value)) {
+                        return Promise.resolve();
+                      } else {
+                        return Promise.reject("invalid address");
+                      }
+                    },
                   },
                 ]}
               >
@@ -152,9 +118,9 @@ export default function Send(): JSX.Element {
                     isAddress == "searching" ? (
                       <Spin indicator={antIcon} />
                     ) : isAddress == "address" ? (
-                      <CheckCircleTwoTone />
+                      <CheckCircleTwoTone rev={undefined} />
                     ) : (
-                      <WarningTwoTone twoToneColor="#eb2f96" />
+                      <WarningTwoTone twoToneColor="#eb2f96" rev={undefined} />
                     )
                   }
                 />

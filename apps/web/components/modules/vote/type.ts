@@ -1,3 +1,7 @@
+import { ProposalProp } from "components/modules/proposals/type";
+
 export type VoteProp = {
-  proposalIndex: number;
+  proposal: ProposalProp;
+  open: boolean;
+  onCancel: () => void;
 };

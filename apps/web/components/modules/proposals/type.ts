@@ -3,8 +3,12 @@ import React from "react";
 export type ProposalProp = {
   key: React.Key;
   index: number;
-  propsal: string;
+  name: string;
+  description: string;
   status: "Executed" | "Ongoing" | "Not Started";
-  date: string;
+  startDate: string;
+  endDate: string;
   vote: "Not Voted" | "Voted";
+  voteAgainst: number;
+  voteFor: number;
 };

@@ -1,13 +1,13 @@
-'use client';
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { Typography } from 'antd';
-import Button from 'components/elements/buttons';
-import { notification } from 'components/elements/notification';
-import { chooseRandomPasspharse } from 'utils/helpers/chooseRandomPassPharse';
-import { RandomPassphraseType, ConfirmPasspraseProps } from './types';
+"use client";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { Typography } from "antd";
+import Button from "components/elements/buttons";
+import { notification } from "components/elements/notification";
+import { chooseRandomPasspharse } from "utils/helpers/chooseRandomPassPharse";
+import { RandomPassphraseType, ConfirmPasspraseProps } from "./types";
 
-import styles from './confirmPassphrase.module.scss';
+import styles from "./confirmPassphrase.module.scss";
 
 const { Title, Text } = Typography;
 
@@ -21,6 +21,7 @@ export default function ConfirmPassphrase({
   const [passphraseCoosen, setPassphraseCoosen] = useState<boolean[]>(
     Array(4).fill(true)
   );
+  const [buttonLoading, setButtonLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const chooseRandomPass = chooseRandomPasspharse();
@@ -28,6 +29,7 @@ export default function ConfirmPassphrase({
   }, []);
 
   const handleSumbit = async (event: any) => {
+    setButtonLoading(true);
     event.preventDefault();
 
     if (!event.target) {
@@ -36,7 +38,7 @@ export default function ConfirmPassphrase({
     let correctChoosen = Array(4).fill(false);
     let allWordSelected = true;
     for (let i = 0; i <= 3; i++) {
-      const choosenWord = 'input' + i;
+      const choosenWord = "input" + i;
       if (!event.target[choosenWord].value) {
         allWordSelected = false;
         break;
@@ -51,15 +53,16 @@ export default function ConfirmPassphrase({
     }
     if (!allWordSelected)
       notification({
-        message: 'Choose all words',
-        description: 'Choose all words with the correct sequence',
-        messageType: 'warning',
+        message: "Choose all words",
+        description: "Choose all words with the correct sequence",
+        messageType: "warning",
       });
     else if (correctChoosen.includes(false))
       setPassphraseCoosen(correctChoosen);
     else {
       stateChanger(3);
     }
+    setButtonLoading(false);
   };
 
   return (
@@ -67,8 +70,8 @@ export default function ConfirmPassphrase({
       <Title className={styles.title} level={3}>
         Confirm PassPhrase
       </Title>
-      <Text type='warning' className={styles.description}>
-        {' '}
+      <Text type="warning" className={styles.description}>
+        {" "}
         Correctly Enter Your PassPhrase in Order!!
       </Text>
       <form onSubmit={handleSumbit}>
@@ -88,9 +91,9 @@ export default function ConfirmPassphrase({
                     <div className={styles.oneitem} key={index + subindex}>
                       <input
                         className={styles.input}
-                        type='radio'
+                        type="radio"
                         name={index.toString()}
-                        id={'input' + index.toString()}
+                        id={"input" + index.toString()}
                         alt={passphrase[subitems]}
                         value={passphrase[subitems]}
                       />
@@ -111,9 +114,10 @@ export default function ConfirmPassphrase({
         })}
         <Button
           className={styles.button}
-          text='Next'
-          type='primary'
-          htmlType='submit'
+          text="Next"
+          type="primary"
+          htmlType="submit"
+          loading={buttonLoading}
         />
       </form>
     </div>

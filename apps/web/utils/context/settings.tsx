@@ -37,8 +37,11 @@ export const SettingProvider = ({
 
   useEffect(() => {
     const settings = getItemFromLocalStorage("settings", true);
-    if (settings) {
+
+    if (settings && Object.keys(settings).length != 0) {
       setUserSetting(settings);
+    } else {
+      setItemInLocalStorage("setting", defaultSettingState.userSetting, true);
     }
   }, []);
 
