@@ -15,9 +15,12 @@ import {
   sendToken,
 } from "utils/helpers/transaction";
 import { prices } from "utils/helpers/assets";
+import { Assets } from "utils/constants/assets";
 import { SendConfirmProps } from "./type";
 
 import styles from "./sendConfirm.module.scss";
+import { NetworkNames } from "utils/constants/rpcProvider";
+import Link from "next/link";
 
 const { Title, Text } = Typography;
 
@@ -45,7 +48,7 @@ export default function SendConfirm({
       setButtonloading(true);
       try {
         if (provider && userInfo) {
-          if (choosenNetwork.currency == asset) {
+          if (choosenNetwork.currency == asset.name) {
             const result = await sendToken(
               provider,
               amount,
@@ -57,11 +60,17 @@ export default function SendConfirm({
               console.log((result.data as TransactionResponse).hash);
             setTransactionHash((result.data as TransactionResponse).hash);
           } else {
-            // await sendContractToken(
-            //   provider,userInfo.priv,value.receiveraddress,{
-            //     Assets.
-            //   }
-            // )
+            const result = await sendContractToken(
+              provider,
+              amount,
+              userInfo.priv,
+              address,
+              asset,
+              choosenNetwork
+            );
+            if (result.result && result)
+              console.log((result.data as TransactionResponse).hash);
+            setTransactionHash((result.data as TransactionResponse).hash);
           }
         }
         setTransactionState("success");
@@ -82,7 +91,6 @@ export default function SendConfirm({
 
   useEffect(() => {
     const work = async () => {
-      console.log("is this working");
       if (provider) {
         const gas = await getGasPrice(provider);
         const priceResponse = await prices();
@@ -114,7 +122,7 @@ export default function SendConfirm({
           <span>
             <Text type="secondary">Sending</Text>
             <Text strong type="success">
-              {" " + asset + " "}
+              {" " + asset.name + " "}
             </Text>
             <Text type="secondary">to</Text>
             <Text strong type="success">
@@ -130,7 +138,7 @@ export default function SendConfirm({
                   className={styles.primaryCurrency}
                   strong
                 >{`${amount} `}</Text>
-                <Text>{asset}</Text>
+                <Text>{asset.name}</Text>
               </span>
 
               {userSetting && (
@@ -138,8 +146,10 @@ export default function SendConfirm({
                   <Text className={styles.secondryCurrency} type="secondary">
                     {price &&
                       (userSetting.currencyConversion == "ETB"
-                        ? `${numberPrecision(price[asset].price * 55 * amount)}`
-                        : `${price[asset].price * amount}`)}
+                        ? `${numberPrecision(
+                            price[asset.name].price * 55 * amount
+                          )}`
+                        : `${price[asset.name].price * amount}`)}
                   </Text>
                   <Text type="secondary">
                     {userSetting.currencyConversion == "ETB" ? ` ETB` : ` USD`}
@@ -157,7 +167,7 @@ export default function SendConfirm({
                   className={styles.primaryCurrency}
                   strong
                 >{`${gasPrice} `}</Text>
-                <Text>{asset}</Text>
+                <Text>{asset.name}</Text>
               </span>
 
               {userSetting && (
@@ -166,9 +176,11 @@ export default function SendConfirm({
                     {price &&
                       (userSetting.currencyConversion == "ETB"
                         ? `${numberPrecision(
-                            price[asset].price * 55 * gasPrice
+                            price[asset.name].price * 55 * gasPrice
                           )}`
-                        : `${numberPrecision(price[asset].price * gasPrice)}`)}
+                        : `${numberPrecision(
+                            price[asset.name].price * gasPrice
+                          )}`)}
                   </Text>
                   <Text type="secondary">
                     {userSetting.currencyConversion == "ETB" ? ` ETB` : ` USD`}
@@ -185,7 +197,7 @@ export default function SendConfirm({
                 <Text className={styles.primaryCurrency} strong>{`${
                   amount + gasPrice
                 } `}</Text>
-                <Text>{asset}</Text>
+                <Text>{asset.name}</Text>
               </span>
 
               {userSetting && (
@@ -194,9 +206,9 @@ export default function SendConfirm({
                     {price &&
                       (userSetting.currencyConversion == "ETB"
                         ? `${numberPrecision(
-                            price[asset].price * 55 * (amount + gasPrice)
+                            price[asset.name].price * 55 * (amount + gasPrice)
                           )}`
-                        : `${price[asset].price * (amount + gasPrice)}`)}
+                        : `${price[asset.name].price * (amount + gasPrice)}`)}
                   </Text>
                   <Text type="secondary">
                     {userSetting.currencyConversion == "ETB" ? ` ETB` : ` USD`}
@@ -232,9 +244,11 @@ export default function SendConfirm({
         <Result
           status="success"
           title="Successfully Sent "
-          subTitle={`${amount} ${asset} sent to ${address} transaction hash ${transactionHash}`}
+          subTitle={`${amount} ${asset.name} sent to ${address} transaction hash ${transactionHash}`}
           extra={[
-            <Button type="primary" key="home" text="Go to dashbord" />,
+            <Link href="/">
+              <Button type="primary" key="home" text="Go to dashbord" />
+            </Link>,
 
             <Button
               key="transaction"
@@ -248,12 +262,14 @@ export default function SendConfirm({
           status="warning"
           title="There are some problems with your operation."
           extra={
-            <Button
-              type="primary"
-              key="console"
-              text="Go Dashbord
-            "
-            />
+            <Link href="/">
+              <Button
+                type="primary"
+                key="console"
+                text="Go Dashbord
+          "
+              />
+            </Link>
           }
         />
       )}

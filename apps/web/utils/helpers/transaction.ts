@@ -7,6 +7,8 @@ import {
   parseEther,
   parseUnits,
 } from "ethers";
+import { AssetProps } from "utils/constants/assets";
+import { NetworkNames, NetworkType } from "utils/constants/rpcProvider";
 
 export async function getGasPrice(provider: Provider) {
   const fee = await provider.getFeeData();
@@ -19,14 +21,15 @@ export async function sendContractToken(
   amount: number,
   privateKey: string,
   receiverAddress: AddressLike,
-  contract: { address: string; abi: InterfaceAbi }
+  asset: AssetProps,
+  network: NetworkType
 ) {
   const wallet = new Wallet(privateKey);
   const walletSigner = wallet.connect(provider);
   try {
     const assetContract = new Contract(
-      contract.address,
-      contract.abi,
+      asset.contractAddress[network.name as NetworkNames],
+      asset.abi as InterfaceAbi,
       walletSigner
     );
     const numberOfTokens = parseUnits(amount.toString(), 18);
@@ -34,9 +37,9 @@ export async function sendContractToken(
       receiverAddress,
       numberOfTokens
     );
+    return { result: true, data: transferResult };
   } catch (err) {
-    console.log(err);
-  } finally {
+    return { result: false, data: err };
   }
 }
 
