@@ -1,30 +1,53 @@
-import { Provider, AddressLike, Contract, formatEther } from "ethers";
-import { NetworkType } from "utils/constants/rpcProvider";
+import {
+  Provider,
+  AddressLike,
+  Contract,
+  formatEther,
+  InterfaceAbi,
+} from "ethers";
 import moment from "moment";
-import etherumAbi from "utils/abis/etherum_abi.json";
+import { NetworkNames, NetworkType } from "utils/constants/rpcProvider";
+import { AssetNames, Assets } from "utils/constants/assets";
 
 export async function userAssets(
   userAddress: string,
   provider: Provider,
   network: NetworkType
 ) {
-  const maticBalance = await provider?.getBalance(userAddress as AddressLike);
-  //   const contract = new Contract(tokenContractAddress, etherumAbi, provider);
-  //   const balance = (
-  //     await contract.balanceOf((await provider.getSigners())[0].address)
-  //   ).toString();
-  let formatedMatic;
-  if (maticBalance) {
-    formatedMatic = formatEther(maticBalance);
-  } else {
-    formatedMatic = "0";
-  }
-  return {
-    Matic: Number(formatedMatic),
-    EtbCoin: 0,
+  let assets = {
+    Matic: 0,
     Ether: 0,
     Usdt: 0,
+    EtbCoin: 0,
   };
+  const maticBalance = await provider?.getBalance(userAddress as AddressLike);
+  const contracts = Assets.filter((value) => value.name != "Matic");
+  let formatedMatic;
+  if (maticBalance) {
+    formatedMatic = Number(formatEther(maticBalance));
+  } else {
+    formatedMatic = 0;
+  }
+  assets.Matic = formatedMatic;
+  await contracts.reduce(async (previousValue, asset) => {
+    await previousValue;
+    const contract = new Contract(
+      asset.contractAddress[network.name as NetworkNames],
+      asset.abi as InterfaceAbi,
+      provider
+    );
+    const balance = await contract.balanceOf(userAddress);
+
+    let formatedBalance;
+    if (balance) {
+      formatedBalance = Number(formatEther(balance));
+    } else {
+      formatedBalance = 0;
+    }
+    assets[asset.name] = formatedBalance;
+  }, Promise.resolve());
+
+  return assets;
 }
 
 export async function prices() {

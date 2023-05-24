@@ -38,7 +38,6 @@ export async function POST(request: Request) {
 
 export async function GET() {
   const data = { ok: "await response.json();" };
-  console.log(data);
 
   return NextResponse.json(data);
 }

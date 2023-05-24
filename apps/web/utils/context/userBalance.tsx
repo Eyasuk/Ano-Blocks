@@ -90,7 +90,7 @@ export const UserBalanceProvider = ({
               totalInbirr: Number(
                 (
                   (price?.Ether.price ?? 0) *
-                  assetsBalance.Ether *
+                  assetsBalance["Ether"] *
                   55
                 ).toPrecision(4)
               ),

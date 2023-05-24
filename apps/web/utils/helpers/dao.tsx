@@ -69,7 +69,6 @@ export async function vote(
     await response.wait();
     return { success: true, data: response };
   } catch (err) {
-    console.log("ede");
     console.log(err);
     return { success: false, data: err };
   }
