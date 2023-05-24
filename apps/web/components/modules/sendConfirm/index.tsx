@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { Divider, Result, Typography } from "antd";
 import { BigNumberish, TransactionResponse, formatUnits } from "ethers";
 import Button from "components/elements/buttons";
@@ -15,12 +16,9 @@ import {
   sendToken,
 } from "utils/helpers/transaction";
 import { prices } from "utils/helpers/assets";
-import { Assets } from "utils/constants/assets";
 import { SendConfirmProps } from "./type";
 
 import styles from "./sendConfirm.module.scss";
-import { NetworkNames } from "utils/constants/rpcProvider";
-import Link from "next/link";
 
 const { Title, Text } = Typography;
 
