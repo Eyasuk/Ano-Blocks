@@ -31,8 +31,7 @@ export default function SendConfirm(): JSX.Element {
         extra={[
           <Button type="primary" key="home" text="Go to Transaction" />,
           <Link href="/">
-            0
-            <Button key="transaction" text="Go to Dashboard" />,
+            <Button key="transaction" text="Go to Dashboard" />
           </Link>,
         ]}
       />

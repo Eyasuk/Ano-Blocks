@@ -10,6 +10,7 @@ import { shortenText } from "utils/helpers/shortText";
 import { copyToClipBoard } from "utils/helpers/copytext";
 import { useUserBalance } from "utils/context/userBalance";
 import { useSetting } from "utils/context/settings";
+import { birr, usd } from "utils/helpers/formatCurrency";
 
 import styles from "./walletcard.module.scss";
 
@@ -43,11 +44,10 @@ export default function Wallet(): JSX.Element {
             Total portfolio value
           </Title>
           <div className={styles.balance}>
-            <Text type="secondary">{userSetting.currencyConversion}</Text>
             <Text className={styles.amount}>
               {userSetting.currencyConversion == "ETB"
-                ? userBalance.TotalInBirr.toPrecision(4)
-                : userBalance.TotalInUsd}
+                ? birr(userBalance.TotalInBirr)
+                : usd(userBalance.TotalInUsd)}
             </Text>
             <Text type="secondary">
               {userSetting.currencyConversion != "ETB"

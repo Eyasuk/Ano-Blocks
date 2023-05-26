@@ -5,7 +5,9 @@ export interface NetworkType {
   type?: "Main" | "Test" | "Custom";
 }
 
-export const Networks: Record<string, NetworkType> = {
+export type NetworkNames = "Polygon" | "Mumbai" | "Local";
+
+export const Networks: Record<NetworkNames, NetworkType> = {
   Polygon: {
     name: "Polygon",
     rpcLink:

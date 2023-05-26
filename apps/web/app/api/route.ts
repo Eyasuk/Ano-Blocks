@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 export async function POST() {
-  console.log("d");
+  ("d");
   var myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${process.env.CHAPA_API_KEY}`);
   myHeaders.append("Content-Type", "application/json");
@@ -29,14 +29,12 @@ export async function POST() {
   );
 
   const data = await response.json();
-  console.log(data);
 
   return NextResponse.json(data);
 }
 
 export async function GET() {
   const data = { ok: "await response.json();" };
-  console.log(data);
 
   return NextResponse.json(data);
 }

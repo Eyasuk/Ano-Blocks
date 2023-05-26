@@ -1,9 +1,17 @@
+import { InterfaceAbi } from "ethers";
+import { NetworkNames } from "utils/constants/rpcProvider";
+import etherumAbi from "utils/abis/etherum_abi.json";
+import usdtAbi from "utils/abis/usdt_abi.json";
+import etbcAbi from "utils/abis/etbc_abi.json";
+
+export type AssetNames = "Matic" | "Ether" | "Usdt" | "EtbCoin";
 export interface AssetProps {
-  name: string;
+  name: AssetNames;
   abbrev: string;
   imageUrl?: string;
-  contractAddress?: {};
+  contractAddress: Record<NetworkNames, string>;
   coingeckoId?: string;
+  abi?: InterfaceAbi;
 }
 
 export const Assets: AssetProps[] = [
@@ -13,6 +21,8 @@ export const Assets: AssetProps[] = [
     imageUrl: "./icons/assets/matic.svg",
     contractAddress: {
       Local: "",
+      Mumbai: "",
+      Polygon: "",
     },
     coingeckoId: "matic-network",
   },
@@ -22,10 +32,11 @@ export const Assets: AssetProps[] = [
     imageUrl: "./icons/assets/eth.svg",
     contractAddress: {
       Polygon: "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619",
-      Mumbai: "0xA6FA4fB5f76172d178d61B04b0ecd319C5d1C0aa",
-      Local: "",
+      Mumbai: "0xc9572565Bf72C5fBBecf317681482dd42761eBba",
+      Local: "0x47d72035D968AD6dAe6790D20FB52CE3a2ecF4f9",
     },
     coingeckoId: "ethereum",
+    abi: etherumAbi,
   },
   {
     name: "EtbCoin",
@@ -33,9 +44,10 @@ export const Assets: AssetProps[] = [
     imageUrl: "./icons/assets/etbcoin.svg",
     contractAddress: {
       Polygon: "",
-      Mumbai: "",
-      Local: "",
+      Mumbai: "0x1c1593B0116596345E7443E03cA2f433Bdb9cEc0",
+      Local: "0xf98D58b1E2D0B5869e773fCa4d6cEEADd4B63ad3",
     },
+    abi: etbcAbi,
   },
   {
     name: "Usdt",
@@ -43,9 +55,10 @@ export const Assets: AssetProps[] = [
     imageUrl: "./icons/assets/usdt.svg",
     contractAddress: {
       Polygon: "0xc2132d05d31c914a87c6611c10748aeb04b58e8f",
-      Mumbai: "",
-      Local: "",
+      Mumbai: "0x154dc2C2eb39835962FaF61B697cCef0A57f3f6E",
+      Local: "0xce31B91f46019397572e1fCC40F1C9F0F4347D87",
     },
     coingeckoId: "tether",
+    abi: usdtAbi,
   },
 ];

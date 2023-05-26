@@ -1,27 +1,26 @@
-import { NextApiRequest } from "next";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   const body = await request.json();
-  var myHeaders = new Headers();
+  const myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${process.env.CHAPA_API_KEY}`);
   myHeaders.append("Content-Type", "application/json");
 
   const { origin } = new URL(request.url);
-  var raw = JSON.stringify({
+  const raw = JSON.stringify({
     amount: body.amount,
     currency: "ETB",
     email: "anoblocks@gmail.com",
     first_name: "Ano",
     last_name: "Blocks",
     tx_ref: `${body.address + Date.now()}`,
-    callback_url: "https://webhook.site/077164d6-29cb-40df-ba29-8a00e59a7e60",
+    callback_url: `${origin}/api/transaction/confirm`,
     return_url: `${origin}/deposit/confirm`,
     "customization[title]": "Payment for AnoBlocks",
     "customization[description]": "Deposit to AnoBlock platform",
   });
 
-  var requestOptions = {
+  const requestOptions = {
     method: "POST",
     headers: myHeaders,
     body: raw,
@@ -38,7 +37,6 @@ export async function POST(request: Request) {
 
 export async function GET() {
   const data = { ok: "await response.json();" };
-  console.log(data);
 
   return NextResponse.json(data);
 }

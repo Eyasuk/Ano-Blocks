@@ -11,7 +11,7 @@ import {
 import { GlassCard } from "components/elements/cards";
 import Button from "components/elements/buttons";
 import SendConfirm from "components/modules/sendConfirm";
-import { Assets } from "utils/constants/assets";
+import { AssetProps, Assets } from "utils/constants/assets";
 import { useNetwork } from "utils/context/network";
 import { useUserBalance } from "utils/context/userBalance";
 
@@ -26,12 +26,11 @@ const antIcon = (
 export default function Send(): JSX.Element {
   const [form] = Form.useForm();
   const { userBalance } = useUserBalance();
-  const { provider, choosenNetwork } = useNetwork();
   const [assetIcon, setAssetIcon] = useState<string>("");
   const [isAddress, setIsAddress] = useState<
     "notAddress" | "searching" | "address" | null
   >(null);
-  const [selectedAsset, setSelectedAsset] = useState();
+  const [selectedAsset, setSelectedAsset] = useState<AssetProps>();
   const [confirmOpen, setConfirmOpen] = useState<boolean>(false);
 
   const handleCancel = () => {
@@ -40,7 +39,7 @@ export default function Send(): JSX.Element {
 
   const onChangeAsset = (_v: any, option: any) => {
     setAssetIcon(option.icon);
-    setSelectedAsset(_v);
+    setSelectedAsset(option.asset);
     form.setFieldsValue({
       amount: undefined,
     });
@@ -61,18 +60,18 @@ export default function Send(): JSX.Element {
   const setMaxiumum = () => {
     if (selectedAsset)
       form.setFieldsValue({
-        amount: userBalance[selectedAsset]["total"],
+        amount: userBalance[selectedAsset.name]["total"],
       });
   };
 
   return (
     <>
-      {form.getFieldValue("asset") && (
+      {form.getFieldValue("asset") && selectedAsset && (
         <SendConfirm
           open={confirmOpen}
           onCancel={handleCancel}
           address={form.getFieldValue("receiveraddress")}
-          asset={form.getFieldValue("asset")}
+          asset={selectedAsset}
           amount={form.getFieldValue("amount")}
         />
       )}
@@ -161,6 +160,7 @@ export default function Send(): JSX.Element {
                       icon: value.imageUrl,
                       value: value.name,
                       label: value.abbrev,
+                      asset: value,
                     };
                   })}
                 />
@@ -178,11 +178,13 @@ export default function Send(): JSX.Element {
               >
                 <InputNumber
                   min={0}
-                  max={selectedAsset && userBalance[selectedAsset]["total"]}
+                  max={
+                    selectedAsset && userBalance[selectedAsset.name]["total"]
+                  }
                   addonAfter={
                     selectedAsset != undefined && (
                       <Button
-                        text={`max ${userBalance[selectedAsset]["total"]}`}
+                        text={`max ${userBalance[selectedAsset.name]["total"]}`}
                         type="text"
                         onClick={setMaxiumum}
                       />
