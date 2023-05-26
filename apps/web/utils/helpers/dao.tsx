@@ -12,7 +12,7 @@ export async function createProposal(
     const wallet = new Wallet(privateKey, provider);
     // const walletSigner = wallet.connect(provider);
     const contract = new Contract(
-      Contracts.Dao[network],
+      Contracts.Dao[network].address,
       Contracts.Dao.abi,
       wallet
     );
@@ -36,7 +36,7 @@ export async function getProposal(
   try {
     const wallet = new Wallet(privateKey, provider);
     const contract = new Contract(
-      Contracts.Dao[network],
+      Contracts.Dao[network].address,
       Contracts.Dao.abi,
       wallet
     );
@@ -59,7 +59,7 @@ export async function vote(
   try {
     const wallet = new Wallet(privateKey, provider);
     const contract = new Contract(
-      Contracts.Dao[network],
+      Contracts.Dao[network].address,
       Contracts.Dao.abi,
       wallet
     );

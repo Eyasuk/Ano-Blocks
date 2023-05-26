@@ -5,7 +5,9 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**"],
      "env": [
-      "CHAPA_API_KEY"
+      "CHAPA_API_KEY",
+      "LOCAL_OWNER_PRIVATE_KEY",
+      "MUMBAI_OWNER_PRIVATE_KEY"
     ]},
     "lint": {
       "outputs": []

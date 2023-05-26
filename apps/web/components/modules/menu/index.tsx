@@ -87,17 +87,17 @@ export function MenuBar() {
       </Link>
     ),
     getItem(
-      "Swap",
-      "/swap",
-      <Link href="/swap">
-        <SwapIcon />
-      </Link>
-    ),
-    getItem(
       "Deposit",
       "/deposit",
       <Link href="/deposit">
         <ReceiveIcon />{" "}
+      </Link>
+    ),
+    getItem(
+      "Swap",
+      "/swap",
+      <Link href="/swap">
+        <SwapIcon />
       </Link>
     ),
     getItem("Borrow/Pay", "7", <CreditCardIcon />),

@@ -44,8 +44,8 @@ export const Assets: AssetProps[] = [
     imageUrl: "./icons/assets/etbcoin.svg",
     contractAddress: {
       Polygon: "",
-      Mumbai: "0xe4B5Ca7F0c3Ba8A0d94985a5B4600F185fE0bd32",
-      Local: "0xA959578C43374491F5414dcDB46f9895f258A46a",
+      Mumbai: "0x1c1593B0116596345E7443E03cA2f433Bdb9cEc0",
+      Local: "0xf98D58b1E2D0B5869e773fCa4d6cEEADd4B63ad3",
     },
     abi: etbcAbi,
   },

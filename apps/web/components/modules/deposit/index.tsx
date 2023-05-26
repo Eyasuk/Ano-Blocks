@@ -44,6 +44,7 @@ export default function Send(): JSX.Element {
         if (body.status == "success") {
           push(body.data.checkout_url);
         } else {
+          console.log(body);
           notification({
             message: "error",
             messageType: "error",

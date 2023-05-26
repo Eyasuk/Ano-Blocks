@@ -1,7 +1,11 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
 import { JsonRpcProvider } from "ethers";
-import { Networks, NetworkType } from "utils/constants/rpcProvider";
+import {
+  NetworkNames,
+  Networks,
+  NetworkType,
+} from "utils/constants/rpcProvider";
 import {
   getItemFromLocalStorage,
   setItemInLocalStorage,
@@ -59,9 +63,11 @@ export const NetworkProvider = ({
 
   useEffect(() => {
     const userNetwork = getItemFromLocalStorage("network");
-    if (userNetwork && Networks[userNetwork]) {
-      setChoosenNetwork(Networks[userNetwork]);
-      const provider = new JsonRpcProvider(Networks[userNetwork].rpcLink);
+    if (userNetwork && Networks[userNetwork as NetworkNames]) {
+      setChoosenNetwork(Networks[userNetwork as NetworkNames]);
+      const provider = new JsonRpcProvider(
+        Networks[userNetwork as NetworkNames].rpcLink
+      );
       setProvider(provider);
     } else {
       setChoosenNetwork(Networks.Mumbai);
