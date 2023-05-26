@@ -36,6 +36,7 @@ export async function GET(request: Request) {
       console.log("success");
     }
   } catch (err) {
+    console.log(err);
     console.log("error");
   }
 
