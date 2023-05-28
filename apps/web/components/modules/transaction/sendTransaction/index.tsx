@@ -3,11 +3,15 @@ import NextImage from "next/image";
 import { Table, Typography } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { useEffect, useState } from "react";
+import { CopyIcon } from "components/elements/icons";
+import { notification } from "components/elements/notification";
 import {
   getSendHistory,
   SendHistoryProps,
 } from "utils/helpers/transactionHistory";
 import { AssetProps, Assets } from "utils/constants/assets";
+import { copyToClipBoard } from "utils/helpers/copytext";
+import { shortenText } from "utils/helpers/shortText";
 
 import styles from "./deposit.module.scss";
 
@@ -43,9 +47,18 @@ export function SendTransaction() {
     setSendData(sendMap);
   }, []);
 
+  const handelCopy = (text: string) => {
+    const response = copyToClipBoard(text);
+    notification({
+      messageType: "success",
+      message: "Copied!",
+      description: "You Copied the address",
+    });
+  };
+
   const columns: ColumnsType<DataType> = [
     {
-      title: "coin",
+      title: "Coin",
       dataIndex: "coin",
       render: (_value, record) => {
         return (
@@ -59,9 +72,8 @@ export function SendTransaction() {
       },
     },
     {
-      title: "amount",
+      title: "Amount",
       dataIndex: "amount",
-      width: "30%",
       render: (_value, record) => {
         return (
           <span>
@@ -71,7 +83,25 @@ export function SendTransaction() {
       },
     },
     {
-      title: "hash",
+      title: "Address",
+      dataIndex: "recieverAddress",
+      render: (_value, record) => {
+        return (
+          <span>
+            <CopyIcon
+              className={styles.icon}
+              style={{ fontSize: "170%" }}
+              onClick={() => {
+                handelCopy(record.recieverAddress);
+              }}
+            />
+            <Text>{shortenText(record.recieverAddress)}</Text>
+          </span>
+        );
+      },
+    },
+    {
+      title: "Hash",
       dataIndex: "hash",
     },
   ];
