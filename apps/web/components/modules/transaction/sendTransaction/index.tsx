@@ -88,14 +88,14 @@ export function SendTransaction() {
       render: (_value, record) => {
         return (
           <span>
+            <Text>{shortenText(record.recieverAddress) + " "}</Text>
             <CopyIcon
               className={styles.icon}
-              style={{ fontSize: "170%" }}
+              style={{ fontSize: "120%" }}
               onClick={() => {
                 handelCopy(record.recieverAddress);
               }}
             />
-            <Text>{shortenText(record.recieverAddress)}</Text>
           </span>
         );
       },
