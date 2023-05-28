@@ -1,5 +1,5 @@
 "use client";
-import { Tabs } from "antd";
+import { Tabs, Typography } from "antd";
 import type { TabsProps } from "antd";
 import Default from "components/layouts/default";
 import { GlassCard } from "components/elements/cards";
@@ -9,6 +9,8 @@ import {
 } from "components/modules/transaction";
 
 import styles from "./transaction.module.scss";
+
+const { Text, Title } = Typography;
 
 const items: TabsProps["items"] = [
   {
@@ -26,6 +28,14 @@ export default function Transaction(): JSX.Element {
   return (
     <Default>
       <div className={styles.layout}>
+        <Title level={3}>Transactions </Title>
+        <div className={styles.desc}>
+          <Text>
+            All transaction are recorded only in this device.To get your
+            transaction on other devices you can import/export in setting or
+            view on blockexplorer!!{" "}
+          </Text>
+        </div>
         <GlassCard>
           <Tabs defaultActiveKey="1" items={items} />{" "}
         </GlassCard>
