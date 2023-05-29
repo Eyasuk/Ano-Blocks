@@ -7,6 +7,7 @@ export type SendHistoryProps = {
   network: string;
   amount: number;
   asset: string;
+  date: string;
 };
 
 export function saveSendHistory(sendHistory: SendHistoryProps) {
@@ -18,5 +19,6 @@ export function saveSendHistory(sendHistory: SendHistoryProps) {
 
 export function getSendHistory() {
   const history = getItemFromLocalStorage("send", true);
-  return history;
+  if (Array.isArray(history)) return history;
+  else return [];
 }

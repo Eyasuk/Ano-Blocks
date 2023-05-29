@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Divider, Result, Typography } from "antd";
 import { BigNumberish, TransactionResponse, formatUnits } from "ethers";
+import moment from "moment";
 import Button from "components/elements/buttons";
 import { notification } from "components/elements/notification";
 import Modal from "components/elements/modal";
@@ -69,17 +70,16 @@ export default function SendConfirm({
               choosenNetwork
             );
             if (result.result && result) {
-              console.log("llll");
+              console.log(moment().format("D MMM, YYYY"));
               const transactionHistory: SendHistoryProps = {
                 amount: amount,
                 recieverAddress: address,
                 transactionHash: (result.data as TransactionResponse).hash,
                 network: choosenNetwork.name,
                 asset: asset.name,
+                date: moment().format("D MMM, YYYY"),
               };
-              console.log("ooo");
               saveSendHistory(transactionHistory);
-              console.log("ppp");
             }
             setTransactionHash((result.data as TransactionResponse).hash);
           }
