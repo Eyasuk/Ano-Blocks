@@ -100,7 +100,13 @@ export function MenuBar() {
         <SwapIcon />
       </Link>
     ),
-    getItem("Borrow/Pay", "7", <CreditCardIcon />),
+    getItem(
+      "Borrow/Pay",
+      "/finance",
+      <Link href="/finance">
+        <CreditCardIcon />
+      </Link>
+    ),
     { type: "divider" },
   ];
 
