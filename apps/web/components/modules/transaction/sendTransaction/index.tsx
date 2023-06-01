@@ -128,7 +128,7 @@ export function SendTransaction() {
       },
     },
     {
-      title: "date",
+      title: "Date",
       dataIndex: "date",
     },
     {

@@ -15,13 +15,13 @@ const { Text, Title } = Typography;
 const items: TabsProps["items"] = [
   {
     key: "1",
-    label: `Deposits`,
-    children: <DepositTransaction />,
+    label: `Send`,
+    children: <SendTransaction />,
   },
   {
     key: "2",
-    label: `Send`,
-    children: <SendTransaction />,
+    label: `Deposits`,
+    children: <DepositTransaction />,
   },
 ];
 export default function Transaction(): JSX.Element {
@@ -31,9 +31,8 @@ export default function Transaction(): JSX.Element {
         <Title level={3}>Transactions </Title>
         <div className={styles.desc}>
           <Text>
-            All transaction are recorded only in this device.To get your
-            transaction on other devices you can import/export in setting or
-            view on blockexplorer!!{" "}
+            You can import/export all transactions history in setting or you can
+            view on Block Explorer!!{" "}
           </Text>
         </div>
         <GlassCard>

@@ -13,6 +13,11 @@ export async function mintFromDepositLocal(amount: number, address: string) {
         Contracts.Etbc.abi,
         walletSigner
       );
+      const chapaContract = new Contract(
+        Contracts.ChapaTracker.Local.address,
+        Contracts.ChapaTracker.abi,
+        walletSigner
+      );
       const amountInWei = parseEther(amount.toString());
       const etherContract = new Contract(
         Contracts.Ether.Local.address,
@@ -26,8 +31,8 @@ export async function mintFromDepositLocal(amount: number, address: string) {
       const receipt = await approve.wait();
 
       const mint = await etbc.mintForDeposit(amountInWei, address);
+      const record = await chapaContract.newTransaction(address, amountInWei);
 
-      console.log("success");
       return true;
     } else {
       console.log("no private key");
@@ -57,6 +62,12 @@ export async function mintFromDepositMumbai(amount: number, address: string) {
         walletSigner
       );
 
+      const chapaContract = new Contract(
+        Contracts.ChapaTracker.Mumbai.address,
+        Contracts.ChapaTracker.abi,
+        walletSigner
+      );
+
       const approve = await etherContract.approve(
         Contracts.Etbc.Mumbai.address,
         amountInWei
@@ -65,6 +76,8 @@ export async function mintFromDepositMumbai(amount: number, address: string) {
       const receipt = await approve.wait();
 
       const mint = await etbc.mintForDeposit(amountInWei, address);
+
+      const record = await chapaContract.newTransaction(address, amountInWei);
 
       return true;
     } else {
