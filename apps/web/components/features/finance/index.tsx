@@ -1,6 +1,7 @@
 "use client";
 import { Col, Row } from "antd";
 import Default from "components/layouts/default";
+import CreditScore from "components/modules/creditScore";
 
 export default function Finance(): JSX.Element {
   return (
@@ -12,7 +13,7 @@ export default function Finance(): JSX.Element {
         ]}
       >
         <Col md={10} xs={24} span={12}>
-          <div></div>{" "}
+          <CreditScore />
         </Col>
         <Col md={12} xs={24} span={22}>
           <div></div>{" "}
