@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Divider, Typography } from "antd";
 import { CopyIcon, QrIcon } from "components/elements/icons";
 import { GlassCard } from "components/elements/cards";

@@ -31,26 +31,34 @@ export default function Send(): JSX.Element {
 
   const onFinsh = (value: any) => {
     const work = async () => {
-      if (userInfo) {
-        var raw = JSON.stringify({
-          amount: value.amount,
-          address: userInfo?.pubad,
-        });
-        const response = await fetch("/api/transaction", {
-          method: "POST",
-          body: raw,
-        });
-        const body = await response.json();
-        if (body.status == "success") {
-          push(body.data.checkout_url);
-        } else {
-          console.log(body);
-          notification({
-            message: "error",
-            messageType: "error",
-            description: "Contact developer if these continue happining",
+      try {
+        if (userInfo) {
+          var raw = JSON.stringify({
+            amount: value.amount,
+            address: userInfo?.pubad,
           });
+          const response = await fetch("/api/transaction", {
+            method: "POST",
+            body: raw,
+          });
+          const body = await response.json();
+          if (body.status == "success") {
+            push(body.data.checkout_url);
+          } else {
+            console.log(body);
+            notification({
+              message: "error",
+              messageType: "error",
+              description: "Contact developer if these continue happining",
+            });
+          }
         }
+      } catch (err) {
+        notification({
+          message: "error",
+          messageType: "error",
+          description: "Contact developer if these continue happining",
+        });
       }
     };
     work();

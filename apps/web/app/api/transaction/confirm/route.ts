@@ -31,8 +31,11 @@ export async function GET(request: Request) {
         const { data, status } = await response.json();
         if (status == "success") {
           const mintEth = data.amount / (120 * 1700);
-          const a = await mintFromDepositLocal(mintEth, userAddress);
-          const b = await mintFromDepositMumbai(mintEth, userAddress);
+          const mintForlocal = await mintFromDepositLocal(mintEth, userAddress);
+          const mintformumbai = await mintFromDepositMumbai(
+            mintEth,
+            userAddress
+          );
         }
       }
       console.log("success");

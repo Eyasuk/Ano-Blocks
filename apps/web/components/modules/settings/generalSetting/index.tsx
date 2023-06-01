@@ -89,10 +89,6 @@ export function GeneralSetting() {
           <Radio.Group options={primaryCurrencyOptions} optionType="button" />
         </Form.Item>
       </div>
-      <div className={styles.options}>
-        {" "}
-        <Title level={5}>Language</Title>
-      </div>
 
       <div className={styles.options}>
         <Title level={5}>Hide assets without balance</Title>

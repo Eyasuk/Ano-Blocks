@@ -59,7 +59,7 @@ export const Contracts: Record<string, ContractsType> = {
     },
     Local: {
       address: "0x47d72035D968AD6dAe6790D20FB52CE3a2ecF4f9",
-      owner: "0x64Fc8D6dCA4A3C65432cC1E6d12779a761381b4a",
+      owner: "0x347FB5f57c9763a263d46c78313600E780f195e7",
     },
   },
 };

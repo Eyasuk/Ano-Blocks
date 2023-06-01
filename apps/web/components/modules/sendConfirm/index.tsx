@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Divider, Result, Typography } from "antd";
 import { BigNumberish, TransactionResponse, formatUnits } from "ethers";
+import moment from "moment";
 import Button from "components/elements/buttons";
 import { notification } from "components/elements/notification";
 import Modal from "components/elements/modal";
 import { useSetting } from "utils/context/settings";
 import { useNetwork } from "utils/context/network";
-import { useUserBalance } from "utils/context/userBalance";
 import { useUser } from "utils/context/user";
 import { numberPrecision } from "utils/helpers/numberPrecision";
 import {
@@ -16,6 +16,10 @@ import {
   sendToken,
 } from "utils/helpers/transaction";
 import { prices } from "utils/helpers/assets";
+import {
+  SendHistoryProps,
+  saveSendHistory,
+} from "utils/helpers/transactionHistory";
 import { SendConfirmProps } from "./type";
 
 import styles from "./sendConfirm.module.scss";
@@ -31,7 +35,6 @@ export default function SendConfirm({
 }: SendConfirmProps): JSX.Element {
   const { provider, choosenNetwork } = useNetwork();
   const { userSetting } = useSetting();
-  const { userBalance } = useUserBalance();
   const { userInfo } = useUser();
   const [gasPrice, setGasPrice] = useState(0);
   const [price, setPrice] = useState<any>();
@@ -66,8 +69,18 @@ export default function SendConfirm({
               asset,
               choosenNetwork
             );
-            if (result.result && result)
-              console.log((result.data as TransactionResponse).hash);
+            if (result.result && result) {
+              console.log(moment().format("D MMM, YYYY"));
+              const transactionHistory: SendHistoryProps = {
+                amount: amount,
+                recieverAddress: address,
+                transactionHash: (result.data as TransactionResponse).hash,
+                network: choosenNetwork.name,
+                asset: asset.name,
+                date: moment().format("D MMM, YYYY"),
+              };
+              saveSendHistory(transactionHistory);
+            }
             setTransactionHash((result.data as TransactionResponse).hash);
           }
         }
@@ -85,6 +98,11 @@ export default function SendConfirm({
     };
 
     work();
+  };
+
+  const onAnotherTransaction = () => {
+    setTransactionState("ongoing");
+    onCancel();
   };
 
   useEffect(() => {
@@ -251,7 +269,7 @@ export default function SendConfirm({
             <Button
               key="transaction"
               text="Another transaction"
-              onClick={onCancel}
+              onClick={onAnotherTransaction}
             />,
           ]}
         />
