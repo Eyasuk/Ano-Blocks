@@ -1,6 +1,8 @@
 "use client";
 import { Col, Row } from "antd";
 import Default from "components/layouts/default";
+import CreditAmount from "components/modules/creditAmount";
+import CreditLimit from "components/modules/creditLimit";
 import CreditScore from "components/modules/creditScore";
 
 export default function Finance(): JSX.Element {
@@ -16,10 +18,10 @@ export default function Finance(): JSX.Element {
           <CreditScore />
         </Col>
         <Col md={12} xs={24} span={22}>
-          <div></div>{" "}
+          <CreditAmount />
         </Col>
         <Col md={12} xs={24} lg={12} span={6}>
-          <div></div>{" "}
+          <CreditLimit />
         </Col>
         <Col md={12} xs={24} lg={10} span={6}>
           <div></div>{" "}
