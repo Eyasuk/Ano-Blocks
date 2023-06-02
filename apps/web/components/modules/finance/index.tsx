@@ -2,19 +2,19 @@
 import { Tabs, Typography } from "antd";
 import type { TabsProps } from "antd";
 import { GlassCard } from "components/elements/cards";
-
-const { Text, Title } = Typography;
+import { GetLoan } from "components/modules/finance/getLoan";
+import { PayLoan } from "components/modules/finance/payLoan";
 
 const items: TabsProps["items"] = [
   {
     key: "1",
     label: `Get Loan`,
-    children: <p>d</p>,
+    children: <GetLoan />,
   },
   {
     key: "2",
     label: `Pay Loan`,
-    children: <p>s</p>,
+    children: <PayLoan />,
   },
   {
     key: "3",
