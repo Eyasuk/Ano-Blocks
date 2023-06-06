@@ -59,7 +59,12 @@ export function AdvancedSetting() {
         if (file.sendHistory && file.sendHistory.length > 0) {
           const prev = getItemFromLocalStorage("send", true);
           const arry = Object.values(prev);
-          const combined = Array.from(new Set([...arry, ...file.sendHistory]));
+          const array = [...arry, ...file.sendHistory];
+          const combined = Array.from(
+            new Set(array.map((items) => items.transactionHash))
+          ).map((hash) => {
+            return array.find((item) => item.transactionHash === hash);
+          });
           setItemInLocalStorage("send", combined, true);
         }
       }
