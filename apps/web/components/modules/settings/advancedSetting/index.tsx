@@ -1,22 +1,29 @@
-import { useEffect } from "react";
-import { InputNumber, Typography } from "antd";
+"use client";
+import { useEffect, useState } from "react";
+import { InputNumber, Typography, Upload, UploadProps, message } from "antd";
+import { RcFile } from "antd/lib/upload";
+import { UploadOutlined } from "@ant-design/icons";
 import Button from "components/elements/buttons";
+import { notification } from "components/elements/notification";
 import { useSetting } from "utils/context/settings";
 import { SettingProps } from "utils/types/settingTypes";
+import { exportSettingsToFile } from "utils/helpers/sync";
 import {
   getItemFromLocalStorage,
   setItemInLocalStorage,
 } from "utils/helpers/localStorage";
 
 import styles from "./advancedSetting.module.scss";
+import Item from "antd/es/list/Item";
 
 const { Text, Title } = Typography;
 
 export function AdvancedSetting() {
   const { userSetting, setUserSetting } = useSetting();
+  const [file, setFile] = useState<any>();
 
   useEffect(() => {
-    const settings = getItemFromLocalStorage("settings", true);
+    const settings = getItemFromLocalStorage("setting", true);
     setUserSetting(settings);
   }, []);
 
@@ -29,7 +36,73 @@ export function AdvancedSetting() {
   };
 
   const saveSetting = () => {
-    setItemInLocalStorage("settings", userSetting, true);
+    try {
+      if (file) {
+        if (file.contacts && file.contacts.length > 0) {
+          const prev = getItemFromLocalStorage("contacts", true);
+          const arry = Object.values(prev);
+          const array = [...arry, ...file.contacts];
+
+          const combined = Array.from(
+            new Set(array.map((items) => items.address))
+          ).map((address, index) => {
+            const temp = array.find((item) => item.address === address);
+            return {
+              key: index.toString(),
+              name: temp.name,
+              address: temp.address,
+            };
+          });
+
+          setItemInLocalStorage("contacts", combined, true);
+        }
+        if (file.sendHistory && file.sendHistory.length > 0) {
+          const prev = getItemFromLocalStorage("send", true);
+          const arry = Object.values(prev);
+          const combined = Array.from(new Set([...arry, ...file.sendHistory]));
+          setItemInLocalStorage("send", combined, true);
+        }
+      }
+
+      if (file && file.settings) {
+        setItemInLocalStorage("setting", file.settings, true);
+      } else {
+        setItemInLocalStorage("setting", userSetting, true);
+      }
+    } catch (err) {
+      console.log(err);
+      console.log("ERR");
+    }
+  };
+
+  const exportSetting = () => {
+    const response = exportSettingsToFile();
+    if (response) {
+      notification({
+        message: "Succesfully Backed Your data",
+        messageType: "success",
+        description:
+          "You Data is downloading you can find it in your browser download manager",
+      });
+    } else {
+      notification({
+        message: "Unexpected Error Occured",
+        messageType: "error",
+        description: "If these keep happining contact support",
+      });
+    }
+  };
+
+  const fileUpload = (file: any) => {
+    const reader = new FileReader();
+
+    reader.onload = (e: any) => {
+      const json = JSON.parse(e.target.result);
+      setFile(json);
+    };
+    reader.readAsText(file);
+
+    return false;
   };
 
   return (
@@ -52,7 +125,11 @@ export function AdvancedSetting() {
           You can backup user settings containing preferences and account
           addresses into a JSON file
         </Text>
-        <Button className={styles.button} text="Backup" />
+        <Button
+          className={styles.button}
+          text="Backup"
+          onClick={exportSetting}
+        />
       </div>
       <div className={styles.options}>
         {" "}
@@ -61,7 +138,17 @@ export function AdvancedSetting() {
           You can restore user settings containing preferences and account
           addresses from a previously backed up JSON file
         </Text>
-        <Button className={styles.button} text="Restore" />
+        <Upload
+          maxCount={1}
+          accept="application/JSON"
+          beforeUpload={fileUpload}
+        >
+          <Button
+            className={styles.button}
+            icon={<UploadOutlined />}
+            text="Restore"
+          />
+        </Upload>
       </div>
       <div className={styles.options}>
         <Button
