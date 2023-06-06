@@ -32,10 +32,6 @@ export default function Auth(): JSX.Element {
     setButtonLoading(true);
     event.preventDefault();
 
-    // if (!event.target) {
-    //   setPassError(false);
-    //   return;
-    // }
     const auth = await checkUserWithPassword(event.target.password.value);
 
     if (!auth) {

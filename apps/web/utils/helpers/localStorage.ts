@@ -16,7 +16,8 @@ export const getItemFromLocalStorage = (
   isJson: boolean = false
 ): any => {
   const storageItem: string | null = localStorage.getItem(key);
-  if (storageItem === null) return {};
+
+  if (!storageItem && storageItem === null) return {};
   return isJson ? JSON.parse(storageItem) : storageItem;
 };
 
