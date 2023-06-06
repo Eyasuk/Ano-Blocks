@@ -29,7 +29,6 @@ export function exportSettingsToFile() {
       json.sendHistory = send;
     }
 
-    console.log(json);
     const jsonData = JSON.stringify(json);
 
     const element = document.createElement("a");
