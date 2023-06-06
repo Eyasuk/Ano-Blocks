@@ -70,9 +70,9 @@ export function AdvancedSetting() {
       }
 
       if (file && file.settings) {
-        setItemInLocalStorage("setting", file.settings, true);
+        setItemInLocalStorage("settings", file.settings, true);
       } else {
-        setItemInLocalStorage("setting", userSetting, true);
+        setItemInLocalStorage("settings", userSetting, true);
       }
     } catch (err) {
       console.log(err);
