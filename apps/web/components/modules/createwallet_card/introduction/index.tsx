@@ -1,18 +1,21 @@
-'use client';
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import NextImage from 'next/image';
-import { Typography } from 'antd';
-import Button from 'components/elements/buttons';
-import { GlassCard } from 'components/elements/cards';
-import { IntroductionData } from 'utils/constants/introdcationData';
+"use client";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import NextImage from "next/image";
+import { Typography } from "antd";
+import Button from "components/elements/buttons";
+import { GlassCard } from "components/elements/cards";
+import { IntroductionData } from "utils/constants/introdcationData";
 
-import styles from './introduction.module.scss';
+import styles from "./introduction.module.scss";
 
 const { Title, Text } = Typography;
 
 export default function Introduction(): JSX.Element {
   const [step, setStep] = useState<number>(0);
+  const [loadingButton1, setLoadingButton1] = useState<boolean>(false);
+  const [loadingButton2, setLoadingButton2] = useState<boolean>(false);
+
   const lengthOfIntroData = IntroductionData.length;
   const router = useRouter();
 
@@ -52,15 +55,25 @@ export default function Introduction(): JSX.Element {
           </div>
           <div className={styles.button}>
             <Button
-              text='Create Wallet'
-              type='primary'
-              onClick={() => router.push('/new')}
-              size='large'
+              text="Create Wallet"
+              type="primary"
+              onClick={() => {
+                setLoadingButton1(true);
+                router.push("/new");
+                setLoadingButton1(false);
+              }}
+              size="large"
+              loading={loadingButton1}
             />
             <Button
-              text='I have Wallet'
-              onClick={() => router.push('/import')}
-              size='large'
+              text="I have Wallet"
+              onClick={() => {
+                setLoadingButton2(true);
+                router.push("/import");
+                setLoadingButton2(false);
+              }}
+              size="large"
+              loading={loadingButton2}
             />
           </div>
         </div>

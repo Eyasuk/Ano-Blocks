@@ -39,6 +39,8 @@ export default function CreatePassword({
         messageType: "error",
         description: "make sure your password are the same",
       });
+      setButtonLoading(false);
+
       return;
     }
 
