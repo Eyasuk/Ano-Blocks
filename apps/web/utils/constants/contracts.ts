@@ -23,7 +23,7 @@ export const Contracts: Record<string, ContractsType> = {
   Dao: {
     abi: DaoAbi,
     Polygon: { address: "" },
-    Mumbai: { address: "0x545de3a67C64CC0Ba2704a89A59EE3D0f4a26722" },
+    Mumbai: { address: "0xF296936f570b82777A8eA529DdaabB233f510Df1" },
     Local: { address: "0xA6adEE61DA075cD90Fd8c27Af71A9058218ea011" },
   },
   Etbc: {

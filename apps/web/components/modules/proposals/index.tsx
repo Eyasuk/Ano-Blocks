@@ -30,6 +30,8 @@ export default function Dao(): JSX.Element {
           choosenNetwork.name as "Polygon" | "Mumbai" | "Local",
           userInfo?.priv
         );
+        console.log("waht is happinfing");
+        console.log(response);
         if (response.success) {
           let data: ProposalProp[] = [];
 
@@ -53,7 +55,7 @@ export default function Dao(): JSX.Element {
                   ? "Ongoing"
                   : "Not Started",
 
-              vote: response.IsVoted[i] ? "Voted" : "Not Voted",
+              vote: response.data[i][6] ? "Voted" : "Not Voted",
               voteFor: Number(response.data[i][5]),
               voteAgainst: Number(response.data[i][4]),
             };
