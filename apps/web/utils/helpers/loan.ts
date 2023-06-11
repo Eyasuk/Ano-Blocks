@@ -42,6 +42,9 @@ export async function currentUserLoan(
   );
 
   const balance = await contract.currentUserLoan();
-  console.log();
   return balance;
 }
+
+export async function getLoan() {}
+
+export async function payLoan() {}
