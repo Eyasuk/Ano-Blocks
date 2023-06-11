@@ -30,8 +30,7 @@ export default function Dao(): JSX.Element {
           choosenNetwork.name as "Polygon" | "Mumbai" | "Local",
           userInfo?.priv
         );
-        console.log("waht is happinfing");
-        console.log(response);
+
         if (response.success) {
           let data: ProposalProp[] = [];
 
