@@ -2,6 +2,7 @@ import DaoAbi from "utils/abis/dao_abi.json";
 import ChapaTracker from "utils/abis/chapatracker_abi.json";
 import EtbcAbi from "utils/abis/etbc_abi.json";
 import EtherAbi from "utils/abis/etherum_abi.json";
+import LoanAbi from "utils/abis/loan_abi.json";
 
 export interface ContractsType {
   Polygon: {
@@ -33,16 +34,19 @@ export const Contracts: Record<string, ContractsType> = {
     Local: { address: "0xf98D58b1E2D0B5869e773fCa4d6cEEADd4B63ad3" },
   },
   Loan: {
-    abi: "",
+    abi: LoanAbi,
     Polygon: { address: "" },
-    Mumbai: { address: "" },
+    Mumbai: {
+      address: "0x9Cf39cf7212bc38084f0777263BB9895d30f0482",
+      owner: "0x64Fc8D6dCA4A3C65432cC1E6d12779a761381b4a",
+    },
     Local: { address: "" },
   },
   ChapaTracker: {
     abi: ChapaTracker,
     Polygon: { address: "" },
     Mumbai: {
-      address: "0x8C986Bd14b080BE2e4dA2F04238f94F6c4A06AFE",
+      address: "0x5821133e3005C6103de35c2886FC55fDac5ea846",
       owner: "0x64Fc8D6dCA4A3C65432cC1E6d12779a761381b4a",
     },
     Local: {
