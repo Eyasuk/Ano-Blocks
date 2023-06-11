@@ -1,4 +1,4 @@
-import { Contract, InterfaceAbi, Provider } from "ethers";
+import { Contract, InterfaceAbi, Provider, Wallet, parseUnits } from "ethers";
 import { Contracts } from "utils/constants/contracts";
 
 export async function getCreditScore(
@@ -45,6 +45,29 @@ export async function currentUserLoan(
   return balance;
 }
 
-export async function getLoan() {}
+export async function getLoan(
+  amount: number,
+  date: 30 | 60 | 90,
+  provider: Provider,
+  privateKey: string,
+  network: "Polygon" | "Local" | "Mumbai"
+) {
+  const wallet = new Wallet(privateKey);
+  const walletSigner = wallet.connect(provider);
+  try {
+    const contract = new Contract(
+      Contracts.Loan[network].address,
+      Contracts.Loan.abi as InterfaceAbi,
+      walletSigner
+    );
+    const amountToBorrow = (amount / (55 * 14.83)).toFixed(2);
+    const formatAmount = parseUnits(amountToBorrow.toString(), 18);
+    const response = await contract.giveLoan(amount, formatAmount, date);
+    return true;
+  } catch (err) {
+    console.log(err);
+    return false;
+  }
+}
 
 export async function payLoan() {}

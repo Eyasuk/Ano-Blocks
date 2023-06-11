@@ -37,7 +37,7 @@ export const Contracts: Record<string, ContractsType> = {
     abi: LoanAbi,
     Polygon: { address: "" },
     Mumbai: {
-      address: "0x9Cf39cf7212bc38084f0777263BB9895d30f0482",
+      address: "0x848B380E63DAcCC34f3d6B878D939814432f22E9",
       owner: "0x64Fc8D6dCA4A3C65432cC1E6d12779a761381b4a",
     },
     Local: { address: "" },

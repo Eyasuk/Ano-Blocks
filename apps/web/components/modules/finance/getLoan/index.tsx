@@ -1,16 +1,41 @@
 import { Form, InputNumber, Radio, Select, Switch, Typography } from "antd";
 import Button from "components/elements/buttons";
+import { getLoan } from "utils/helpers/loan";
+import { useUser } from "utils/context/user";
+import { useNetwork } from "utils/context/network";
 
 import styles from "./getLoan.module.scss";
 
 const { Text, Title } = Typography;
 
 export function GetLoan() {
+  const { userInfo } = useUser();
+  const { provider, choosenNetwork } = useNetwork();
+
   const [form] = Form.useForm();
 
   const returnDateOptions = ["30 days", "60 days", "90 days"];
 
-  const onSumbit = () => {};
+  const onSumbit = (value: any) => {
+    const work = async () => {
+      let returnDay: 30 | 60 | 90;
+      if (value.date == "30 days") returnDay = 30;
+      else if (value.date == "60 days") returnDay = 60;
+      else returnDay = 90;
+      if (provider && userInfo) {
+        const res = await getLoan(
+          value.amount,
+          returnDay,
+          provider,
+          userInfo?.priv,
+          choosenNetwork.name as "Polygon" | "Mumbai" | "Local"
+        );
+        console.log(res);
+      }
+    };
+
+    work();
+  };
 
   return (
     <Form
@@ -42,8 +67,12 @@ export function GetLoan() {
           Select Your return data, Interset rate are different for different
           return dates.
         </Text>
-        <Form.Item name="primary currency">
-          <Radio.Group options={returnDateOptions} optionType="button" />
+        <Form.Item name="date" required>
+          <Radio.Group
+            options={returnDateOptions}
+            optionType="button"
+            defaultValue={"30 days"}
+          />
         </Form.Item>
       </div>
 
