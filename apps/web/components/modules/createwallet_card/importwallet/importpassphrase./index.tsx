@@ -1,14 +1,14 @@
-'use client';
-import { useState, useEffect, useRef } from 'react';
-import { Switch } from 'antd';
-import Button from 'components/elements/buttons';
-import Input from 'components/elements/input';
-import { notification } from 'components/elements/notification';
-import { PassphraseTypes } from './types';
-import { Typography } from 'antd';
+"use client";
+import { useState, useEffect, useRef } from "react";
+import { Switch } from "antd";
+import Button from "components/elements/buttons";
+import Input from "components/elements/input";
+import { notification } from "components/elements/notification";
+import { PassphraseTypes } from "./types";
+import { Typography } from "antd";
 
 const { Title, Text } = Typography;
-import styles from './importphrase.module.scss';
+import styles from "./importphrase.module.scss";
 
 export default function ImportPassphrase({
   passPhrase,
@@ -18,58 +18,62 @@ export default function ImportPassphrase({
 }: PassphraseTypes): JSX.Element {
   const [copy, setCopie] = useState<boolean>(false);
   const [extraWord, setExtraWord] = useState<boolean>(false);
+  const [buttonLoading, setButtonLoading] = useState<boolean>(false);
   const passphraseFetchedRef = useRef<boolean | null>(false);
 
   useEffect(() => {
     for (let i = 0; i < 12; i++) {
-      const c = document.getElementById('input' + i) as HTMLInputElement;
-      if (c.value != '') {
-        const passphraseArray = c.value.split(' ');
+      const c = document.getElementById("input" + i) as HTMLInputElement;
+      if (c.value != "") {
+        const passphraseArray = c.value.split(" ");
         if (passphraseArray.length == 1) {
           return;
         }
         if (passphraseArray.length != 12) {
           notification({
-            message: 'Incorrect passphrase',
-            messageType: 'error',
+            message: "Incorrect passphrase",
+            messageType: "error",
             description:
-              'Make sure to to copy all passphrases separted by only space',
+              "Make sure to to copy all passphrases separted by only space",
           });
           return;
         }
         setpassPhrase(passphraseArray);
       }
     }
-  }, [copy]);
+  }, [copy, passPhrase]);
 
   const handleSumbit = async (event: any) => {
+    setButtonLoading(true);
     event.preventDefault();
 
     if (!event.target) {
+      setButtonLoading(false);
       return;
     }
     const extraWordInput = document.getElementById(
-      'extraword'
+      "extraword"
     ) as HTMLInputElement;
 
     setExtraPassphrase(extraWordInput.value);
     for (let i = 0; i < 12; i++) {
-      if (!event.target['input' + i].value) {
+      if (!event.target["input" + i].value) {
         notification({
-          message: 'Empty field',
-          messageType: 'error',
+          message: "Empty field",
+          messageType: "error",
           description:
-            'Make sure to fill every field or copy all passphrase on one field',
+            "Make sure to fill every field or copy all passphrase on one field",
         });
+        setButtonLoading(false);
         return;
       }
     }
-
+    setButtonLoading(false);
     stateChanger(2);
   };
 
   const handelCopy = () => {
-    setCopie(!copy);
+    setCopie((prev) => !prev);
   };
 
   const onChange = (value: string, index: number) => {
@@ -86,9 +90,9 @@ export default function ImportPassphrase({
 
   const handleSwitch = () => {
     const extraWordInput = document.getElementById(
-      'extraword'
+      "extraword"
     ) as HTMLInputElement;
-    if (extraWord) extraWordInput.value = '';
+    if (extraWord) extraWordInput.value = "";
     setExtraWord((prev) => !prev);
   };
 
@@ -99,7 +103,7 @@ export default function ImportPassphrase({
           Import Wallet
         </Title>
         <Text className={styles.description}>
-          {' '}
+          {" "}
           Please Enter Your PassPhrase Correctly by Entering One by One or Copy
           it in The First Field!!
         </Text>
@@ -108,16 +112,19 @@ export default function ImportPassphrase({
           {passPhrase.map((content, index) => {
             return (
               <div className={styles.input} key={index}>
-                <Text className={styles.index}>{index + 1 + '.'}</Text>
+                <Text className={styles.index}>{index + 1 + "."}</Text>
                 <div className={styles.wordinputfield} key={index}>
                   <Input
                     value={passPhrase[index]}
                     error={false}
-                    inputType={'text'}
+                    inputType={"text"}
                     minLength={2}
-                    name={'input' + index}
-                    id={'input' + index}
-                    onPasteCapture={handelCopy}
+                    name={"input" + index}
+                    id={"input" + index}
+                    onPasteCapture={() => {
+                      console.log("called 1");
+                      handelCopy();
+                    }}
                     onChange={(event) => onChange(event.target.value, index)}
                   />
                 </div>
@@ -136,18 +143,21 @@ export default function ImportPassphrase({
           </div>
           <div className={styles.extraWordInput}>
             <Input
-              id='extraword'
-              inputType='text'
+              id="extraword"
+              inputType="text"
               error={false}
               disabled={!extraWord}
             />
           </div>
         </div>
-        <span className={styles.icons}>
-          <div className={styles.button}>
-            <Button text='Next' />
-          </div>
-        </span>
+        <Button
+          text="Next"
+          size="large"
+          className={styles.button}
+          type="primary"
+          htmlType="submit"
+          loading={buttonLoading}
+        />
       </div>
     </form>
   );
