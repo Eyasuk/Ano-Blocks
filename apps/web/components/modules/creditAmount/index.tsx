@@ -10,7 +10,7 @@ import styles from "./creditAmont.module.scss";
 const { Title, Text } = Typography;
 
 export default function CreditAmount(): JSX.Element {
-  const [creditamount, setCreditAmount] = useState<any>(0);
+  const [creditAmount, setCreditAmount] = useState<any>(0);
   const { choosenNetwork, provider } = useNetwork();
 
   useEffect(() => {

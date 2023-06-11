@@ -41,7 +41,7 @@ export async function currentUserLoan(
     provider
   );
 
-  const balance = await contract.calculateCreditLimit();
+  const balance = await contract.currentUserLoan();
   console.log();
   return balance;
 }
