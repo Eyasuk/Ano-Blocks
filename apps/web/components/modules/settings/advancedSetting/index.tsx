@@ -74,6 +74,12 @@ export function AdvancedSetting() {
       } else {
         setItemInLocalStorage("settings", userSetting, true);
       }
+
+      notification({
+        message: "Setting Saved",
+        description: "Setting Saved Successfully",
+        messageType: "success",
+      });
     } catch (err) {
       console.log(err);
       console.log("ERR");

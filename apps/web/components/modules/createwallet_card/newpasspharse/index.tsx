@@ -20,6 +20,7 @@ export default function NewPassphrase({
 }: PassphraseTypes): JSX.Element {
   const passphraseFetchedRef = useRef<boolean | null>(false);
   const [extraWord, setExtraWord] = useState<boolean>(false);
+  const [loadingButton, setLoadingButton] = useState<boolean>(false);
 
   useEffect(() => {
     if (passphraseFetchedRef.current) return;
@@ -33,11 +34,13 @@ export default function NewPassphrase({
   };
 
   const buttonAction = () => {
-    stateChanger(2);
+    setLoadingButton(true);
     const extraWordInput = document.getElementById(
       "extraword"
     ) as HTMLInputElement;
     setExtraPassphrase(extraWordInput.value);
+    stateChanger(2);
+    setLoadingButton(false);
   };
 
   const handleSwitch = () => {
@@ -93,6 +96,7 @@ export default function NewPassphrase({
           text="Next"
           type="primary"
           onClick={buttonAction}
+          loading={loadingButton}
         />
       </span>
     </div>

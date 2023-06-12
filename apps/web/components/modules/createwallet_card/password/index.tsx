@@ -26,31 +26,43 @@ export default function CreatePassword({
   const { setUserLoggedin, setUserInfo } = useUser();
 
   const handleSumbit = async (event: any) => {
-    setButtonLoading(true);
-    event.preventDefault();
-    if (!event.target) {
-      setPassError(false);
-      return;
-    }
-    if (event.target.password.value != event.target.repassword.value) {
-      setPassError(true);
+    try {
+      setButtonLoading(true);
+      event.preventDefault();
+      if (!event.target) {
+        setPassError(false);
+        return;
+      }
+      if (event.target.password.value != event.target.repassword.value) {
+        setPassError(true);
+        notification({
+          message: "password doesn't match",
+          messageType: "error",
+          description: "make sure your password are the same",
+        });
+        setButtonLoading(false);
+
+        return;
+      }
+
+      setPassword(event.target.password.value);
+      const account = await createWallet(passphrase, extraPassphrase);
+      const userLogin = signUp(account, event.target.password.value);
+      await setUserSession(event.target.password.value);
+
+      setUserInfo(account);
+      setUserLoggedin(true);
+      setButtonLoading(false);
+      router.push("/");
+    } catch (err) {
       notification({
-        message: "password doesn't match",
+        message: "Error",
+        description: "InCorrect PassPhrase",
         messageType: "error",
-        description: "make sure your password are the same",
       });
-      return;
+
+      setButtonLoading(false);
     }
-
-    setPassword(event.target.password.value);
-    const account = await createWallet(passphrase, extraPassphrase);
-    const userLogin = signUp(account, event.target.password.value);
-    await setUserSession(event.target.password.value);
-
-    setUserInfo(account);
-    setUserLoggedin(true);
-    setButtonLoading(false);
-    router.push("/");
   };
 
   return (

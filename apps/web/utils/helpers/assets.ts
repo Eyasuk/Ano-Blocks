@@ -74,7 +74,7 @@ export async function prices() {
         change: data.tether.usd_24h_change,
       },
       EtbCoin: {
-        price: 1,
+        price: 14.83,
         change: 0.01,
       },
     };

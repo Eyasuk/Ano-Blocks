@@ -1,6 +1,6 @@
 .layouts {
-  width: 32em;
-  margin-top: 2em;
+  width: 40em;
+  margin-top: 0.1em;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -20,23 +20,22 @@
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 1em;
-    min-width: 80%;
-    margin: 2em;
+    // min-width: 90%;
+    margin: 1em;
     .input {
       display: flex;
       flex-direction: row;
       .index {
-        margin-right: 0.12em;
+        margin-right: 0.1em;
 
-        align-self: center;
+        // align-self: center;
       }
       .wordinputfield {
         min-height: 2em;
         display: flex;
         justify-content: flex-start;
         align-items: center;
-        min-width: 10ch;
-
+        max-width: 80%; //min-width: 9ch;
         .content {
           margin-left: 3%;
         }
@@ -46,7 +45,7 @@
 
   .extraWord {
     align-self: flex-start;
-    margin-left: 4em;
+    margin-left: 2em;
     .extraWordSwitch {
       display: flex;
       flex-direction: row;
@@ -63,14 +62,8 @@
     }
   }
 
-  .icons {
-    display: flex;
-    flex-direction: row;
-    margin-top: 0.2em;
-    margin-bottom: 2.5em;
-    margin-left: 13em;
-    .button {
-      margin-left: 7.5em;
-    }
+  .button {
+    margin-left: 20em;
+    min-width: 10em;
   }
 }

@@ -2,6 +2,7 @@ import DaoAbi from "utils/abis/dao_abi.json";
 import ChapaTracker from "utils/abis/chapatracker_abi.json";
 import EtbcAbi from "utils/abis/etbc_abi.json";
 import EtherAbi from "utils/abis/etherum_abi.json";
+import LoanAbi from "utils/abis/loan_abi.json";
 
 export interface ContractsType {
   Polygon: {
@@ -23,26 +24,29 @@ export const Contracts: Record<string, ContractsType> = {
   Dao: {
     abi: DaoAbi,
     Polygon: { address: "" },
-    Mumbai: { address: "0x545de3a67C64CC0Ba2704a89A59EE3D0f4a26722" },
+    Mumbai: { address: "0xF296936f570b82777A8eA529DdaabB233f510Df1" },
     Local: { address: "0xA6adEE61DA075cD90Fd8c27Af71A9058218ea011" },
   },
   Etbc: {
     abi: EtbcAbi,
     Polygon: { address: "" },
-    Mumbai: { address: "0x1c1593B0116596345E7443E03cA2f433Bdb9cEc0" },
+    Mumbai: { address: "0xF362E4f95A191E891F19A493173d7e5E950953D9" },
     Local: { address: "0xf98D58b1E2D0B5869e773fCa4d6cEEADd4B63ad3" },
   },
   Loan: {
-    abi: "",
+    abi: LoanAbi,
     Polygon: { address: "" },
-    Mumbai: { address: "" },
+    Mumbai: {
+      address: "0xe47414EF15528877D54539c27bD6211B944dF73F",
+      owner: "0x64Fc8D6dCA4A3C65432cC1E6d12779a761381b4a",
+    },
     Local: { address: "" },
   },
   ChapaTracker: {
     abi: ChapaTracker,
     Polygon: { address: "" },
     Mumbai: {
-      address: "0x8C986Bd14b080BE2e4dA2F04238f94F6c4A06AFE",
+      address: "0x5821133e3005C6103de35c2886FC55fDac5ea846",
       owner: "0x64Fc8D6dCA4A3C65432cC1E6d12779a761381b4a",
     },
     Local: {
