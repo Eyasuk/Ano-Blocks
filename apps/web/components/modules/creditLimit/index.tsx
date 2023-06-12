@@ -20,8 +20,7 @@ export default function CreditLimit(): JSX.Element {
           provider,
           choosenNetwork.name as "Polygon" | "Mumbai" | "Local"
         );
-        console.log("sss");
-        console.log(credit);
+
         setCreditLimit(credit.toString());
       }
     };
@@ -36,16 +35,10 @@ export default function CreditLimit(): JSX.Element {
         </Title>
         <Divider />
         <Text className={styles.amount}>
-          {creditLimit}
+          {"ETB " + creditLimit}
           {/* {userSetting.currencyConversion == "ETB"
             ? birr(userBalance.TotalInBirr)
             : usd(userBalance.TotalInUsd)} */}
-        </Text>
-        <Text type="secondary">
-          12 USD
-          {/* {userSetting.currencyConversion != "ETB"
-            ? `   ETB ${userBalance.TotalInBirr.toPrecision(4)}`
-            : `   USD ${userBalance.TotalInUsd}`} */}
         </Text>
       </div>
     </GlassCard>

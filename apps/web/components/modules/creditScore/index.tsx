@@ -20,8 +20,7 @@ export default function CreditScore(): JSX.Element {
           provider,
           choosenNetwork.name as "Polygon" | "Mumbai" | "Local"
         );
-        console.log("sss");
-        console.log(credit);
+
         setCreditScore(credit.toString());
       }
     };
