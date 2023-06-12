@@ -63,6 +63,7 @@ export async function getLoan(
     const amountToBorrow = (amount / (55 * 14.83)).toFixed(2);
     const formatAmount = parseUnits(amountToBorrow.toString(), 18);
     const response = await contract.giveLoan(amount, formatAmount, date);
+    console.log(response);
     return true;
   } catch (err) {
     console.log(err);

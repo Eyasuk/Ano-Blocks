@@ -30,14 +30,14 @@ export const Contracts: Record<string, ContractsType> = {
   Etbc: {
     abi: EtbcAbi,
     Polygon: { address: "" },
-    Mumbai: { address: "0x1c1593B0116596345E7443E03cA2f433Bdb9cEc0" },
+    Mumbai: { address: "0xF362E4f95A191E891F19A493173d7e5E950953D9" },
     Local: { address: "0xf98D58b1E2D0B5869e773fCa4d6cEEADd4B63ad3" },
   },
   Loan: {
     abi: LoanAbi,
     Polygon: { address: "" },
     Mumbai: {
-      address: "0x848B380E63DAcCC34f3d6B878D939814432f22E9",
+      address: "0xe47414EF15528877D54539c27bD6211B944dF73F",
       owner: "0x64Fc8D6dCA4A3C65432cC1E6d12779a761381b4a",
     },
     Local: { address: "" },
