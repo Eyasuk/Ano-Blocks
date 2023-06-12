@@ -72,3 +72,25 @@ export async function getLoan(
 }
 
 export async function payLoan() {}
+
+export async function getUserLoan(
+  provider: Provider,
+  network: "Polygon" | "Local" | "Mumbai"
+) {
+  try {
+    console.log("working");
+    const contract = new Contract(
+      Contracts.Loan[network].address,
+      Contracts.Loan.abi as InterfaceAbi,
+      provider
+    );
+    const credits = await contract.getUserLoans();
+    console.log(credits);
+    console.log("op");
+
+    return credits;
+  } catch (err) {
+    console.log("err worked");
+    console.log(err);
+  }
+}
