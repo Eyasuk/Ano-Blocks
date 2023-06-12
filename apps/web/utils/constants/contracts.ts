@@ -24,20 +24,20 @@ export const Contracts: Record<string, ContractsType> = {
   Dao: {
     abi: DaoAbi,
     Polygon: { address: "" },
-    Mumbai: { address: "0xF296936f570b82777A8eA529DdaabB233f510Df1" },
+    Mumbai: { address: "0x94e4d8Cc6EF5f4F5C60584bFC3AF83235635AF10" },
     Local: { address: "0xA6adEE61DA075cD90Fd8c27Af71A9058218ea011" },
   },
   Etbc: {
     abi: EtbcAbi,
     Polygon: { address: "" },
-    Mumbai: { address: "0xF362E4f95A191E891F19A493173d7e5E950953D9" },
+    Mumbai: { address: "0xd5EE2bF2FB8c78ccca0a77144F64E4F5f6d9c731" },
     Local: { address: "0xf98D58b1E2D0B5869e773fCa4d6cEEADd4B63ad3" },
   },
   Loan: {
     abi: LoanAbi,
     Polygon: { address: "" },
     Mumbai: {
-      address: "0x8F884EC930A98712d88C34332750aB0E2B6Fb383",
+      address: "0x306BF2502dCEA9A0d5644439b6e5C224F2019C23",
       owner: "0x64Fc8D6dCA4A3C65432cC1E6d12779a761381b4a",
     },
     Local: { address: "" },
@@ -46,7 +46,7 @@ export const Contracts: Record<string, ContractsType> = {
     abi: ChapaTracker,
     Polygon: { address: "" },
     Mumbai: {
-      address: "0x5821133e3005C6103de35c2886FC55fDac5ea846",
+      address: "0x390f42De4894451976126c491cbaDDEbD652aAcb",
       owner: "0x64Fc8D6dCA4A3C65432cC1E6d12779a761381b4a",
     },
     Local: {
@@ -58,7 +58,7 @@ export const Contracts: Record<string, ContractsType> = {
     abi: EtherAbi,
     Polygon: { address: "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619" },
     Mumbai: {
-      address: "0xc9572565Bf72C5fBBecf317681482dd42761eBba",
+      address: "0x91B0A9bb04991cf83f62348FE24196BbAA8D2603",
       owner: "0x64Fc8D6dCA4A3C65432cC1E6d12779a761381b4a",
     },
     Local: {
