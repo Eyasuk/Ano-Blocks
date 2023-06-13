@@ -15,16 +15,16 @@ export default function Finance(): JSX.Element {
           { xs: 15, sm: 4, md: 4, lg: 20 },
         ]}
       >
-        <Col md={10} xs={24} lg={5} span={12}>
+        <Col md={20} xs={24} lg={5} span={12}>
           <CreditScore />
         </Col>
-        <Col md={10} xs={24} lg={6} span={12}>
+        <Col md={20} xs={24} lg={6} span={12}>
           <CreditAmount />
         </Col>
-        <Col md={10} xs={24} lg={6} span={12}>
+        <Col md={20} xs={24} lg={6} span={12}>
           <CreditLimit />
         </Col>
-        <Col md={12} xs={24} lg={17} span={6}>
+        <Col md={20} xs={24} lg={17} span={6}>
           <FinanceTap />{" "}
         </Col>
       </Row>

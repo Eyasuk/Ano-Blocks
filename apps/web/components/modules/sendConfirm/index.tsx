@@ -265,12 +265,15 @@ export default function SendConfirm({
             <Link href="/">
               <Button type="primary" key="home" text="Go to dashbord" />
             </Link>,
+            <Link href="/transactions">
+              <Button type="primary" key="home" text="Go to transaction" />
+            </Link>,
 
-            <Button
-              key="transaction"
-              text="Another transaction"
-              onClick={onAnotherTransaction}
-            />,
+            // <Button
+            //   key="transaction"
+            //   text="Another transaction"
+            //   onClick={onAnotherTransaction}
+            // />,
           ]}
         />
       ) : (
