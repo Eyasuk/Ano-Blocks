@@ -24,9 +24,9 @@ export default function Finance(): JSX.Element {
         <Col md={20} xs={24} lg={6} span={12}>
           <CreditLimit />
         </Col>
-        <Col md={20} xs={24} lg={17} span={6}>
-          <FinanceTap />{" "}
-        </Col>
+        {/* <Col md={20} xs={24} lg={17} span={6}>
+          {/* <FinanceTap />{" "} */}
+        {/* </Col> */} */
       </Row>
     </Default>
   );
