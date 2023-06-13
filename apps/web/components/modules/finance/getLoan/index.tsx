@@ -5,6 +5,7 @@ import { useUser } from "utils/context/user";
 import { useNetwork } from "utils/context/network";
 
 import styles from "./getLoan.module.scss";
+import { notification } from "components/elements/notification";
 
 const { Text, Title } = Typography;
 
@@ -30,7 +31,19 @@ export function GetLoan() {
           userInfo?.priv,
           choosenNetwork.name as "Polygon" | "Mumbai" | "Local"
         );
-        console.log(res);
+        if (res) {
+          notification({
+            message: "success",
+            description: "loan is approved and send to your account",
+            messageType: "success",
+          });
+        } else {
+          notification({
+            message: "error occured",
+            description: "you have unpaid loan!",
+            messageType: "error",
+          });
+        }
       }
     };
 
